@@ -1,0 +1,188 @@
+/* ═══════════════════════════════════════════════════════════
+   LIVE PLAYERS PAGE — Card pair box layout
+   Add these rules to your existing Card.css
+   ═══════════════════════════════════════════════════════════ */
+
+/* card-container on live page: stack pairs vertically */
+#card-container:has(.live-player-pair) {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px;
+}
+
+/* Outer wrapper */
+.live-player-pair {
+  width: 100%;
+}
+
+/* ── The box ─────────────────────────────────────────────── */
+.live-pair-box {
+  border-radius: 20px;
+  background-color: var(--bg-light);
+  border: 2px solid var(--bg-grey);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* ── Box header ──────────────────────────────────────────── */
+.live-pair-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.live-pair-player-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-pair-pos {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.08);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.live-pair-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+}
+
+.live-pair-rating {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.live-pair-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+/* ── Cards row inside the box ────────────────────────────── */
+.live-cards-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 12px 10px;
+}
+
+/* ── Individual card slots ───────────────────────────────── */
+.live-card-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Slot label */
+.live-slot-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.upgraded-label {
+  color: #4ade80;
+}
+
+/* Base card: dimmed */
+.base-card-slot .card-wrapper,
+.base-card-slot .card-link {
+  opacity: 0.6;
+  filter: saturate(0.6);
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+.base-card-slot:hover .card-wrapper,
+.base-card-slot:hover .card-link {
+  opacity: 0.85;
+  filter: saturate(1);
+}
+
+/* ── Arrow between cards ─────────────────────────────────── */
+.live-upgrade-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  padding: 0 6px;
+}
+
+.live-upgrade-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── No base card placeholder ────────────────────────────── */
+.live-no-base {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 130px;
+  height: 200px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+}
+
+.live-no-base-icon {
+  color: rgba(255,255,255,0.2);
+}
+
+.live-no-base span {
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .live-cards-row {
+    flex-direction: column;
+    padding: 16px 12px;
+    gap: 12px;
+  }
+
+  .live-upgrade-arrow {
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+
+  .live-pair-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

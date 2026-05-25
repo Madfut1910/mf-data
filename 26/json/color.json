@@ -1,0 +1,1519 @@
+{
+  "documents": [
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "All Gold" },
+          "id": { "stringValue": "all_gold" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/my_cards_ic_all_gold.png" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "All Silver" },
+          "id": { "stringValue": "all_silver" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/my_cards_ic_all_silver.png" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "All Bronze" },
+          "id": { "stringValue": "all_bronze" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/my_cards_ic_all_bronze.png" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "All Special" },
+          "id": { "stringValue": "all_special" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/my_cards_ic_all_special.png" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "All UCL" },
+          "id": { "stringValue": "all_ucl" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/my_cards_ic_all_ucl.png" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Rare Gold" },
+          "id": { "stringValue": "rare_gold" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_gold_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_gold_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_gold_micro.png" },
+          "top_text_color": { "stringValue": "#2E2410" },
+          "middle_text_color": { "stringValue": "#2E2410" },
+          "bottom_text_color": { "stringValue": "#2E2410" },
+          "bottom_2_text_color": { "stringValue": "#2E2410" },
+          "flare_1": { "stringValue": "#EDD089" },
+          "flare_2": { "stringValue": "#C58D3A" },
+          "alt_pos_outline": { "stringValue": "#2E2410" },
+          "alt_pos_background": { "stringValue": "#E0B866" },
+          "alt_pos_text": { "stringValue": "#2E2410" },
+          "walkout_card_reveal_flare": { "stringValue": "#EDD089" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#EDD089" },
+          "walkout_glow_lines_1": { "stringValue": "#2E2410" },
+          "walkout_glow_lines_2": { "stringValue": "#EDD089" },
+          "walkout_floor_color": { "stringValue": "#EDD089" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F2E0BE" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#C58D3A" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#F2E0BE" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#C58D3A" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Non-Rare Gold" },
+          "id": { "stringValue": "gold" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/gold_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/gold_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/gold_micro.png" },
+          "top_text_color": { "stringValue": "#2E2410" },
+          "middle_text_color": { "stringValue": "#2E2410" },
+          "bottom_text_color": { "stringValue": "#2E2410" },
+          "bottom_2_text_color": { "stringValue": "#2E2410" },
+          "flare_1": { "stringValue": "#EDD089" },
+          "flare_2": { "stringValue": "#F2E0BE" },
+          "alt_pos_outline": { "stringValue": "#2E2410" },
+          "alt_pos_background": { "stringValue": "#E0B866" },
+          "alt_pos_text": { "stringValue": "#2E2410" },
+          "walkout_card_reveal_flare": { "stringValue": "#EDD089" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#EDD089" },
+          "walkout_glow_lines_1": { "stringValue": "#2E2410" },
+          "walkout_glow_lines_2": { "stringValue": "#EDD089" },
+          "walkout_floor_color": { "stringValue": "#EDD089" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F2E0BE" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#C58D3A" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#F2E0BE" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#C58D3A" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Rare Silver" },
+          "id": { "stringValue": "rare_silver" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_silver_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_silver_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_silver_micro.png" },
+          "top_text_color": { "stringValue": "#1D2529" },
+          "middle_text_color": { "stringValue": "#1D2529" },
+          "bottom_text_color": { "stringValue": "#1D2529" },
+          "bottom_2_text_color": { "stringValue": "#1D2529" },
+          "flare_1": { "stringValue": "#EDEDF0" },
+          "flare_2": { "stringValue": "#656B74" },
+          "alt_pos_outline": { "stringValue": "#1D2529" },
+          "alt_pos_background": { "stringValue": "#BECCD1" },
+          "alt_pos_text": { "stringValue": "#1D2529" },
+          "walkout_card_reveal_flare": { "stringValue": "#8B909C" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#EDEDF0" },
+          "walkout_glow_lines_1": { "stringValue": "#1D2529" },
+          "walkout_glow_lines_2": { "stringValue": "#656B74" },
+          "walkout_floor_color": { "stringValue": "#656B74" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#EDEDF0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#656B74" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#EDEDF0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#656B74" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Non-Rare Silver" },
+          "id": { "stringValue": "silver" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/silver_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/silver_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/silver_micro.png" },
+          "top_text_color": { "stringValue": "#1D2529" },
+          "middle_text_color": { "stringValue": "#1D2529" },
+          "bottom_text_color": { "stringValue": "#1D2529" },
+          "bottom_2_text_color": { "stringValue": "#1D2529" },
+          "flare_1": { "stringValue": "#EDEDF0" },
+          "flare_2": { "stringValue": "#656B74" },
+          "alt_pos_outline": { "stringValue": "#1D2529" },
+          "alt_pos_background": { "stringValue": "#BECCD1" },
+          "alt_pos_text": { "stringValue": "#1D2529" },
+          "walkout_card_reveal_flare": { "stringValue": "#656B74" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#EDEDF0" },
+          "walkout_glow_lines_1": { "stringValue": "#1D2529" },
+          "walkout_glow_lines_2": { "stringValue": "#656B74" },
+          "walkout_floor_color": { "stringValue": "#656B74" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#EDEDF0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#656B74" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#EDEDF0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#656B74" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Rare Bronze" },
+          "id": { "stringValue": "rare_bronze" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_bronze_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_bronze_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/rare_bronze_micro.png" },
+          "top_text_color": { "stringValue": "#3E281C" },
+          "middle_text_color": { "stringValue": "#3E281C" },
+          "bottom_text_color": { "stringValue": "#3E281C" },
+          "bottom_2_text_color": { "stringValue": "#3E281C" },
+          "flare_1": { "stringValue": "#DC9764" },
+          "alt_pos_outline": { "stringValue": "#3E281C" },
+          "alt_pos_background": { "stringValue": "#DD9C7A" },
+          "alt_pos_text": { "stringValue": "#3E281C" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Non-Rare Bronze" },
+          "id": { "stringValue": "bronze" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/bronze_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/bronze_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/bronze_micro.png" },
+          "top_text_color": { "stringValue": "#3E281C" },
+          "middle_text_color": { "stringValue": "#3E281C" },
+          "bottom_text_color": { "stringValue": "#3E281C" },
+          "bottom_2_text_color": { "stringValue": "#3E281C" },
+          "flare_1": { "stringValue": "#DC9764" },
+          "alt_pos_outline": { "stringValue": "#3E281C" },
+          "alt_pos_background": { "stringValue": "#DD9C7A" },
+          "alt_pos_text": { "stringValue": "#3E281C" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "TOTW" },
+          "id": { "stringValue": "totw_gold" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/totw_gold_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/totw_gold_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/totw_gold_micro.png" },
+          "top_text_color": { "stringValue": "#F7DB7B" },
+          "middle_text_color": { "stringValue": "#F7DB7B" },
+          "bottom_text_color": { "stringValue": "#F7DB7B" },
+          "bottom_2_text_color": { "stringValue": "#F7DB7B" },
+          "flare_1": { "stringValue": "#F7DB7A" },
+          "flare_2": { "stringValue": "#E2DCBF" },
+          "alt_pos_outline": { "stringValue": "#F7DB7B" },
+          "alt_pos_background": { "stringValue": "#0F0D0D" },
+          "alt_pos_text": { "stringValue": "#F7DB7B" },
+          "walkout_card_reveal_flare": { "stringValue": "#F7DB7A" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#F7DB7A" },
+          "walkout_glow_lines_1": { "stringValue": "#E2DCBF" },
+          "walkout_glow_lines_2": { "stringValue": "#454137" },
+          "walkout_floor_color": { "stringValue": "#454137" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F7DB7A" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#E2DCBF" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#F7DB7A" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#E2DCBF" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Madfut Icon" },
+          "id": { "stringValue": "madfut_icon" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/madfut_icon_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/madfut_icon_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/madfut_icon_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#F5C620" },
+          "flare_2": { "stringValue": "#E8E7E3" },
+          "alt_pos_outline": { "stringValue": "#F7D838" },
+          "alt_pos_background": { "stringValue": "#060606" },
+          "alt_pos_text": { "stringValue": "#F7D838" },
+          "walkout_card_reveal_flare": { "stringValue": "#F5C620" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#F5C620" },
+          "walkout_glow_lines_1": { "stringValue": "#E8E7E3" },
+          "walkout_glow_lines_2": { "stringValue": "#B55B27" },
+          "walkout_floor_color": { "stringValue": "#F5C620" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F5C620" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#E8E7E3" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#F5C620" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#E8E7E3" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Historic XI" },
+          "id": { "stringValue": "historic_xi" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/historic_xi_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/historic_xi_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/historic_xi_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#FEF000" },
+          "flare_2": { "stringValue": "#93C4A0" },
+          "alt_pos_outline": { "stringValue": "#CAC921" },
+          "alt_pos_background": { "stringValue": "#304135" },
+          "alt_pos_text": { "stringValue": "#99960D" },
+          "walkout_card_reveal_flare": { "stringValue": "#FEF000" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#93C4A0" },
+          "walkout_glow_lines_1": { "stringValue": "#FEF000" },
+          "walkout_glow_lines_2": { "stringValue": "#5C9178" },
+          "walkout_floor_color": { "stringValue": "#587560" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#FEF000" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#B1AC09" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#FEF000" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#B1AC09" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Historic XI Nominee" },
+          "id": { "stringValue": "historic_xi_nominee" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/historic_xi_nominee_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/historic_xi_nominee_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/historic_xi_nominee_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#FEF000" },
+          "flare_2": { "stringValue": "#93C4A0" },
+          "alt_pos_outline": { "stringValue": "#CAC921" },
+          "alt_pos_background": { "stringValue": "#304135" },
+          "alt_pos_text": { "stringValue": "#99960D" },
+          "walkout_card_reveal_flare": { "stringValue": "#FEF000" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#93C4A0" },
+          "walkout_glow_lines_1": { "stringValue": "#FEF000" },
+          "walkout_glow_lines_2": { "stringValue": "#5C9178" },
+          "walkout_floor_color": { "stringValue": "#587560" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#FEF000" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#B1AC09" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#FEF000" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#B1AC09" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM" },
+          "id": { "stringValue": "ltm" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_big (concept).png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_micro.png" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Banjaqui" },
+          "id": { "stringValue": "ltm_83401" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_83401_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_83401_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#ffffff" },
+          "middle_text_color": { "stringValue": "#ffffff" },
+          "bottom_text_color": { "stringValue": "#ffffff" },
+          "bottom_2_text_color": { "stringValue": "#ffffff" },
+          "alt_pos_text": { "stringValue": "#111c4d" },
+          "alt_pos_background": { "stringValue": "#82a1d6" },
+          "alt_pos_outline": { "stringValue": "#111c4d" },
+          "flare_1": { "stringValue": "#a7bde2" },
+          "flare_2": { "stringValue": "#6880ab" },
+          "walkout_glow_lines_1": { "stringValue": "#91b1e9" },
+          "walkout_glow_lines_2": { "stringValue": "#7a9fdf" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#a1b8e0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#6178a0" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#b4bed0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#5b7095" },
+          "walkout_floor_color": { "stringValue": "#82a1d6" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#a8c4f3" },
+          "walkout_card_reveal_flare": { "stringValue": "#adc1e4" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Banjaqui" },
+          "id": { "stringValue": "ltm_83401" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_83401_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_83401_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#ffffff" },
+          "middle_text_color": { "stringValue": "#ffffff" },
+          "bottom_text_color": { "stringValue": "#ffffff" },
+          "bottom_2_text_color": { "stringValue": "#ffffff" },
+          "alt_pos_text": { "stringValue": "#111c4d" },
+          "alt_pos_background": { "stringValue": "#82a1d6" },
+          "alt_pos_outline": { "stringValue": "#111c4d" },
+          "flare_1": { "stringValue": "#a7bde2" },
+          "flare_2": { "stringValue": "#6880ab" },
+          "walkout_glow_lines_1": { "stringValue": "#91b1e9" },
+          "walkout_glow_lines_2": { "stringValue": "#7a9fdf" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#a1b8e0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#6178a0" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#b4bed0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#5b7095" },
+          "walkout_floor_color": { "stringValue": "#82a1d6" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#a8c4f3" },
+          "walkout_card_reveal_flare": { "stringValue": "#adc1e4" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Banjaqui" },
+          "id": { "stringValue": "ltm_83401" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_83401_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_83401_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#ffffff" },
+          "middle_text_color": { "stringValue": "#ffffff" },
+          "bottom_text_color": { "stringValue": "#ffffff" },
+          "bottom_2_text_color": { "stringValue": "#ffffff" },
+          "alt_pos_text": { "stringValue": "#111c4d" },
+          "alt_pos_background": { "stringValue": "#82a1d6" },
+          "alt_pos_outline": { "stringValue": "#111c4d" },
+          "flare_1": { "stringValue": "#a7bde2" },
+          "flare_2": { "stringValue": "#6880ab" },
+          "walkout_glow_lines_1": { "stringValue": "#91b1e9" },
+          "walkout_glow_lines_2": { "stringValue": "#7a9fdf" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#a1b8e0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#6178a0" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#b4bed0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#5b7095" },
+          "walkout_floor_color": { "stringValue": "#82a1d6" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#a8c4f3" },
+          "walkout_card_reveal_flare": { "stringValue": "#adc1e4" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Endrick" },
+          "id": { "stringValue": "ltm_272505" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_272505_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_272505_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#111c4d" },
+          "middle_text_color": { "stringValue": "#111c4d" },
+          "bottom_text_color": { "stringValue": "#111c4d" },
+          "bottom_2_text_color": { "stringValue": "#111c4d" },
+          "alt_pos_text": { "stringValue": "#111c4d" },
+          "alt_pos_background": { "stringValue": "#82a1d6" },
+          "alt_pos_outline": { "stringValue": "#111c4d" },
+          "flare_1": { "stringValue": "#a7bde2" },
+          "flare_2": { "stringValue": "#6880ab" },
+          "walkout_glow_lines_1": { "stringValue": "#91b1e9" },
+          "walkout_glow_lines_2": { "stringValue": "#7a9fdf" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#a1b8e0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#6178a0" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#b4bed0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#5b7095" },
+          "walkout_floor_color": { "stringValue": "#82a1d6" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#a8c4f3" },
+          "walkout_card_reveal_flare": { "stringValue": "#adc1e4" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Miley" },
+          "id": { "stringValue": "ltm_274246" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_274246_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_274246_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#ffffff" },
+          "middle_text_color": { "stringValue": "#ffffff" },
+          "bottom_text_color": { "stringValue": "#ffffff" },
+          "bottom_2_text_color": { "stringValue": "#ffffff" },
+          "alt_pos_text": { "stringValue": "#111c4d" },
+          "alt_pos_background": { "stringValue": "#82a1d6" },
+          "alt_pos_outline": { "stringValue": "#111c4d" },
+          "flare_1": { "stringValue": "#a7bde2" },
+          "flare_2": { "stringValue": "#6880ab" },
+          "walkout_glow_lines_1": { "stringValue": "#91b1e9" },
+          "walkout_glow_lines_2": { "stringValue": "#7a9fdf" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#a1b8e0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#6178a0" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#b4bed0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#5b7095" },
+          "walkout_floor_color": { "stringValue": "#82a1d6" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#a8c4f3" },
+          "walkout_card_reveal_flare": { "stringValue": "#adc1e4" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Banjaqui" },
+          "id": { "stringValue": "ltm_83401" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_83401_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_83401_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#ffffff" },
+          "middle_text_color": { "stringValue": "#ffffff" },
+          "bottom_text_color": { "stringValue": "#ffffff" },
+          "bottom_2_text_color": { "stringValue": "#ffffff" },
+          "alt_pos_text": { "stringValue": "#111c4d" },
+          "alt_pos_background": { "stringValue": "#82a1d6" },
+          "alt_pos_outline": { "stringValue": "#111c4d" },
+          "flare_1": { "stringValue": "#a7bde2" },
+          "flare_2": { "stringValue": "#6880ab" },
+          "walkout_glow_lines_1": { "stringValue": "#91b1e9" },
+          "walkout_glow_lines_2": { "stringValue": "#7a9fdf" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#a1b8e0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#6178a0" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#b4bed0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#5b7095" },
+          "walkout_floor_color": { "stringValue": "#82a1d6" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#a8c4f3" },
+          "walkout_card_reveal_flare": { "stringValue": "#adc1e4" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Jesus Rodriguez" },
+          "id": { "stringValue": "ltm_75055" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_75055_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_75055_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#111c4d" },
+          "middle_text_color": { "stringValue": "#111c4d" },
+          "bottom_text_color": { "stringValue": "#111c4d" },
+          "bottom_2_text_color": { "stringValue": "#111c4d" },
+          "alt_pos_text": { "stringValue": "#111c4d" },
+          "alt_pos_background": { "stringValue": "#82a1d6" },
+          "alt_pos_outline": { "stringValue": "#111c4d" },
+          "flare_1": { "stringValue": "#a7bde2" },
+          "flare_2": { "stringValue": "#6880ab" },
+          "walkout_glow_lines_1": { "stringValue": "#91b1e9" },
+          "walkout_glow_lines_2": { "stringValue": "#7a9fdf" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#a1b8e0" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#6178a0" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#b4bed0" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#5b7095" },
+          "walkout_floor_color": { "stringValue": "#82a1d6" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#a8c4f3" },
+          "walkout_card_reveal_flare": { "stringValue": "#adc1e4" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Pau Navarro" },
+          "id": { "stringValue": "ltm_278659" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_278659_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_278659_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#FFFFFF" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#ffffff" },
+          "flare_2": { "stringValue": "#FFFFFF" },
+          "walkout_glow_lines_1": { "stringValue": "#ffffff" },
+          "walkout_glow_lines_2": { "stringValue": "#ffffff" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#ffffff" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#bfbfbf" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#fff6e8" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#b2b2b2" },
+          "walkout_floor_color": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#ffffff" },
+          "walkout_card_reveal_flare": { "stringValue": "#ffffff" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Manzambi" },
+          "id": { "stringValue": "ltm_276694" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_276694_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_276694_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "alt_pos_text": { "stringValue": "#f52744" },
+          "alt_pos_background": { "stringValue": "#050506" },
+          "alt_pos_outline": { "stringValue": "#f52744" },
+          "flare_1": { "stringValue": "#505050" },
+          "flare_2": { "stringValue": "#040404" },
+          "walkout_glow_lines_1": { "stringValue": "#373737" },
+          "walkout_glow_lines_2": { "stringValue": "#040406" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#434344" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#030304" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#696154" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#030304" },
+          "walkout_floor_color": { "stringValue": "#050506" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#686869" },
+          "walkout_card_reveal_flare": { "stringValue": "#5c5c5d" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LTM Dibling" },
+          "id": { "stringValue": "ltm_279497" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_279497_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ltm_279497_big.png" },
+          "url_micro": { "stringValue": "" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "alt_pos_text": { "stringValue": "#729af4" },
+          "alt_pos_background": { "stringValue": "#090b2d" },
+          "alt_pos_outline": { "stringValue": "#729af4" },
+          "flare_1": { "stringValue": "#52546c" },
+          "flare_2": { "stringValue": "#070824" },
+          "walkout_glow_lines_1": { "stringValue": "#37385c" },
+          "walkout_glow_lines_2": { "stringValue": "#060831" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#464861" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#060821" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#6c656b" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#06071f" },
+          "walkout_floor_color": { "stringValue": "#090b2d" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#676987" },
+          "walkout_card_reveal_flare": { "stringValue": "#5f6076" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Icon" },
+          "id": { "stringValue": "icon" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/icon_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/icon_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/icon_micro.png" },
+          "top_text_color": { "stringValue": "#54462B" },
+          "middle_text_color": { "stringValue": "#54462B" },
+          "bottom_text_color": { "stringValue": "#54462B" },
+          "bottom_2_text_color": { "stringValue": "#54462B" },
+          "flare_1": { "stringValue": "#E0E0DF" },
+          "flare_2": { "stringValue": "#DEBF93" },
+          "alt_pos_outline": { "stringValue": "#54462B" },
+          "alt_pos_background": { "stringValue": "#DBDBDB" },
+          "alt_pos_text": { "stringValue": "#54462B" },
+          "walkout_card_reveal_flare": { "stringValue": "#E0E0DF" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#E0E0DF" },
+          "walkout_glow_lines_1": { "stringValue": "#B38057" },
+          "walkout_glow_lines_2": { "stringValue": "#DEBF93" },
+          "walkout_floor_color": { "stringValue": "#E2DDDC" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#E0E0DF" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#B38057" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#E0E0DF" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#B38057" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Debut Icon" },
+          "id": { "stringValue": "debut_icon" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/debut_icon_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/debut_icon_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/debut_icon_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFE" },
+          "middle_text_color": { "stringValue": "#FFFFFE" },
+          "bottom_text_color": { "stringValue": "#FFFFFE" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFE" },
+          "flare_1": { "stringValue": "#C5C0BD" },
+          "flare_2": { "stringValue": "#C3986C" },
+          "alt_pos_outline": { "stringValue": "#FFFFFE" },
+          "alt_pos_background": { "stringValue": "#54462B" },
+          "alt_pos_text": { "stringValue": "#FFFFFE" },
+          "walkout_card_reveal_flare": { "stringValue": "#C5C0BD" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#C5C0BD" },
+          "walkout_glow_lines_1": { "stringValue": "#553D29" },
+          "walkout_glow_lines_2": { "stringValue": "#C3986C" },
+          "walkout_floor_color": { "stringValue": "#C5C0BD" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#C3986C" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#C5C0BD" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#C3986C" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#C5C0BD" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Champion Icon" },
+          "id": { "stringValue": "champion_icon" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/champion_icon_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/champion_icon_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/champion_icon_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFE" },
+          "middle_text_color": { "stringValue": "#FFFFFE" },
+          "bottom_text_color": { "stringValue": "#FFFFFE" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFE" },
+          "flare_1": { "stringValue": "#C5C0BD" },
+          "flare_2": { "stringValue": "#C3986C" },
+          "alt_pos_outline": { "stringValue": "#FFFFFE" },
+          "alt_pos_background": { "stringValue": "#54462B" },
+          "alt_pos_text": { "stringValue": "#FFFFFE" },
+          "walkout_card_reveal_flare": { "stringValue": "#C5C0BD" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#C5C0BD" },
+          "walkout_glow_lines_1": { "stringValue": "#553D29" },
+          "walkout_glow_lines_2": { "stringValue": "#C3986C" },
+          "walkout_floor_color": { "stringValue": "#E3C7A1" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#C3986C" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#C5C0BD" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#C3986C" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#C5C0BD" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Hero" },
+          "id": { "stringValue": "hero" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/hero_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/hero_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/hero_micro.png" },
+          "top_text_color": { "stringValue": "#FFD44F" },
+          "middle_text_color": { "stringValue": "#FFD44F" },
+          "bottom_text_color": { "stringValue": "#FFD44F" },
+          "bottom_2_text_color": { "stringValue": "#FFD44F" },
+          "flare_1": { "stringValue": "#D1A5CC" },
+          "flare_2": { "stringValue": "#7D5DA7" },
+          "alt_pos_outline": { "stringValue": "#FFD44F" },
+          "alt_pos_background": { "stringValue": "#493881" },
+          "alt_pos_text": { "stringValue": "#FFD44F" },
+          "walkout_card_reveal_flare": { "stringValue": "#D1A5CC" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#7D5DA7" },
+          "walkout_glow_lines_1": { "stringValue": "#2C2945" },
+          "walkout_glow_lines_2": { "stringValue": "#F2AA4C" },
+          "walkout_floor_color": { "stringValue": "#7D5DA7" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F2AA4C" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#D1A5CC" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#D1A5CC" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#D1A5CC" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Flashback" },
+          "id": { "stringValue": "flashback" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/flashback_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/flashback_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/flashback_micro.png" },
+          "top_text_color": { "stringValue": "#FCFCF7" },
+          "middle_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_2_text_color": { "stringValue": "#FCFCF7" },
+          "flare_1": { "stringValue": "#908FC6" },
+          "flare_2": { "stringValue": "#8AD5EC" },
+          "alt_pos_outline": { "stringValue": "#FCFCF7" },
+          "alt_pos_background": { "stringValue": "#2D187F" },
+          "alt_pos_text": { "stringValue": "#FCFCF7" },
+          "walkout_card_reveal_flare": { "stringValue": "#908FC6" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#908FC6" },
+          "walkout_glow_lines_1": { "stringValue": "#EBC583" },
+          "walkout_glow_lines_2": { "stringValue": "#8AD5EC" },
+          "walkout_floor_color": { "stringValue": "#8AD5EC" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#908FC6" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#8AD5EC" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#908FC6" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#8AD5EC" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Moments" },
+          "id": { "stringValue": "moments" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/moments_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/moments_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/moments_micro.png" },
+          "top_text_color": { "stringValue": "#FCFCF7" },
+          "middle_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_2_text_color": { "stringValue": "#FCFCF7" },
+          "flare_1": { "stringValue": "#D5E167" },
+          "flare_2": { "stringValue": "#308E8D" },
+          "alt_pos_outline": { "stringValue": "#FCFCF7" },
+          "alt_pos_background": { "stringValue": "#303636" },
+          "alt_pos_text": { "stringValue": "#FCFCF7" },
+          "walkout_card_reveal_flare": { "stringValue": "#308E8D" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#75CFE3" },
+          "walkout_glow_lines_1": { "stringValue": "#D5E167" },
+          "walkout_glow_lines_2": { "stringValue": "#308E8D" },
+          "walkout_floor_color": { "stringValue": "#308E8D" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#D5E167" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#308E8D" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#D5E167" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#308E8D" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Squad Foundations" },
+          "id": { "stringValue": "squad_foundations" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/squad_foundations_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/squad_foundations_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/squad_foundations_micro.png" },
+          "top_text_color": { "stringValue": "#FCFCF7" },
+          "middle_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_2_text_color": { "stringValue": "#FCFCF7" },
+          "flare_1": { "stringValue": "#75CFE3" },
+          "flare_2": { "stringValue": "#308E8D" },
+          "alt_pos_outline": { "stringValue": "#FCFCF7" },
+          "alt_pos_background": { "stringValue": "#2B2A26" },
+          "alt_pos_text": { "stringValue": "#FCFCF7" },
+          "walkout_card_reveal_flare": { "stringValue": "#308E8D" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#75CFE3" },
+          "walkout_glow_lines_1": { "stringValue": "#FCFCF7" },
+          "walkout_glow_lines_2": { "stringValue": "#308E8D" },
+          "walkout_floor_color": { "stringValue": "#308E8D" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#75CFE3" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#308E8D" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#75CFE3" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#308E8D" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Showdown" },
+          "id": { "stringValue": "showdown" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/showdown_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/showdown_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/showdown_micro.png" },
+          "top_text_color": { "stringValue": "#F2F2F2" },
+          "middle_text_color": { "stringValue": "#F2F2F2" },
+          "bottom_text_color": { "stringValue": "#F2F2F2" },
+          "bottom_2_text_color": { "stringValue": "#F2F2F2" },
+          "flare_1": { "stringValue": "#C3C3C3" },
+          "flare_2": { "stringValue": "#727373" },
+          "alt_pos_outline": { "stringValue": "#F2F2F2" },
+          "alt_pos_background": { "stringValue": "#3F3F3F" },
+          "alt_pos_text": { "stringValue": "#F2F2F2" },
+          "walkout_card_reveal_flare": { "stringValue": "#C3C3C3" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#F2F2F2" },
+          "walkout_glow_lines_1": { "stringValue": "#727373" },
+          "walkout_glow_lines_2": { "stringValue": "#39393A" },
+          "walkout_floor_color": { "stringValue": "#C3C3C3" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F2F2F2" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#727373" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#F2F2F2" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#727373" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Showdown Plus" },
+          "id": { "stringValue": "showdown_plus" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/showdown_plus_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/showdown_plus_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/showdown_plus_micro.png" },
+          "top_text_color": { "stringValue": "#C8F249" },
+          "middle_text_color": { "stringValue": "#C8F249" },
+          "bottom_text_color": { "stringValue": "#C8F249" },
+          "bottom_2_text_color": { "stringValue": "#C8F249" },
+          "flare_1": { "stringValue": "#F8F6C8" },
+          "flare_2": { "stringValue": "#9FB03E" },
+          "alt_pos_outline": { "stringValue": "#C8F249" },
+          "alt_pos_background": { "stringValue": "#3F3F3F" },
+          "alt_pos_text": { "stringValue": "#C8F249" },
+          "walkout_card_reveal_flare": { "stringValue": "#9FB03E" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#F8F6C8" },
+          "walkout_glow_lines_1": { "stringValue": "#9FB03E" },
+          "walkout_glow_lines_2": { "stringValue": "#343A1F" },
+          "walkout_floor_color": { "stringValue": "#9FB03E" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F8F6C8" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#9FB03E" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#F8F6C8" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#9FB03E" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "World Tour" },
+          "id": { "stringValue": "world_tour" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/world_tour_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/world_tour_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/world_tour_micro.png" },
+          "top_text_color": { "stringValue": "#FEF7B9" },
+          "middle_text_color": { "stringValue": "#FEF7B9" },
+          "bottom_text_color": { "stringValue": "#FEF7B9" },
+          "bottom_2_text_color": { "stringValue": "#FEF7B9" },
+          "flare_1": { "stringValue": "#FCDE16" },
+          "flare_2": { "stringValue": "#FAA62C" },
+          "alt_pos_outline": { "stringValue": "#FEF7B9" },
+          "alt_pos_background": { "stringValue": "#1ACF13" },
+          "alt_pos_text": { "stringValue": "#FEF7B9" },
+          "walkout_card_reveal_flare": { "stringValue": "#FCDE16" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#FCDE16" },
+          "walkout_glow_lines_1": { "stringValue": "#EE4223" },
+          "walkout_glow_lines_2": { "stringValue": "#03AC4B" },
+          "walkout_floor_color": { "stringValue": "#FCDE16" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#FCDE16" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#FAA62C" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#FCDE16" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#FAA62C" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Silver Superstar" },
+          "id": { "stringValue": "silver_superstar" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/silver_superstar_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/silver_superstar_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/silver_superstar_micro.png" },
+          "top_text_color": { "stringValue": "#FCFCF7" },
+          "middle_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_2_text_color": { "stringValue": "#FCFCF7" },
+          "flare_1": { "stringValue": "#DFD9CE" },
+          "flare_2": { "stringValue": "#E15928" },
+          "alt_pos_outline": { "stringValue": "#FCFCF7" },
+          "alt_pos_background": { "stringValue": "#7D7C7C" },
+          "alt_pos_text": { "stringValue": "#FCFCF7" },
+          "walkout_card_reveal_flare": { "stringValue": "#E15928" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#E15928" },
+          "walkout_glow_lines_1": { "stringValue": "#1AAE4B" },
+          "walkout_glow_lines_2": { "stringValue": "#DFD9CE" },
+          "walkout_floor_color": { "stringValue": "#E15928" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#DFD9CE" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#E15928" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#DFD9CE" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#E15928" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "EPL POTM" },
+          "id": { "stringValue": "epl_potm" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/epl_potm_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/epl_potm_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/epl_potm_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#C3E7F1" },
+          "flare_2": { "stringValue": "#48C3F1" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#3D195B" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#48C3F1" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#C3E7F1" },
+          "walkout_glow_lines_1": { "stringValue": "#48C3F1" },
+          "walkout_glow_lines_2": { "stringValue": "#686EB3" },
+          "walkout_floor_color": { "stringValue": "#48C3F1" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#686EB3" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#48C3F1" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#686EB3" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#48C3F1" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "LaLiga POTM" },
+          "id": { "stringValue": "laliga_potm" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/laliga_potm_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/laliga_potm_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/laliga_potm_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#EF4A43" },
+          "flare_2": { "stringValue": "#35394A" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#37394A" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#EF4A43" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#EF4A43" },
+          "walkout_glow_lines_1": { "stringValue": "#FFFFFF" },
+          "walkout_glow_lines_2": { "stringValue": "#35394A" },
+          "walkout_floor_color": { "stringValue": "#EF4A43" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#EF4A43" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#35394A" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#EF4A43" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#35394A" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Serie A POTM" },
+          "id": { "stringValue": "seriea_potm" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/seriea_potm_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/seriea_potm_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/seriea_potm_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#5CC5C5" },
+          "flare_2": { "stringValue": "#3E65AE" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#171D88" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#5CC5C5" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#5CC5C5" },
+          "walkout_glow_lines_1": { "stringValue": "#FFFFFF" },
+          "walkout_glow_lines_2": { "stringValue": "#5CC5C5" },
+          "walkout_floor_color": { "stringValue": "#5CC5C5" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#5CC5C5" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#3E65AE" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#5CC5C5" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#3E65AE" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Bundesliga POTM" },
+          "id": { "stringValue": "bundesliga_potm" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/bundesliga_potm_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/bundesliga_potm_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/bundesliga_potm_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#D12228" },
+          "flare_2": { "stringValue": "#441616" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#93020E" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#D12228" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#D12228" },
+          "walkout_glow_lines_1": { "stringValue": "#FFFFFF" },
+          "walkout_glow_lines_2": { "stringValue": "#441616" },
+          "walkout_floor_color": { "stringValue": "#D12228" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#D12228" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#441616" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#D12228" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#441616" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Ligue 1 POTM" },
+          "id": { "stringValue": "ligue1_potm" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ligue1_potm_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ligue1_potm_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ligue1_potm_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#DE88B9" },
+          "flare_2": { "stringValue": "#4066B0" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#262626" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#DE88B9" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#DE88B9" },
+          "walkout_glow_lines_1": { "stringValue": "#FFFFFF" },
+          "walkout_glow_lines_2": { "stringValue": "#4066B0" },
+          "walkout_floor_color": { "stringValue": "#4066B0" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#DE88B9" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#4066B0" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#DE88B9" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#4066B0" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Liga F POTM" },
+          "id": { "stringValue": "liga_f_potm" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/liga_f_potm_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/liga_f_potm_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/liga_f_potm_micro.png" },
+          "top_text_color": { "stringValue": "#F3F3F3" },
+          "middle_text_color": { "stringValue": "#F3F3F3" },
+          "bottom_text_color": { "stringValue": "#F3F3F3" },
+          "bottom_2_text_color": { "stringValue": "#F3F3F3" },
+          "flare_1": { "stringValue": "#60C5BF" },
+          "flare_2": { "stringValue": "#005CA3" },
+          "alt_pos_outline": { "stringValue": "#F3F3F3" },
+          "alt_pos_background": { "stringValue": "#00256A" },
+          "alt_pos_text": { "stringValue": "#F3F3F3" },
+          "walkout_card_reveal_flare": { "stringValue": "#60C5BF" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#60C5BF" },
+          "walkout_glow_lines_1": { "stringValue": "#F3F3F3" },
+          "walkout_glow_lines_2": { "stringValue": "#005CA3" },
+          "walkout_floor_color": { "stringValue": "#005CA3" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#005CA3" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#60C5BF" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#005CA3" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#60C5BF" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "UCL Primetime" },
+          "id": { "stringValue": "ucl_rttk" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ucl_rttk_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ucl_rttk_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ucl_rttk_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#66C7C2" },
+          "flare_2": { "stringValue": "#31499C" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#010056" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#66C7C2" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#66C7C2" },
+          "walkout_glow_lines_1": { "stringValue": "#FFFFFF" },
+          "walkout_glow_lines_2": { "stringValue": "#31499C" },
+          "walkout_floor_color": { "stringValue": "#31499C" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#66C7C2" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#31499C" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#66C7C2" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#31499C" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "UWCL Primetime" },
+          "id": { "stringValue": "uwcl_rttk" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/uwcl_rttk_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/uwcl_rttk_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/uwcl_rttk_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#37C4E4" },
+          "flare_2": { "stringValue": "#0065AD" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#003D77" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#0065AD" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#37C4E4" },
+          "walkout_glow_lines_1": { "stringValue": "#FFFFFF" },
+          "walkout_glow_lines_2": { "stringValue": "#0065AD" },
+          "walkout_floor_color": { "stringValue": "#0065AD" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#37C4E4" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#0065AD" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#37C4E4" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#0065AD" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "UEL RTTF" },
+          "id": { "stringValue": "europa_rttf" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/europa_rttf_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/europa_rttf_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/europa_rttf_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#F05625" },
+          "flare_2": { "stringValue": "#992F20" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#3B1903" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#F05625" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#F79320" },
+          "walkout_glow_lines_1": { "stringValue": "#F79320" },
+          "walkout_glow_lines_2": { "stringValue": "#992F20" },
+          "walkout_floor_color": { "stringValue": "#992F20" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F79320" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#992F20" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#F79320" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#992F20" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "UEL Primetime" },
+          "id": { "stringValue": "europa_rttk" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/europa_rttk_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/europa_rttk_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/europa_rttk_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#F26522" },
+          "flare_2": { "stringValue": "#86311C" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#3B1903" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#F26522" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#F26522" },
+          "walkout_glow_lines_1": { "stringValue": "#F79320" },
+          "walkout_glow_lines_2": { "stringValue": "#86311C" },
+          "walkout_floor_color": { "stringValue": "#86311C" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#F26522" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#86311C" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#F26522" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#86311C" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "ECL RTTF" },
+          "id": { "stringValue": "ecl_rttf" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ecl_rttf_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ecl_rttf_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ecl_rttf_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#3EB54B" },
+          "flare_2": { "stringValue": "#125D30" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#012D08" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#3EB54B" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#B2DAB3" },
+          "walkout_glow_lines_1": { "stringValue": "#125D30" },
+          "walkout_glow_lines_2": { "stringValue": "#3EB54B" },
+          "walkout_floor_color": { "stringValue": "#125D30" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#B2DAB3" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#125D30" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#B2DAB3" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#125D30" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "ECL Primetime" },
+          "id": { "stringValue": "ecl_rttk" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ecl_rttk_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ecl_rttk_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ecl_rttk_micro.png" },
+          "top_text_color": { "stringValue": "#FFFFFF" },
+          "middle_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_text_color": { "stringValue": "#FFFFFF" },
+          "bottom_2_text_color": { "stringValue": "#FFFFFF" },
+          "flare_1": { "stringValue": "#3EB54B" },
+          "flare_2": { "stringValue": "#125D30" },
+          "alt_pos_outline": { "stringValue": "#FFFFFF" },
+          "alt_pos_background": { "stringValue": "#012D08" },
+          "alt_pos_text": { "stringValue": "#FFFFFF" },
+          "walkout_card_reveal_flare": { "stringValue": "#3EB54B" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#3EB54B" },
+          "walkout_glow_lines_1": { "stringValue": "#FFFFFF" },
+          "walkout_glow_lines_2": { "stringValue": "#3EB54B" },
+          "walkout_floor_color": { "stringValue": "#125D30" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#3EB54B" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#125D30" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#3EB54B" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#125D30" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Evo" },
+          "id": { "stringValue": "evo" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/evo_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/evo_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/evo_micro.png" },
+          "top_text_color": { "stringValue": "#B9F5DF" },
+          "middle_text_color": { "stringValue": "#B9F5DF" },
+          "bottom_text_color": { "stringValue": "#B9F5DF" },
+          "bottom_2_text_color": { "stringValue": "#B9F5DF" },
+          "flare_1": { "stringValue": "#9EC9B8" },
+          "flare_2": { "stringValue": "#31886B" },
+          "alt_pos_outline": { "stringValue": "#B9F5DF" },
+          "alt_pos_background": { "stringValue": "#043435" },
+          "alt_pos_text": { "stringValue": "#B9F5DF" },
+          "walkout_card_reveal_flare": { "stringValue": "#9EC9B8" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#9EC9B8" },
+          "walkout_glow_lines_1": { "stringValue": "#0B526B" },
+          "walkout_glow_lines_2": { "stringValue": "#31886B" },
+          "walkout_floor_color": { "stringValue": "#31886B" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#BFE3D6" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#31886B" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#BFE3D6" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#31886B" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Evo Elite" },
+          "id": { "stringValue": "evo_elite" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/evo_elite_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/evo_elite_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/evo_elite_micro.png" },
+          "top_text_color": { "stringValue": "#ECC97D" },
+          "middle_text_color": { "stringValue": "#ECC97D" },
+          "bottom_text_color": { "stringValue": "#ECC97D" },
+          "bottom_2_text_color": { "stringValue": "#ECC97D" },
+          "flare_1": { "stringValue": "#B1E1EE" },
+          "flare_2": { "stringValue": "#ECC97D" },
+          "alt_pos_outline": { "stringValue": "#ECC97D" },
+          "alt_pos_background": { "stringValue": "#022237" },
+          "alt_pos_text": { "stringValue": "#ECC97D" },
+          "walkout_card_reveal_flare": { "stringValue": "#B1E1EE" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#ECC97D" },
+          "walkout_glow_lines_1": { "stringValue": "#24AF7A" },
+          "walkout_glow_lines_2": { "stringValue": "#B1E1EE" },
+          "walkout_floor_color": { "stringValue": "#085C52" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#7ED2ED" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#ECC97D" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#7ED2ED" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#ECC97D" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Cornerstones" },
+          "id": { "stringValue": "cornerstones" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/cornerstones_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/cornerstones_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/cornerstones_micro.png" },
+          "top_text_color": { "stringValue": "#F6DFD0" },
+          "middle_text_color": { "stringValue": "#F6DFD0" },
+          "bottom_text_color": { "stringValue": "#F6DFD0" },
+          "bottom_2_text_color": { "stringValue": "#F6DFD0" },
+          "flare_1": { "stringValue": "#DFA65E" },
+          "flare_2": { "stringValue": "#DD5727" },
+          "alt_pos_outline": { "stringValue": "#F6DFD0" },
+          "alt_pos_background": { "stringValue": "#562E1F" },
+          "alt_pos_text": { "stringValue": "#F6DFD0" },
+          "walkout_card_reveal_flare": { "stringValue": "#DFA65E" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#DD5727" },
+          "walkout_glow_lines_1": { "stringValue": "#666B7B" },
+          "walkout_glow_lines_2": { "stringValue": "#DFA65E" },
+          "walkout_floor_color": { "stringValue": "#DFA65E" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#DFA65E" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#DD5727" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#DFA65E" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#DD5727" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Champions" },
+          "id": { "stringValue": "champions" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/champions_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/champions_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/champions_micro.png" },
+          "top_text_color": { "stringValue": "#EDDBBF" },
+          "middle_text_color": { "stringValue": "#EDDBBF" },
+          "bottom_text_color": { "stringValue": "#EDDBBF" },
+          "bottom_2_text_color": { "stringValue": "#EDDBBF" },
+          "flare_1": { "stringValue": "#EEC191" },
+          "flare_2": { "stringValue": "#670E16" },
+          "alt_pos_outline": { "stringValue": "#EDDBBF" },
+          "alt_pos_background": { "stringValue": "#3D1113" },
+          "alt_pos_text": { "stringValue": "#EDDBBF" },
+          "walkout_card_reveal_flare": { "stringValue": "#EEC191" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#EEC191" },
+          "walkout_glow_lines_1": { "stringValue": "#A06F3F" },
+          "walkout_glow_lines_2": { "stringValue": "#670E16" },
+          "walkout_floor_color": { "stringValue": "#670E16" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#670E16" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#EEC191" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#670E16" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#EEC191" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Ratings Reload" },
+          "id": { "stringValue": "ratings_reload" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ratings_reload_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ratings_reload_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/ratings_reload_micro.png" },
+          "top_text_color": { "stringValue": "#FEF8E0" },
+          "middle_text_color": { "stringValue": "#FEF8E0" },
+          "bottom_text_color": { "stringValue": "#FEF8E0" },
+          "bottom_2_text_color": { "stringValue": "#FEF8E0" },
+          "flare_1": { "stringValue": "#DEC489" },
+          "flare_2": { "stringValue": "#C77636" },
+          "alt_pos_outline": { "stringValue": "#FEF8E0" },
+          "alt_pos_background": { "stringValue": "#563C19" },
+          "alt_pos_text": { "stringValue": "#FEF8E0" },
+          "walkout_card_reveal_flare": { "stringValue": "#DEC489" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#DEC489" },
+          "walkout_glow_lines_1": { "stringValue": "#563C19" },
+          "walkout_glow_lines_2": { "stringValue": "#DEC489" },
+          "walkout_floor_color": { "stringValue": "#DEC489" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#DEC489" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#C77636" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#DEC489" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#C77636" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Season Ladder" },
+          "id": { "stringValue": "season_ladder" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/season_ladder_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/season_ladder_big_Normal.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/season_ladder_micro.png" },
+          "top_text_color": { "stringValue": "#FEF7D3" },
+          "middle_text_color": { "stringValue": "#FEF7D3" },
+          "bottom_text_color": { "stringValue": "#FEF7D3" },
+          "bottom_2_text_color": { "stringValue": "#FEF7D3" },
+          "flare_1": { "stringValue": "#D8BBD1" },
+          "flare_2": { "stringValue": "#4D2971" },
+          "alt_pos_outline": { "stringValue": "#FEF7D3" },
+          "alt_pos_background": { "stringValue": "#4D2770" },
+          "alt_pos_text": { "stringValue": "#FEF7D3" },
+          "walkout_card_reveal_flare": { "stringValue": "#D8BBD1" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#D8BBD1" },
+          "walkout_glow_lines_1": { "stringValue": "#FEF7D3" },
+          "walkout_glow_lines_2": { "stringValue": "#4D2971" },
+          "walkout_floor_color": { "stringValue": "#4D2971" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#D8BBD1" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#4D2971" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#D8BBD1" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#4D2971" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Winter Wildcard Icon" },
+          "id": { "stringValue": "winter_wildcard_icon" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/winter_wildcard_icon_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/winter_wildcard_icon_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/winter_wildcard_icon_micro.png" },
+          "top_text_color": { "stringValue": "#FCFCF7" },
+          "middle_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_2_text_color": { "stringValue": "#FCFCF7" },
+          "flare_1": { "stringValue": "#F3F2F0" },
+          "flare_2": { "stringValue": "#5C9178" },
+          "alt_pos_outline": { "stringValue": "#D4B681" },
+          "alt_pos_background": { "stringValue": "#188D54" },
+          "alt_pos_text": { "stringValue": "#FDFDDD" },
+          "walkout_card_reveal_flare": { "stringValue": "#F3F2F0" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#F3F2F0" },
+          "walkout_glow_lines_1": { "stringValue": "#F3CD9C" },
+          "walkout_glow_lines_2": { "stringValue": "#5C9178" },
+          "walkout_floor_color": { "stringValue": "#DAD8D5" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#FCF0D5" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#C2A473" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#FCF0D5" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#C2A473" }
+        }
+      }
+    },
+    {
+      "mapValue": {
+        "fields": {
+          "name": { "stringValue": "Unbreakables Icon" },
+          "id": { "stringValue": "unbreakables_icon" },
+          "url_small": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/unbreakables_icon_small.png" },
+          "url_big": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/unbreakables_icon_big.png" },
+          "url_micro": { "stringValue": "https://mf-data.b-cdn.net/26/Colors/unbreakables_icon_micro.png" },
+          "top_text_color": { "stringValue": "#FCFCF7" },
+          "middle_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_text_color": { "stringValue": "#FCFCF7" },
+          "bottom_2_text_color": { "stringValue": "#FCFCF7" },
+          "flare_1": { "stringValue": "#E7E6E5" },
+          "flare_2": { "stringValue": "#B46FD4" },
+          "alt_pos_outline": { "stringValue": "#C5A17B" },
+          "alt_pos_background": { "stringValue": "#431438" },
+          "alt_pos_text": { "stringValue": "#EEB258" },
+          "walkout_card_reveal_flare": { "stringValue": "#E7E6E5" },
+          "walkout_card_reveal_glow_explosion": { "stringValue": "#E7E6E5" },
+          "walkout_glow_lines_1": { "stringValue": "#E2BB85" },
+          "walkout_glow_lines_2": { "stringValue": "#B46FD4" },
+          "walkout_floor_color": { "stringValue": "#88509E" },
+          "walkout_final_wall_gradient_1": { "stringValue": "#DAD9DA" },
+          "walkout_final_wall_gradient_2": { "stringValue": "#EFBA61" },
+          "walkout_final_floor_gradient_1": { "stringValue": "#DAD9DA" },
+          "walkout_final_floor_gradient_2": { "stringValue": "#EFBA61" }
+        }
+      }
+    }
+  ]
+}

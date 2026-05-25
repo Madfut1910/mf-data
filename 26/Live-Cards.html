@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MF26 Live Players</title>
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="css/Card.css">
+<link rel="stylesheet" href="css/Live-Card.css">
+<link rel="stylesheet" href="css/Filter.css">
+</head>
+<body>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-scroll">
+    <a href="index.html">DATA</a>
+    <span>›</span>
+    <a href="/26/Database.html">DATABASE</a>
+    <span>›</span>
+    <a href="/26/Cards.html">CARDS</a>
+    <span>›</span>
+    <a href="/26/Live-Cards.html" class="bc-current">LIVE PLAYERS</a>
+  </div>
+</nav>
+ 
+<main class="main-content">
+  <h1 class="page-heading">LIVE PLAYERS</h1>
+  <p class="page-desc">View all Live Players in Madfut 26 — showing their original base card alongside the current upgraded version.</p>
+ 
+  <div class="tmpl-strip-wrap">
+    <div class="tmpl-strip" id="tmplStrip" role="tablist">
+      <a href="Cards.html" class="tmpl-tab" role="tab" aria-selected="false">All Cards</a>
+      <a href="Live-Cards.html" class="tmpl-tab active" role="tab" aria-selected="true">Live Players</a>
+      <a href="LTM-Cards.html" class="tmpl-tab" role="tab" aria-selected="false">LTM Cards</a>
+    </div>
+  </div>
+</main>
+ 
+<script src="/Template26.js"></script>
+<script type="module" src="js/Card.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+ 
+<script>
+function downloadCardImage(cardElement, fileName) {
+  const downloadBtn = cardElement.querySelector('.download-btn');
+  const faceBtn = cardElement.querySelector('.download-face-btn');
+  const metaBadge = cardElement.querySelector('.fatal-meta-badge');
+ 
+  if (downloadBtn) {
+    downloadBtn.classList.add('downloading');
+    setTimeout(() => downloadBtn.classList.remove('downloading'), 600);
+  }
+ 
+  if (downloadBtn) downloadBtn.style.display = 'none';
+  if (faceBtn) faceBtn.style.display = 'none';
+  if (metaBadge) metaBadge.style.display = 'none';
+ 
+  const totwElement = cardElement.querySelector('.totwNumber');
+  const prevTotwDisplay = totwElement ? totwElement.style.display : null;
+  if (totwElement) totwElement.style.display = 'none';
+ 
+  const chemElement = cardElement.querySelector('.specialChem');
+  const prevChemDisplay = chemElement ? chemElement.style.display : null;
+  if (chemElement) chemElement.style.display = 'none';
+ 
+  const rect = cardElement.getBoundingClientRect();
+ 
+  html2canvas(cardElement, {
+    backgroundColor: null,
+    useCORS: true,
+    scale: 3,
+    width: rect.width,
+    height: rect.height
+  }).then(canvas => {
+    if (downloadBtn) downloadBtn.style.display = '';
+    if (faceBtn) faceBtn.style.display = '';
+    if (metaBadge) metaBadge.style.display = '';
+    if (totwElement) totwElement.style.display = prevTotwDisplay;
+    if (chemElement) chemElement.style.display = prevChemDisplay;
+ 
+    canvas.toBlob(blob => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fileName;
+      a.click();
+    }, 'image/png');
+  });
+}
+</script>
+ 
+</body>
+</html>

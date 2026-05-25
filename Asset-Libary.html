@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madfut Asset Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="asset-library.css">
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-scroll">
+    <a href="/index.html">DATA</a>
+    <span>›</span>
+    <span class="bc-plain">MISC</span>
+    <span>›</span>
+    <a href="/26/Template2infolder.html" class="bc-current">ASSET LIBARY</a>
+  </div>
+</nav>
+
+<main class="main-content">
+  <h1 class="page-heading">ASSET LIBRARY</h1>
+  <p class="page-desc">Browse and download images from Madfut 26, 25 and 24.</p>
+
+
+<!-- sticky trail + back bar -->
+  <div class="al-sticky-bar" id="alStickyBar">
+    <div class="al-trail" id="alTrail"></div>
+    <div class="al-back-wrap" id="alBackSticky" style="display:none;">
+      <button class="al-back" id="alBack">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="10,2 4,8 10,14"/></svg>
+        BACK
+      </button>
+    </div>
+  </div>
+
+  <!-- main content area -->
+  <div id="alContent"></div>
+</main>
+
+
+<div class="al-lightbox" id="alLightbox">
+  <div class="al-lb-backdrop" id="alLbBackdrop"></div>  <!-- ADD THIS -->
+  <div class="al-lb-topbar">
+    <span class="al-lb-name" id="alLbName"></span>
+    <div class="al-lb-actions">
+      <a class="al-lb-btn" id="alLbDownload" href="#" download target="_blank" rel="noopener" title="Download">
+        <svg viewBox="0 0 16 16"><line x1="8" y1="2" x2="8" y2="11"/><polyline points="4,7 8,11 12,7"/><line x1="2" y1="14" x2="14" y2="14"/></svg>
+      </a>
+      <button class="al-lb-btn" id="alLbClose" title="Close">
+        <svg viewBox="0 0 16 16"><line x1="2" y1="2" x2="14" y2="14"/><line x1="14" y1="2" x2="2" y2="14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="al-lb-body" id="alLbBody">
+    <button class="al-lb-nav al-lb-nav--prev" id="alLbPrev" title="Previous">
+      <svg viewBox="0 0 16 16"><polyline points="10,2 4,8 10,14"/></svg>
+    </button>
+    <div class="al-lb-img-wrap">
+      <img id="alLbImg" src="" alt="Full image">
+    </div>
+    <button class="al-lb-nav al-lb-nav--next" id="alLbNext" title="Next">
+      <svg viewBox="0 0 16 16"><polyline points="6,2 12,8 6,14"/></svg>
+    </button>
+    <div class="al-lb-counter" id="alLbCounter"></div>
+  </div>
+</div>
+
+
+<script src="/Template26.js"></script>
+<script src="asset-library.js"></script>
+</body>
+</html>

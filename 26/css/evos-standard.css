@@ -1,0 +1,591 @@
+.loading-wrap {
+  padding: 20px;
+  color: #444;
+  font-family: "Roboto", sans-serif;
+}
+
+.evo-list-view,
+.evo-detail-view {
+  padding: 0 20px 30px;
+}
+
+.evo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.evo-card {
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.evo-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+
+.evo-card-header h3 {
+  margin: 0;
+  font-family: "cruyffSansBold", sans-serif;
+  font-size: 1rem;
+}
+
+.evo-card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.evo-eligible-badge {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.75rem;
+  background: #edf8f2;
+  border: 1px solid #c6ead7;
+  color: #1c7f55;
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+/* ── Preview cards in the evo list ── */
+.evo-preview-cards {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+/* Each flip-card slot: fixed height, clips overflow */
+.flip-card-outer {
+  position: relative;
+  width: 100%;
+  height: 100px;          /* visible window */
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* The mini-card inside: scaled down and positioned so it shows centred */
+.flip-card-outer .mini-card-wrap,
+.flip-card-outer .card-wrapper {
+  transform: scale(0.28);
+  transform-origin: top center;
+  margin-top: 0;
+  /* pull the oversized element back up so it doesn't push layout */
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+/* ── Info sections ── */
+.evo-info-sections {
+  margin-top: 8px;
+}
+
+.evo-section-label {
+  margin-top: 10px;
+  font-family: "cruyffSansBold", sans-serif;
+  font-size: 0.85rem;
+}
+
+.evo-reqs-content ul {
+  margin: 6px 0 0 18px;
+  color: #4b4b4b;
+}
+
+.evo-rewards-content {
+  margin-top: 4px;
+}
+
+.reward-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.reward-row img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.evo-view-btn,
+.back-btn,
+.preview-stages-btn,
+.share-card-btn {
+  cursor: pointer;
+}
+
+.evo-view-btn,
+.back-btn,
+.preview-stages-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: "cruyffSansBold", sans-serif;
+  background: #111;
+  color: #fff;
+}
+
+.evo-view-btn {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.tab-navigation {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  border: 1px solid #cecece;
+  border-radius: 999px;
+  background: #fff;
+  padding: 8px 14px;
+  font-family: "Roboto", sans-serif;
+}
+
+.tab-button.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.detail-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.evo-title {
+  margin: 0;
+}
+
+.evo-id {
+  margin: 6px 0 10px;
+  color: #7c7c7c;
+  font-size: 0.85rem;
+}
+
+.requirements-list,
+.stages-list {
+  margin-left: 18px;
+}
+
+.stage-title {
+  font-family: "cruyffSansBold", sans-serif;
+}
+
+.stage-details {
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.upgrade-raw {
+  display: block;
+  opacity: 0.65;
+}
+
+/* ── Eligible card grid ── */
+#eligible-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.eligible-card-wrap {
+  background: #fafafa;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.eligible-card-wrap.selected {
+  border-color: #58b488;
+  box-shadow: 0 0 0 1px #58b488 inset;
+}
+
+/* was height: 118px, scale(0.44) */
+.eligible-card-wrap .card-window {
+  position: relative;
+  width: 100%;
+  height: 202px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.eligible-card-wrap .card-window .card-wrapper {
+  transform: scale(0.65);
+  transform-origin: top center;
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.eligible-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.preview-stages-btn {
+  flex: 1;
+}
+
+.share-card-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Download button inside eligible cards */
+.eligible-card-wrap .download-btn {
+  display: flex !important;
+}
+
+.results-count {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.pagination {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pagination button {
+  border: 1px solid #d5d5d5;
+  border-radius: 7px;
+  background: #fff;
+  padding: 6px 10px;
+}
+
+/* ── Stages grid ── */
+.evo-stages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.evo-stage-item {
+  background: #fafafa;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.evo-stage-meta {
+  margin-bottom: 6px;
+}
+
+.evo-stage-title {
+  font-family: "cruyffSansBold", sans-serif;
+  font-size: 0.88rem;
+}
+
+.evo-stage-upgrades {
+  color: #4f4f4f;
+  font-size: 0.79rem;
+}
+
+/* was height: 118px, scale(0.44) */
+.evo-stage-item .card-window {
+  position: relative;
+  width: 100%;
+  height: 202px;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.evo-stage-item .card-window .card-wrapper {
+  transform: scale(0.65);
+  transform-origin: top center;
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+}
+
+/* Download btn in stage cards */
+.evo-stage-item .download-btn {
+  display: flex !important;
+}
+
+.challenges-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.challenges-table th,
+.challenges-table td {
+  border: 1px solid #e3e3e3;
+  padding: 8px;
+  text-align: left;
+}
+
+.challenge-points {
+  width: 88px;
+  white-space: nowrap;
+}
+
+/* ── Filter sidebar FAB ── */
+.eligible-filter-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 18px;
+  z-index: 90;
+  border: none;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "cruyffSansBold", sans-serif;
+}
+
+.eligible-filter-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: min(360px, 88vw);
+  background: #fff;
+  border-left: 1px solid #ddd;
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  z-index: 95;
+}
+
+.eligible-filter-sidebar.visible {
+  transform: translateX(0);
+}
+
+.ef-sidebar-inner {
+  padding: 14px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.ef-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ef-head-row button {
+  border: 1px solid #d7d7d7;
+  border-radius: 6px;
+  background: #fff;
+  padding: 4px 8px;
+}
+
+.ef-section {
+  margin-bottom: 12px;
+}
+
+.ef-section h4 {
+  margin-bottom: 6px;
+}
+
+.ef-section input,
+.ef-section select {
+  width: 100%;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 6px;
+}
+
+.ef-select-list {
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+}
+
+.ef-option {
+  padding: 8px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.ef-option:last-child {
+  border-bottom: none;
+}
+
+.ef-option img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.ef-option.selected {
+  background: #eaf8f0;
+}
+
+.ef-rating-slider {
+  position: relative;
+  padding-top: 6px;
+}
+
+.ef-rating-slider input[type="range"] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  pointer-events: none;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.ef-rating-slider input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: none;
+  background: #111;
+}
+
+.ef-rating-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #ececec;
+  position: relative;
+  margin-top: 8px;
+}
+
+.ef-rating-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #3da571;
+  position: absolute;
+}
+
+.ef-rating-labels {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+}
+
+/* ── Rarity tier filter chips ── */
+.ef-rarity-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ef-rarity-chip {
+  border: 1px solid #d0d0d0;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #fff;
+  font-family: "Roboto", sans-serif;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.ef-rarity-chip.selected {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.ef-rarity-chip[data-rarity="gold"].selected    { background: #b8860b; border-color: #b8860b; }
+.ef-rarity-chip[data-rarity="silver"].selected  { background: #708090; border-color: #708090; }
+.ef-rarity-chip[data-rarity="bronze"].selected  { background: #8b4513; border-color: #8b4513; }
+.ef-rarity-chip[data-rarity="special"].selected { background: #6a0dad; border-color: #6a0dad; }
+
+@media (max-width: 768px) {
+  .evo-list-view,
+  .evo-detail-view {
+    padding: 0 10px 18px;
+  }
+
+  .evo-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .evo-preview-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .flip-card-outer {
+    height: 86px;
+  }
+
+  .flip-card-outer .mini-card-wrap,
+  .flip-card-outer .card-wrapper {
+    transform: scale(0.24);
+  }
+
+  #eligible-card-container,
+  .evo-stages-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .eligible-card-wrap .card-window,
+  .evo-stage-item .card-window {
+    height: 100px;
+  }
+
+  .eligible-card-wrap .card-window .card-wrapper,
+  .evo-stage-item .card-window .card-wrapper {
+    transform: scale(0.38);
+  }
+
+  .tab-navigation {
+    gap: 6px;
+  }
+
+  .tab-button {
+    font-size: 0.85rem;
+    padding: 7px 11px;
+  }
+}

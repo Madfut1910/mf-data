@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card Creator — MF26</title>
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="css/Card.css">
+
+<style>
+.creator-page { max-width:1400px; margin:0 auto; padding:24px 20px 60px; }
+.creator-heading { font-size:clamp(22px,4vw,36px); font-weight:800; letter-spacing:-0.02em; margin-bottom:4px; }
+.creator-desc { font-size:14px; color:#888; margin-bottom:28px; }
+
+/* Search */
+.search-step { background:#fff; border:1px solid #e5e5e5; border-radius:14px; padding:24px; margin-bottom:28px; }
+.search-step h2 { font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#999; margin-bottom:14px; }
+.player-search-wrap { position:relative; max-width:500px; }
+.player-search-wrap input { width:100%; padding:11px 16px 11px 42px; border:1px solid #ddd; border-radius:10px; font-size:14px; background:#fafafa; outline:none; transition:border .15s,box-shadow .15s; box-sizing:border-box; }
+.player-search-wrap input:focus { border-color:#111; box-shadow:0 0 0 3px rgba(0,0,0,.06); background:#fff; }
+.player-search-wrap .srch-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#aaa; pointer-events:none; }
+.search-dropdown-list { position:absolute; top:calc(100% + 6px); left:0; right:0; background:#fff; border:1px solid #e0e0e0; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,.12); z-index:200; max-height:320px; overflow-y:auto; display:none; }
+.search-dropdown-list.open { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:10px 14px; cursor:pointer; border-bottom:1px solid #f3f3f3; transition:background .1s; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:#f7f7f7; }
+.search-result-item img { width:36px; height:48px; object-fit:contain; border-radius:4px; flex-shrink:0; }
+.sri-info { flex:1; min-width:0; }
+.sri-name { font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sri-sub { font-size:12px; color:#888; margin-top:1px; }
+.sri-rating { font-size:18px; font-weight:800; color:#111; flex-shrink:0; }
+.search-loading { padding:16px; text-align:center; font-size:13px; color:#aaa; }
+
+/* Editor layout */
+.editor-area { display:grid; grid-template-columns:360px 1fr; gap:20px; align-items:start; }
+@media(max-width:900px){ .editor-area { grid-template-columns:1fr; } }
+.editor-area.hidden { display:none; }
+
+/* Preview panel */
+.card-preview-panel { position:sticky; top:20px; background:#fff; border:1px solid #e5e5e5; border-radius:14px; padding:24px; display:flex; flex-direction:column; align-items:center; gap:16px; }
+.card-preview-panel > h2 { font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#999; align-self:flex-start; }
+#cardPreviewWrapper { position:relative; }
+.creator-dl-btn { position:absolute; top:5px; right:30px; width:28px; height:28px; background:rgba(255,255,255,0.22); border-radius:50%; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(155,155,155,0.3); display:flex; justify-content:center; align-items:center; cursor:pointer; transition:background .2s; z-index:20; }
+.creator-dl-btn:hover { background:rgba(83,255,163,0.55); }
+.creator-dl-btn svg { width:13px; height:13px; fill:#000; }
+@keyframes dlPop { 0%{transform:scale(1)} 40%{transform:scale(1.35)} 100%{transform:scale(1)} }
+.creator-dl-btn.downloading { animation:dlPop .35s ease; }
+
+/* Editor panel */
+.editor-panel { background:#fff; border:1px solid #e5e5e5; border-radius:14px; padding:24px; }
+.editor-panel > h2 { font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#999; margin-bottom:20px; }
+
+/* Tabs */
+.editor-tabs { display:flex; gap:6px; margin-bottom:20px; border-bottom:1px solid #f0f0f0; padding-bottom:12px; flex-wrap:wrap; }
+.etab { padding:6px 14px; border:1px solid transparent; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; background:none; color:#aaa; transition:all .15s; }
+.etab.active { background:#111; color:#fff; border-color:#111; }
+.etab:hover:not(.active) { background:#f5f5f5; color:#444; }
+.etab-content { display:none; }
+.etab-content.active { display:block; }
+
+/* Field rows */
+.field-group { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+.field-item { display:flex; flex-direction:column; gap:5px; }
+.field-item label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#888; }
+.field-item input[type=text],
+.field-item input[type=number] { padding:8px 12px; border:1px solid #e0e0e0; border-radius:8px; font-size:14px; background:#fafafa; outline:none; width:100%; box-sizing:border-box; transition:border .15s; }
+.field-item input:focus { border-color:#111; background:#fff; }
+
+/* Rating + wand row */
+.rating-wand-row { display:flex; align-items:flex-end; gap:8px; margin-bottom:14px; }
+.rating-wand-row .field-item { flex:1; }
+
+/* Wand toggle */
+.wand-toggle { display:flex; flex-direction:column; gap:5px; flex-shrink:0; }
+.wand-toggle label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#888; white-space:nowrap; }
+.wand-switch { position:relative; width:52px; height:32px; }
+.wand-switch input { opacity:0; width:0; height:0; position:absolute; }
+.wand-slider { position:absolute; inset:0; background:#e0e0e0; border-radius:16px; cursor:pointer; transition:background .2s; display:flex; align-items:center; padding:0 4px; }
+.wand-slider:before { content:'✦'; font-size:14px; width:24px; height:24px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:transform .2s; flex-shrink:0; }
+input:checked + .wand-slider { background:#111; }
+input:checked + .wand-slider:before { transform:translateX(20px); }
+.wand-label-text { font-size:10px; color:#888; text-align:center; margin-top:2px; white-space:nowrap; }
+
+/* Stat sliders */
+.stat-slider-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.stat-slider-row label { font-size:12px; font-weight:700; color:#555; width:52px; flex-shrink:0; }
+.stat-slider-row input[type=range] { flex:1; accent-color:#111; }
+.stat-num-input { width:46px; padding:4px 6px; border:1px solid #e0e0e0; border-radius:6px; font-size:13px; font-weight:700; text-align:center; background:#fafafa; outline:none; }
+.stat-num-input:focus { border-color:#111; background:#fff; }
+.section-lbl { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#bbb; margin:16px 0 10px; }
+
+/* Badge pickers */
+.badge-picker-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:4px; }
+.badge-picker { display:flex; flex-direction:column; gap:4px; }
+.badge-picker label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#888; }
+.badge-search-wrap { position:relative; }
+.badge-search-wrap input { width:100%; padding:7px 10px; border:1px solid #e0e0e0; border-radius:8px; font-size:12px; background:#fafafa; outline:none; box-sizing:border-box; }
+.badge-search-wrap input:focus { border-color:#111; background:#fff; }
+.badge-dropdown { position:absolute; top:calc(100%+4px); left:0; right:0; background:#fff; border:1px solid #e0e0e0; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,.1); z-index:100; max-height:200px; overflow-y:auto; display:none; }
+.badge-dropdown.open { display:block; }
+.badge-opt { display:flex; align-items:center; gap:8px; padding:7px 10px; cursor:pointer; font-size:12px; border-bottom:1px solid #f5f5f5; transition:background .1s; }
+.badge-opt:last-child { border-bottom:none; }
+.badge-opt:hover { background:#f7f7f7; }
+.badge-opt img { width:20px; height:20px; object-fit:contain; flex-shrink:0; }
+.badge-current { display:flex; align-items:center; gap:6px; margin-top:4px; min-height:22px; }
+.badge-current img { width:22px; height:22px; object-fit:contain; }
+.badge-current span { font-size:11px; color:#555; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+/* Design picker */
+.design-search-input { padding:8px 12px; border:1px solid #e0e0e0; border-radius:8px; font-size:13px; background:#fafafa; outline:none; width:100%; margin-bottom:10px; box-sizing:border-box; }
+.design-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(86px,1fr)); gap:8px; max-height:420px; overflow-y:auto; }
+.design-tile { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; padding:6px; border:1.5px solid transparent; border-radius:8px; transition:all .12s; }
+.design-tile:hover { background:#f5f5f5; }
+.design-tile.active { border-color:#111; background:#f0f0f0; }
+.design-tile img { width:56px; height:76px; object-fit:contain; border-radius:4px; }
+.design-tile span { font-size:10px; font-weight:600; color:#555; text-align:center; line-height:1.2; max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+</style>
+</head>
+<body>
+
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-scroll">
+    <a href="/index.html">DATA</a>
+    <span>›</span>
+    <span class="bc-plain">MISC</span>
+    <span>›</span>
+    <a href="/26/Card-Creator.html" class="bc-current">CARD CREATOR</a>
+  </div>
+</nav>
+
+
+<div class="creator-page">
+  <h1>CARD CREATOR</h1>
+  <p class="creator-desc">Search for any player, then customise every detail of their card.</p>
+
+  <div class="search-step">
+    <h2>1 — Find a player</h2>
+    <div class="player-search-wrap" id="playerSearchWrap">
+      <svg class="srch-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="playerSearchInput" placeholder="Type a player name…" autocomplete="off">
+      <div class="search-dropdown-list" id="playerDropdown"></div>
+    </div>
+  </div>
+
+  <div class="editor-area hidden" id="editorArea">
+
+    <!-- Preview -->
+    <div class="card-preview-panel">
+      <h2>Preview</h2>
+      <div id="cardPreviewWrapper">
+        <button class="creator-dl-btn" id="creatorDlBtn" onclick="downloadCreatorCard()" title="Download card image">
+          <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"/></svg>
+        </button>
+        <div class="card-wrapper">
+          <div class="card" id="creatorCard">
+            <img id="previewBg" src="" alt="card">
+            <div class="overall-position">
+              <div class="overall player-rating" id="previewRating">91</div>
+              <div class="position player-position" id="previewPos">ST</div>
+            </div>
+            <div class="alt-positions" id="previewAltPos"></div>
+            <img class="player-face" id="previewFace" src="" alt="" onerror="handleFaceError(this)">
+            <div class="player-name" id="previewName">PLAYER NAME</div>
+            <div class="stats" id="previewStats"></div>
+            <div class="fatals">
+              <img class="fatal-bg" id="fatalBgImg" src="" alt="">
+              <div class="fatal-value-container">
+                <div class="fatal-value" id="fv-atk">0</div>
+                <div class="fatal-value" id="fv-ctl">0</div>
+                <div class="fatal-value" id="fv-def">0</div>
+              </div>
+              <div class="fatal-meta-badge">
+                <span class="fatal-meta-label">META</span>
+                <span class="fatal-meta-value" id="metaVal">0.00</span>
+              </div>
+            </div>
+            <div class="badges">
+              <img class="badge flag"   id="prevNationBadge" src="" alt="" onerror="this.style.display='none'">
+              <img class="badge league" id="prevLeagueBadge" src="" alt="" onerror="this.style.display='none'">
+              <img class="badge club"   id="prevClubBadge"   src="" alt="" onerror="this.style.display='none'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="editor-panel">
+      <h2>2 — Edit card</h2>
+      <div class="editor-tabs">
+        <button class="etab active" onclick="switchTab('info')">Info</button>
+        <button class="etab" onclick="switchTab('stats')">Stats</button>
+        <button class="etab" onclick="switchTab('fatal')">Fatals</button>
+        <button class="etab" onclick="switchTab('badges')">Badges</button>
+        <button class="etab" onclick="switchTab('design')">Design</button>
+      </div>
+
+      <!-- INFO -->
+      <div class="etab-content active" id="etab-info">
+        <div class="field-group">
+          <div class="field-item">
+            <label>Player name</label>
+            <input type="text" id="e-name" oninput="syncField('name',this.value)">
+          </div>
+          <div class="field-item">
+            <label>Position</label>
+            <input type="text" id="e-pos" maxlength="4" oninput="syncField('pos',this.value.toUpperCase())">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-item">
+            <label>Alt positions (comma-sep)</label>
+            <input type="text" id="e-alt" placeholder="e.g. CF,CAM" oninput="syncField('alt',this.value)">
+          </div>
+        </div>
+
+        <!-- Rating + wand toggle on same row -->
+        <div class="rating-wand-row">
+          <div class="field-item">
+            <label>Overall rating</label>
+            <input type="number" id="e-rating" min="1" max="99" oninput="onRatingInput(this.value)">
+          </div>
+          <div class="wand-toggle">
+            <label>Magic wand</label>
+            <label class="wand-switch">
+              <input type="checkbox" id="wandToggle">
+              <span class="wand-slider"></span>
+            </label>
+            <span class="wand-label-text" id="wandLabelText">OFF</span>
+          </div>
+        </div>
+        <p style="font-size:11px;color:#aaa;margin-top:-8px;margin-bottom:14px;">When ON, changing the rating will automatically scale all stats &amp; fatals by the same amount.</p>
+      </div>
+
+      <!-- STATS -->
+      <div class="etab-content" id="etab-stats">
+        <div id="statSliders"></div>
+      </div>
+
+      <!-- FATAL -->
+      <div class="etab-content" id="etab-fatal">
+        <div class="section-lbl">Fatal stats</div>
+        <div id="fatalSliders"></div>
+      </div>
+
+      <!-- BADGES -->
+      <div class="etab-content" id="etab-badges">
+        <div class="section-lbl">Nation</div>
+        <div class="badge-picker" id="nationPicker">
+          <div class="badge-search-wrap">
+            <input type="text" id="nationSearch" placeholder="Search nation…" autocomplete="off" oninput="filterBadge('nation',this.value)" onfocus="openBadge('nation')" onblur="closeBadge('nation')">
+          </div>
+          <div class="badge-dropdown" id="nationDrop"></div>
+          <div class="badge-current" id="nationCurrent"></div>
+        </div>
+
+        <div class="section-lbl">League</div>
+        <div class="badge-picker" id="leaguePicker">
+          <div class="badge-search-wrap">
+            <input type="text" id="leagueSearch" placeholder="Search league…" autocomplete="off" oninput="filterBadge('league',this.value)" onfocus="openBadge('league')" onblur="closeBadge('league')">
+          </div>
+          <div class="badge-dropdown" id="leagueDrop"></div>
+          <div class="badge-current" id="leagueCurrent"></div>
+        </div>
+
+        <div class="section-lbl">Club</div>
+        <div class="badge-picker" id="clubPicker">
+          <div class="badge-search-wrap">
+            <input type="text" id="clubSearch" placeholder="Search club…" autocomplete="off" oninput="filterBadge('club',this.value)" onfocus="openBadge('club')" onblur="closeBadge('club')">
+          </div>
+          <div class="badge-dropdown" id="clubDrop"></div>
+          <div class="badge-current" id="clubCurrent"></div>
+        </div>
+      </div>
+
+      <!-- DESIGN -->
+      <div class="etab-content" id="etab-design">
+        <div class="section-lbl">Card design</div>
+        <div class="section-lbl">Upload custom design</div>
+<div id="customUploadArea" style="border:2px dashed #ddd;border-radius:10px;padding:20px;text-align:center;margin-bottom:16px;cursor:pointer;transition:border-color .15s;" onclick="document.getElementById('customBgInput').click()" ondragover="event.preventDefault();this.style.borderColor='#111'" ondragleave="this.style.borderColor='#ddd'" ondrop="handleDesignDrop(event)">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5" style="margin-bottom:8px;display:block;margin-left:auto;margin-right:auto;"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+  <p style="font-size:13px;color:#aaa;margin:0;">Click or drag an image here</p>
+  <p style="font-size:11px;color:#ccc;margin:4px 0 0;">PNG recommended · any aspect ratio</p>
+</div>
+<input type="file" id="customBgInput" accept="image/*" style="display:none" onchange="handleCustomBgUpload(this)">
+
+<div id="customColorPickers" style="margin-bottom:16px;">
+  <div class="section-lbl">Text colours</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+    <div class="field-item">
+      <label>Top (rating/pos)</label>
+      <input type="color" id="cTop" value="#000000" oninput="window.CARD_STATE.topc=this.value;updatePreview()" style="width:100%;height:34px;border:1px solid #e0e0e0;border-radius:8px;padding:2px;background:#fafafa;cursor:pointer;">
+    </div>
+    <div class="field-item">
+      <label>Middle (name)</label>
+      <input type="color" id="cMid" value="#ffffff" oninput="window.CARD_STATE.midc=this.value;updatePreview()" style="width:100%;height:34px;border:1px solid #e0e0e0;border-radius:8px;padding:2px;background:#fafafa;cursor:pointer;">
+    </div>
+<div class="field-item">
+      <label>Bottom (stats)</label>
+      <input type="color" id="cBot" value="#ffffff" oninput="window.CARD_STATE.botc=this.value;updatePreview()" style="width:100%;height:34px;border:1px solid #e0e0e0;border-radius:8px;padding:2px;background:#fafafa;cursor:pointer;">
+    </div>
+  </div>
+  <div class="section-lbl" style="margin-top:12px;">Alt position colours</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+    <div class="field-item">
+      <label>Background</label>
+      <input type="color" id="cAltBg" value="#333333" oninput="window.CARD_STATE.altBg=this.value;updatePreview()" style="width:100%;height:34px;border:1px solid #e0e0e0;border-radius:8px;padding:2px;background:#fafafa;cursor:pointer;">
+    </div>
+    <div class="field-item">
+      <label>Text</label>
+      <input type="color" id="cAltText" value="#ffffff" oninput="window.CARD_STATE.altText=this.value;updatePreview()" style="width:100%;height:34px;border:1px solid #e0e0e0;border-radius:8px;padding:2px;background:#fafafa;cursor:pointer;">
+    </div>
+    <div class="field-item">
+      <label>Border</label>
+      <input type="color" id="cAltOutline" value="#000000" oninput="window.CARD_STATE.altOutline=this.value;updatePreview()" style="width:100%;height:34px;border:1px solid #e0e0e0;border-radius:8px;padding:2px;background:#fafafa;cursor:pointer;">
+    </div>
+  </div>
+</div>
+
+<div class="section-lbl">Or choose a preset design</div>
+        <input type="text" class="design-search-input" id="designSearch" placeholder="Search designs…" oninput="filterDesigns(this.value)">
+        <div class="design-grid" id="designGrid">
+          <div style="grid-column:1/-1;text-align:center;padding:20px;color:#aaa;font-size:13px;">Loading designs…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div id="emptyState" style="text-align:center;padding:80px 20px;color:#bbb;">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin-bottom:16px;opacity:.3;"><rect x="3" y="2" width="14" height="20" rx="2"/><line x1="7" y1="8" x2="13" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="7" y1="16" x2="10" y2="16"/></svg>
+    <p style="font-size:16px;font-weight:600;margin-bottom:6px;">Search for a player above</p>
+    <small style="font-size:13px;">Select any player from the database to start editing</small>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="/Template26.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="module">
+import { clubIdToName, leagueIdToName, nationIdToName } from './js/mappings.js';
+
+// ── State ──────────────────────────────────────
+const CARD_STATE = {
+  name:'', rating:91, pos:'ST', alt:'',
+  topc:'#f5e642', midc:'#ffffff', botc:'#ffffff',
+  stats:{ PAC:88, SHO:90, PAS:80, DRI:92, DEF:40, PHY:78 },
+  fatals:{ ATT:88, CTR:82, DEF2:36 },
+  nationId:'0', leagueId:'0', clubId:'0',
+  playerId:'00000000', baseId:'00000000',
+cardBgUrl:'https://mf-data.b-cdn.net/26/Colors/default_big.png',
+  colorKey:'default',
+  altBg:'#333333', altText:'#ffffff', altOutline:'#000000'
+};
+
+let allLoadedPlayers=[], colorMap={}, allDesigns=[], searchTimer;
+window.CARD_STATE = CARD_STATE;
+
+// ── Helpers ─────────────────────────────────────
+function clampNum(v,mn,mx){ const n=parseInt(v)||0; return Math.min(mx,Math.max(mn,n)); }
+function cap99(v){ return Math.min(99,Math.max(0,Math.round(+v))); }
+function toast(msg){ const tc=document.getElementById('toast-container'); const t=document.createElement('div'); t.className='toast'; t.textContent=msg; tc.appendChild(t); setTimeout(()=>t.remove(),3000); }
+
+// ── Expose globals needed by inline HTML ────────
+window.switchTab=switchTab;
+window.filterBadge=filterBadge;
+window.openBadge=openBadge;
+window.closeBadge=closeBadge;
+window.filterDesigns=filterDesigns;
+window.syncField=syncField;
+window.onRatingInput=onRatingInput;
+window.downloadCreatorCard=downloadCreatorCard;
+window.handleFaceError=handleFaceError;
+
+// ── Tabs ────────────────────────────────────────
+function switchTab(name){
+  const names=['info','stats','fatal','badges','design'];
+  document.querySelectorAll('.etab').forEach((b,i)=>b.classList.toggle('active',names[i]===name));
+  document.querySelectorAll('.etab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('etab-'+name).classList.add('active');
+}
+
+// ── Wand toggle ──────────────────────────────────
+const wandToggle=document.getElementById('wandToggle');
+const wandLabelText=document.getElementById('wandLabelText');
+wandToggle.addEventListener('change',()=>{
+  wandLabelText.textContent=wandToggle.checked?'ON':'OFF';
+});
+
+// ── Rating input — scales stats when wand is ON ─
+function onRatingInput(val){
+  const newRating=clampNum(val,1,99);
+  if(wandToggle.checked){
+    const delta=newRating-CARD_STATE.rating;
+    if(delta!==0){
+      Object.keys(CARD_STATE.stats).forEach(k=>{CARD_STATE.stats[k]=cap99(CARD_STATE.stats[k]+delta);});
+      Object.keys(CARD_STATE.fatals).forEach(k=>{CARD_STATE.fatals[k]=cap99(CARD_STATE.fatals[k]+delta);});
+      buildStatSliders(); buildFatalSliders();
+    }
+  }
+  CARD_STATE.rating=newRating;
+  document.getElementById('e-rating').value=newRating;
+  updatePreview();
+}
+
+// ── Sync other fields ────────────────────────────
+function syncField(key,val){
+  CARD_STATE[key]=val;
+  updatePreview();
+}
+
+// ── Fatal calc ───────────────────────────────────
+function getFatalCode(A,C,D){
+  A=+A||0;C=+C||0;D=+D||0;
+  const h=Math.max(A,C,D),diff=h-3;
+  return `${A<=h&&A>=diff?1:0}${C<=h&&C>=diff?1:0}${D<=h&&D>=diff?1:0}`;
+}
+function calcMeta(A,C,D,R,pos){
+  A=+A||0;C=+C||0;D=+D||0;R=+R||1;
+  if((pos||'').toUpperCase()==='GK'){ const de=D-R; return parseFloat((D+((A+C)/2)*0.03+(de>=0?de:de*0.4)).toFixed(2)); }
+  const h=Math.max(A,C,D),diff=h-3;
+  const aM=A<=h&&A>=diff,cM=C<=h&&C>=diff,dM=D<=h&&D>=diff;
+  const MB=1.5,SW=0.08;
+  const sc=(aM?A*MB:A*SW)+(cM?C*MB:C*SW)+(dM?D*MB:D*SW);
+  const nm=(aM?MB:SW)+(cM?MB:SW)+(dM?MB:SW);
+  const nF=sc/nm;
+  let net=0; if(aM)net+=(A-R);if(cM)net+=(C-R);if(dM)net+=(D-R);
+  const nb=net>=0?net:net*0.4;
+  const raw=nF-R;
+  const cl=R>=88?raw:(raw>=0?raw:Math.max(raw,-(R/99)*5));
+  let lb=0; if(raw>0&&R<87){lb=Math.min(raw*((87-R)/87)*2.8,14);}
+  return parseFloat((nF+(cl*1.2)+lb+nb).toFixed(2));
+}
+
+// ── Sliders ──────────────────────────────────────
+function makeSlider(container,label,key,isFatal){
+  const obj=isFatal?CARD_STATE.fatals:CARD_STATE.stats;
+  const val=obj[key];
+  const row=document.createElement('div');
+  row.className='stat-slider-row';
+  row.innerHTML=`<label>${label}</label><input type="range" min="0" max="99" value="${val}" step="1" id="sl-${key}"><input type="number" class="stat-num-input" min="0" max="99" value="${val}" id="sn-${key}">`;
+  const slider=row.querySelector(`#sl-${key}`);
+  const numIn=row.querySelector(`#sn-${key}`);
+  slider.addEventListener('input',()=>{ const v=cap99(+slider.value); numIn.value=v; obj[key]=v; updatePreview(); });
+  numIn.addEventListener('change',()=>{ const v=cap99(clampNum(numIn.value,0,99)); slider.value=v; numIn.value=v; obj[key]=v; updatePreview(); });
+  container.appendChild(row);
+}
+function buildStatSliders(){ const c=document.getElementById('statSliders'); c.innerHTML=''; [{k:'PAC',l:'PAC'},{k:'SHO',l:'SHO'},{k:'PAS',l:'PAS'},{k:'DRI',l:'DRI'},{k:'DEF',l:'DEF'},{k:'PHY',l:'PHY'}].forEach(({k,l})=>makeSlider(c,l,k,false)); }
+function buildFatalSliders(){ const c=document.getElementById('fatalSliders'); c.innerHTML=''; [{k:'ATT',l:'Attack'},{k:'CTR',l:'Control'},{k:'DEF2',l:'Defense'}].forEach(({k,l})=>makeSlider(c,l,k,true)); }
+
+// ── Badge pickers ────────────────────────────────
+const BADGE_CONFIG = {
+  nation: { map: nationIdToName, urlFn: id=>`https://mf-data.b-cdn.net/26/Badges/Nations/Large/nation_large_${id}.png`, stateKey:'nationId' },
+  league: { map: leagueIdToName, urlFn: id=>`https://mf-data.b-cdn.net/26/Badges/Leagues/Large/league_large_${id}.png`, stateKey:'leagueId' },
+  club:   { map: clubIdToName,   urlFn: id=>`https://mf-data.b-cdn.net/26/Badges/Clubs/Large/club_large_${id}.png`,   stateKey:'clubId'   }
+};
+
+function renderBadgeDrop(type, term=''){
+  const cfg=BADGE_CONFIG[type];
+  const drop=document.getElementById(type+'Drop');
+  const t=term.toLowerCase();
+  const entries=Object.entries(cfg.map).filter(([,name])=>!t||name.toLowerCase().includes(t)).slice(0,50);
+  drop.innerHTML=entries.map(([id,name])=>
+    `<div class="badge-opt" onmousedown="selectBadge('${type}','${id}')">
+       <img src="${cfg.urlFn(id)}" onerror="this.style.display='none'" alt="">
+       <span>${name}</span>
+     </div>`
+  ).join('') || '<div style="padding:10px;font-size:12px;color:#aaa;text-align:center;">No results</div>';
+}
+
+function filterBadge(type,val){ renderBadgeDrop(type,val); }
+function openBadge(type){ renderBadgeDrop(type,document.getElementById(type+'Search').value); document.getElementById(type+'Drop').classList.add('open'); }
+function closeBadge(type){ setTimeout(()=>document.getElementById(type+'Drop').classList.remove('open'),180); }
+
+function selectBadge(type,id){
+  const cfg=BADGE_CONFIG[type];
+  CARD_STATE[cfg.stateKey]=id;
+  const name=cfg.map[id]||id;
+  document.getElementById(type+'Search').value=name;
+  document.getElementById(type+'Drop').classList.remove('open');
+  const cur=document.getElementById(type+'Current');
+  cur.innerHTML=`<img src="${cfg.urlFn(id)}" onerror="this.style.display='none'" alt=""><span>${name}</span>`;
+  updatePreview();
+}
+window.selectBadge=selectBadge;
+
+function updateBadgeCurrent(type,id){
+  const cfg=BADGE_CONFIG[type];
+  const name=cfg.map[id]||('ID '+id);
+  const cur=document.getElementById(type+'Current');
+  if(!cur)return;
+  cur.innerHTML=`<img src="${cfg.urlFn(id)}" onerror="this.style.display='none'" alt=""><span>${name}</span>`;
+  document.getElementById(type+'Search').value=name;
+}
+
+// ── Live preview ─────────────────────────────────
+function updatePreview(){
+  const s=CARD_STATE;
+  const pos=(s.pos||'ST').toUpperCase();
+
+  document.getElementById('previewBg').src=s.cardBgUrl;
+  document.getElementById('previewRating').textContent=s.rating;
+  document.getElementById('previewRating').style.color=s.topc;
+  document.getElementById('previewPos').textContent=pos;
+  document.getElementById('previewPos').style.color=s.topc;
+  document.getElementById('previewName').textContent=s.name||'Player';
+  document.getElementById('previewName').style.color=s.midc;
+
+  // Alt positions with design colours
+const altBgHex=s.altBg||'#333333';
+  const altTextCol=s.altText||'#ffffff';
+  const altOutline=s.altOutline||'#000000';
+  const r2=parseInt(altBgHex.slice(1,3),16)||51, g2=parseInt(altBgHex.slice(3,5),16)||51, b2=parseInt(altBgHex.slice(5,7),16)||51;
+  document.getElementById('previewAltPos').innerHTML=
+    (s.alt||'').split(',').filter(Boolean).slice(0,3)
+    .map(p=>`<div class="alt-pos" style="background-color:rgba(${r2},${g2},${b2},0.8);color:${altTextCol};border:1px solid ${altOutline};">${p.trim()}</div>`).join('');
+  // Stats
+  const labels=pos==='GK'?['DIV','HAN','KIC','REF','SPD','POS']:['PAC','SHO','PAS','DRI','DEF','PHY'];
+  const vals=[s.stats.PAC,s.stats.SHO,s.stats.PAS,s.stats.DRI,s.stats.DEF,s.stats.PHY];
+  document.getElementById('previewStats').innerHTML=labels.map((l,i)=>
+    `<div class="stat"><div class="stat-label" style="color:${s.botc}">${l}</div><div class="stat-value" style="color:${s.botc}">${vals[i]}</div></div>`
+  ).join('');
+
+  // Fatals
+  document.getElementById('fv-atk').textContent=s.fatals.ATT;
+  document.getElementById('fv-ctl').textContent=s.fatals.CTR;
+  document.getElementById('fv-def').textContent=s.fatals.DEF2;
+  document.getElementById('fatalBgImg').src=`https://mf-data.b-cdn.net/26/Fatal/Stats/fatal_card_stats_${getFatalCode(s.fatals.ATT,s.fatals.CTR,s.fatals.DEF2)}.png`;
+  document.getElementById('metaVal').textContent=calcMeta(s.fatals.ATT,s.fatals.CTR,s.fatals.DEF2,s.rating,pos).toFixed(2);
+
+  // Face
+  const face=document.getElementById('previewFace');
+  face.dataset.step=''; face.className='player-face';
+  face.src=`https://trivela.b-cdn.net/26/normalFacesSmall/${s.playerId}.png`;
+
+  // Badges
+  ['prevNationBadge','prevLeagueBadge','prevClubBadge'].forEach(id=>{ const el=document.getElementById(id); el.style.display=''; });
+  document.getElementById('prevNationBadge').src=`https://mf-data.b-cdn.net/26/Badges/Nations/Large/nation_large_${s.nationId}.png`;
+  document.getElementById('prevLeagueBadge').src=`https://mf-data.b-cdn.net/26/Badges/Leagues/Large/league_large_${s.leagueId}.png`;
+  document.getElementById('prevClubBadge').src=`https://mf-data.b-cdn.net/26/Badges/Clubs/Large/club_large_${s.clubId}.png`;
+}
+
+function handleFaceError(img){
+  if(!img.dataset.step){ img.dataset.step='p'; img.classList.remove('player-face'); img.classList.add('normal-face'); img.src=`https://trivela.b-cdn.net/26/faces/p${CARD_STATE.playerId}.png`; }
+  else if(img.dataset.step==='p'){ img.dataset.step='base'; img.classList.remove('normal-face'); img.classList.add('player-face'); img.src=`https://trivela.b-cdn.net/26/normalFacesSmall/${CARD_STATE.baseId}.png`; }
+  else{ img.onerror=null; img.classList.remove('normal-face'); img.classList.add('player-face'); img.src='Main Assets/boo.png'; }
+}
+
+// ── Download ─────────────────────────────────────
+function downloadCreatorCard(){
+  const btn=document.getElementById('creatorDlBtn');
+  const card=document.getElementById('creatorCard');
+  const metaBadge=card.querySelector('.fatal-meta-badge');
+  btn.classList.add('downloading'); btn.style.display='none';
+  if(metaBadge)metaBadge.style.display='none';
+  const rect=card.getBoundingClientRect();
+  const safeName=(CARD_STATE.name||'card').replace(/[^a-z0-9]/gi,'_');
+  html2canvas(card,{backgroundColor:null,useCORS:true,scale:3,width:rect.width,height:rect.height}).then(canvas=>{
+    btn.style.display=''; btn.classList.remove('downloading');
+    if(metaBadge)metaBadge.style.display='';
+    canvas.toBlob(blob=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${safeName}_${CARD_STATE.rating}_${CARD_STATE.colorKey}.png`; a.click(); },'image/png');
+  });
+}
+
+// ── DB fetch ─────────────────────────────────────
+const DB_BASES = {
+  updates:'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/updates/',
+  sbcGroups:'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/sbcGroups/',
+  objectives:'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/objectives/',
+  realmExport:'json/realmExport.json'
+};
+async function fetchDoc(url,db){ try{ const res=await fetch(url); if(!res.ok)return[]; const data=await res.json(); return(data.fields?.players?.arrayValue?.values||[]).map(p=>({...p,_db:db})); }catch{return[];} }
+async function loadAllPlayers(){
+  const promises=[];
+  for(let i=150;i>=1;i--){ promises.push(fetchDoc(`${DB_BASES.updates}${i}`,'updates')); promises.push(fetchDoc(`${DB_BASES.sbcGroups}${i}`,'sbcGroups')); promises.push(fetchDoc(`${DB_BASES.objectives}${i}`,'objectives')); }
+  promises.push(fetchDoc(DB_BASES.realmExport,'realmExport'));
+  const flat=(await Promise.all(promises)).flat();
+  const map=new Map(); flat.forEach(p=>{ const id=p?.mapValue?.fields?.id?.stringValue; if(id&&!map.has(id))map.set(id,p); });
+  allLoadedPlayers=Array.from(map.values());
+}
+
+// ── Player search ─────────────────────────────────
+const playerInput=document.getElementById('playerSearchInput');
+const playerDropdown=document.getElementById('playerDropdown');
+playerInput.addEventListener('input',()=>{ clearTimeout(searchTimer); const q=playerInput.value.trim().toLowerCase(); if(!q||q.length<2){playerDropdown.classList.remove('open');return;} searchTimer=setTimeout(()=>showResults(q),120); });
+playerInput.addEventListener('blur',()=>setTimeout(()=>playerDropdown.classList.remove('open'),180));
+
+function showResults(q){
+  const matches=allLoadedPlayers.filter(p=>(p?.mapValue?.fields?.name?.stringValue||'').toLowerCase().includes(q)).slice(0,24);
+  if(!matches.length){ playerDropdown.innerHTML='<div class="search-loading">No players found</div>'; }
+  else{
+    playerDropdown.innerHTML=matches.map((p,i)=>{
+      const f=p.mapValue.fields;
+      const color=(f.color?.stringValue||'default').toLowerCase();
+      const cardImg=colorMap[color]?.url_micro||`https://mf-data.b-cdn.net/26/Colors/${color}_micro.png`;
+      return `<div class="search-result-item" onmousedown="selectPlayer(${i})"><img src="${cardImg}" onerror="this.style.display='none'" alt=""><div class="sri-info"><div class="sri-name">${f.name?.stringValue||'Unknown'}</div><div class="sri-sub">${f.position?.stringValue||''} · ${f._db||''}</div></div><div class="sri-rating">${f.rating?.integerValue||'0'}</div></div>`;
+    }).join('');
+    playerDropdown._matches=matches;
+  }
+  playerDropdown.classList.add('open');
+}
+window.selectPlayer=selectPlayer;
+
+function selectPlayer(idx){
+  const p=playerDropdown._matches[idx]; if(!p)return;
+  playerDropdown.classList.remove('open');
+  const f=p.mapValue.fields;
+  CARD_STATE.name   =f.name?.stringValue||'Player';
+  CARD_STATE.rating =parseInt(f.rating?.integerValue||91);
+  CARD_STATE.pos    =f.position?.stringValue||'ST';
+  CARD_STATE.alt    =f.altPositions?.stringValue||'';
+  CARD_STATE.stats.PAC =parseInt(f.PAC?.integerValue ||80);
+  CARD_STATE.stats.SHO =parseInt(f.SHO?.integerValue ||80);
+  CARD_STATE.stats.PAS =parseInt(f.PAS?.integerValue ||80);
+  CARD_STATE.stats.DRI =parseInt(f.DRI?.integerValue ||80);
+  CARD_STATE.stats.DEF =parseInt(f.DEF?.integerValue ||80);
+  CARD_STATE.stats.PHY =parseInt(f.PHY?.integerValue ||80);
+  CARD_STATE.fatals.ATT =parseInt(f.attack?.integerValue  ||80);
+  CARD_STATE.fatals.CTR =parseInt(f.control?.integerValue ||75);
+  CARD_STATE.fatals.DEF2=parseInt(f.defense?.integerValue ||70);
+  CARD_STATE.nationId=String(f.nationId?.integerValue||'0');
+  CARD_STATE.leagueId=String(f.leagueId?.integerValue||'0');
+  CARD_STATE.clubId  =String(f.clubId?.integerValue  ||'0');
+  CARD_STATE.playerId=(f.id?.stringValue||'').replace('id','');
+  CARD_STATE.baseId  =String(f.baseId?.integerValue  ||'0');
+
+  const colorKey=(f.color?.stringValue||'default').toLowerCase();
+  CARD_STATE.colorKey=colorKey;
+  const design=colorMap[colorKey];
+  CARD_STATE.cardBgUrl=design?.url_big||`https://mf-data.b-cdn.net/26/Colors/${colorKey}_big.png`;
+  CARD_STATE.topc=design?.top_text_color   ||'#000000';
+  CARD_STATE.midc=design?.middle_text_color||'#ffffff';
+  CARD_STATE.botc=design?.bottom_text_color||'#ffffff';
+
+  playerInput.value=CARD_STATE.name;
+  document.getElementById('e-name').value  =CARD_STATE.name;
+  document.getElementById('e-rating').value=CARD_STATE.rating;
+  document.getElementById('e-pos').value   =CARD_STATE.pos;
+  document.getElementById('e-alt').value   =CARD_STATE.alt;
+
+CARD_STATE.altBg=design?.alt_pos_background||'#333333';
+  CARD_STATE.altText=design?.alt_pos_text||'#ffffff';
+  CARD_STATE.altOutline=design?.alt_pos_outline||'#000000';
+  document.getElementById('cTop').value=CARD_STATE.topc;
+  document.getElementById('cMid').value=CARD_STATE.midc;
+  document.getElementById('cBot').value=CARD_STATE.botc;
+  document.getElementById('cAltBg').value=CARD_STATE.altBg;
+  document.getElementById('cAltText').value=CARD_STATE.altText;
+  document.getElementById('cAltOutline').value=CARD_STATE.altOutline;
+  buildStatSliders(); buildFatalSliders(); updatePreview(); highlightActiveDesign(colorKey);  updateBadgeCurrent('nation',CARD_STATE.nationId);
+  updateBadgeCurrent('league',CARD_STATE.leagueId);
+  updateBadgeCurrent('club',CARD_STATE.clubId);
+
+  document.getElementById('editorArea').classList.remove('hidden');
+  document.getElementById('emptyState').style.display='none';
+  toast(`${CARD_STATE.name} loaded`);
+}
+
+// ── Designs ───────────────────────────────────────
+async function loadDesigns(){
+  try{
+    const[local,fs]=await Promise.all([
+      fetch('json/color.json').then(r=>r.ok?r.json():null).catch(()=>null),
+      fetch('https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/images').then(r=>r.ok?r.json():null).catch(()=>null)
+    ]);
+    const sources=[]; if(local?.documents)sources.push(...local.documents); if(fs?.documents)sources.push(...fs.documents);
+    sources.forEach(doc=>{
+      let arr=[]; if(doc.fields?.images?.arrayValue?.values)arr=doc.fields.images.arrayValue.values; else if(doc.mapValue?.fields)arr=[doc];
+      arr.forEach(item=>{
+        const fields=item.mapValue?.fields||{};
+        const id=(fields.id?.stringValue||fields.name?.stringValue||'').trim().toLowerCase();
+        if(!id)return;
+        colorMap[id]={ name:fields.name?.stringValue||id, url_big:fields.url_big?.stringValue||null, url_micro:fields.url_micro?.stringValue||null, url_small:fields.url_small?.stringValue||null, top_text_color:fields.top_text_color?.stringValue||'#000000', middle_text_color:fields.middle_text_color?.stringValue||'#ffffff', bottom_text_color:fields.bottom_text_color?.stringValue||'#ffffff', alt_pos_background:fields.alt_pos_background?.stringValue||'#333333', alt_pos_text:fields.alt_pos_text?.stringValue||'#ffffff', alt_pos_outline:fields.alt_pos_outline?.stringValue||'#000000' };
+        allDesigns.push({id,...colorMap[id]});
+      });
+    });
+    const seen=new Set(); allDesigns=allDesigns.filter(d=>{if(seen.has(d.id))return false;seen.add(d.id);return true;});
+  }catch(e){}
+  renderDesignGrid(allDesigns);
+}
+
+function renderDesignGrid(designs){
+  const grid=document.getElementById('designGrid');
+  if(!designs.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:20px;color:#aaa;font-size:13px;">No designs loaded</div>';return;}
+  grid.innerHTML=designs.map(d=>{
+    const thumb=d.url_small||d.url_micro||d.url_big||`https://mf-data.b-cdn.net/26/Colors/${d.id}_micro.png`;
+    return`<div class="design-tile" id="dt-${d.id}" onclick="selectDesign('${d.id}')"><img src="${thumb}" onerror="this.style.display='none'" alt="${d.name}"><span>${d.name||d.id}</span></div>`;
+  }).join('');
+}
+function filterDesigns(q){ const term=q.trim().toLowerCase(); renderDesignGrid(term?allDesigns.filter(d=>d.name.toLowerCase().includes(term)||d.id.includes(term)):allDesigns); }
+function selectDesign(id){
+  const design=colorMap[id];
+  CARD_STATE.colorKey=id;
+  CARD_STATE.cardBgUrl=design?.url_big||`https://mf-data.b-cdn.net/26/Colors/${id}_big.png`;
+if(design?.top_text_color)       CARD_STATE.topc=design.top_text_color;
+  if(design?.middle_text_color)    CARD_STATE.midc=design.middle_text_color;
+  if(design?.bottom_text_color)    CARD_STATE.botc=design.bottom_text_color;
+  if(design?.alt_pos_background)   CARD_STATE.altBg=design.alt_pos_background;
+  if(design?.alt_pos_text)         CARD_STATE.altText=design.alt_pos_text;
+  if(design?.alt_pos_outline)      CARD_STATE.altOutline=design.alt_pos_outline;
+  document.getElementById('cTop').value=CARD_STATE.topc;
+  document.getElementById('cMid').value=CARD_STATE.midc;
+  document.getElementById('cBot').value=CARD_STATE.botc;
+  document.getElementById('cAltBg').value=CARD_STATE.altBg;
+  document.getElementById('cAltText').value=CARD_STATE.altText;
+  document.getElementById('cAltOutline').value=CARD_STATE.altOutline;
+const area = document.getElementById('customUploadArea');
+  if (area) {
+    area.style.borderColor = '#ddd';
+    area.style.background = '';
+    area.querySelector('p').textContent = 'Click or drag an image here';
+  }
+  highlightActiveDesign(id); updatePreview();
+}
+window.selectDesign=selectDesign;
+
+function highlightActiveDesign(id){ document.querySelectorAll('.design-tile').forEach(el=>el.classList.remove('active')); const el=document.getElementById('dt-'+id); if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'nearest'});} }
+
+function applyCustomBg(dataUrl) {
+  CARD_STATE.colorKey = 'custom_upload';
+  CARD_STATE.cardBgUrl = dataUrl;
+  // Show the colour pickers so the user can tune text colours
+  document.getElementById('customColorPickers').style.display = 'block';
+  // Sync colour picker inputs to current state
+  document.getElementById('cTop').value = CARD_STATE.topc;
+  document.getElementById('cMid').value = CARD_STATE.midc;
+  document.getElementById('cBot').value = CARD_STATE.botc;
+  // Deselect any preset tile
+  document.querySelectorAll('.design-tile').forEach(el => el.classList.remove('active'));
+  // Visual feedback on the upload area
+  const area = document.getElementById('customUploadArea');
+  area.style.borderColor = '#111';
+  area.style.background = '#f9f9f9';
+  area.querySelector('p').textContent = 'Custom design applied ✓';
+  updatePreview();
+}
+
+window.handleCustomBgUpload = function(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => applyCustomBg(e.target.result);
+  reader.readAsDataURL(file);
+  input.value = ''; // reset so the same file can be re-picked
+};
+
+window.handleDesignDrop = function(event) {
+  event.preventDefault();
+  document.getElementById('customUploadArea').style.borderColor = '#ddd';
+  const file = event.dataTransfer.files[0];
+  if (!file || !file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = e => applyCustomBg(e.target.result);
+  reader.readAsDataURL(file);
+};
+
+// ── Init ──────────────────────────────────────────
+(async()=>{ await loadDesigns(); loadAllPlayers(); })();
+</script>
+
+</body>
+</html>

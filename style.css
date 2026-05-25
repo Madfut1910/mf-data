@@ -1,0 +1,1274 @@
+/* ============================================================
+   FONTS
+   ============================================================ */
+
+@font-face {
+  font-family: Note This;
+  src: url(Fonts/Note\ this.ttf);
+}
+@font-face {
+  font-family: cruyffBold;
+  src: url(Fonts/CruyffSansCondensed+DINArabic+SSTThai-Bold.otf);
+}
+@font-face {
+  font-family: cruyffMedium;
+  src: url(Fonts/CruyffSansCondensed+DINArabic+SSTThai-Medium.otf);
+}
+@font-face {
+  font-family: cruyffRegular;
+  src: url(Fonts/CruyffSansCondensed+DINArabic+SSTThai-Regular.otf);
+}
+@font-face {
+  font-family: cruyffBoldNo;
+  src: url(Fonts/Numbers-Bold.ttf);
+}
+@font-face {
+  font-family: cruyffMediumNo;
+  src: url(Fonts/Numbers-Medium.ttf);
+}
+@font-face {
+  font-family: cruyffSansBold;
+  src: url(Fonts/CruyffSans-Bold.ecd5078c.otf);
+}
+@font-face {
+  font-family: cruyffSansMedium;
+  src: url(Fonts/CruyffSans-Medium.26bd8110.otf);
+}
+@font-face {
+  font-family: cruyffSansLight;
+  src: url(Fonts/CruyffSans-Light.443e7d8e.otf);
+}
+@font-face {
+  font-family: robotoBold;
+  src: url(Fonts/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: robotoMedium;
+  src: url(Fonts/Roboto-Medium.ttf);
+}
+@font-face {
+  font-family: Roboto Condensed;
+  src: url(Fonts/Roboto_Condensed-Medium.ttf);
+}
+@font-face {
+  font-family: Roboto;
+  src: url(Fonts/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: robotoMediumI;
+  src: url(Fonts/Roboto-MediumItalic.ttf);
+}
+@font-face {
+  font-family: robotoSemiBold;
+  src: url(Fonts/Roboto-SemiBold.ttf);
+}
+@font-face {
+  font-family: robotoLight;
+  src: url(Fonts/Roboto-Light.ttf);
+}
+@font-face {
+  font-family: Cruyff Sans Expanded;
+  src: url(Fonts/CruyffSansExpanded-Heavy.e64b4629.otf);
+}
+
+/* ============================================================
+   RESET & CSS VARIABLES
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-light:   #f6f6f6;
+  --bg-grey:    #e1e1e1;
+  --dark:       #262626;
+  --mid:        #424242;
+  --muted:      #787878;
+  --icon-grey:  #9f9f9f;
+  --icon-border:#caffde;
+  --white:      #eceaea;
+
+  --nav-h:  67px;
+  --bc-h:   44px;
+  --link-h: 24px;
+  --link-w: 150px;
+}
+
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #caffde rgb(66, 66, 66, 0.8);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(180, 180, 180, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #caffde;
+  border-radius: 999px;
+  border: 2px solid rgba(200, 200, 200, 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8f0d0;
+}
+
+/* Nav drawer scrollbar */
+.nav-drawer {
+  scrollbar-width: thin;
+  scrollbar-color: #caffde rgba(180, 180, 180, 0.28);
+}
+
+.nav-drawer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-drawer::-webkit-scrollbar-track {
+  background: rgba(180, 180, 180, 0.25);
+  border-radius: 999px;
+}
+
+.nav-drawer::-webkit-scrollbar-thumb {
+  background: #caffde;
+  border-radius: 999px;
+}
+
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: #f0f0f0;
+  overflow-x: hidden;
+}
+
+
+/* ============================================================
+   TOP NAV
+   ============================================================ */
+
+.top-nav {
+  width: 100%;
+  height: var(--nav-h);
+  background: var(--bg-light);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+/* Hamburger button */
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 4px;
+  width: 34px;
+  height: 34px;
+}
+
+.menu-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--dark);
+  display: block;
+  flex-shrink: 0;
+}
+
+.menu-btn .bar1,
+.menu-btn .bar2,
+.menu-btn .bar3 {
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.menu-btn.active .bar1 { transform: translateY(6px) rotate(45deg); }
+.menu-btn.active .bar2 { opacity: 0; transform: scaleX(0); }
+.menu-btn.active .bar3 { transform: translateY(-6px) rotate(-45deg); }
+
+/* DATA logo */
+.nav-logo {
+  margin-left: auto;
+  font-family: "Note This", sans-serif;
+  font-size: 30px !important;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  margin-right: 6px;
+  color: var(--dark);
+  text-decoration: none;
+  flex-shrink: 0;
+  -webkit-user-select: none; /* Safari */
+  user-select: none;         /* Standard */
+}
+
+
+/* ============================================================
+   SEARCH BAR
+   ============================================================ */
+
+.search-wrap {
+  position: relative;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  border-radius: 17px;
+  background: var(--bg-grey);
+  padding: 0 6px 0 13px;
+  gap: 8px;
+  width: 100%;
+}
+
+.search-box input {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  color: var(--dark);
+  opacity: 0.8;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-box input::placeholder {
+  color: var(--dark);
+  opacity: 0.749;
+}
+
+/* Search results dropdown */
+.search-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--bg-grey);
+  width: 300px;
+  max-height: 340px;
+  overflow-y: auto;
+  z-index: 300;
+  scrollbar-width: thin;
+  scrollbar-color: #caffde rgba(180, 180, 180, 0.28);
+}
+
+.search-dropdown::-webkit-scrollbar       { width: 5px; }
+.search-dropdown::-webkit-scrollbar-track { background: rgba(180, 180, 180, 0.2); border-radius: 999px; }
+.search-dropdown::-webkit-scrollbar-thumb { background: #caffde; border-radius: 999px; }
+
+.search-dropdown.show {
+  display: block;
+}
+
+.search-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  color: var(--mid);
+  text-decoration: none;
+  transition: background 0.1s, color 0.1s;
+}
+
+.search-result:hover,
+.search-result.highlighted {
+  background: var(--bg-grey);
+  color: var(--dark);
+}
+
+.search-result em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.search-year-tag {
+  font-size: 10px;
+  color: var(--muted);
+  margin-left: 8px;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.search-no-results {
+  padding: 12px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+
+/* ============================================================
+   SEARCH — YEAR FILTER BUTTON (inside search box, right side)
+   ============================================================ */
+
+.search-year-filter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.search-year-filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s;
+}
+
+.search-year-filter-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.syf-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  object-fit: cover;
+  display: block;
+}
+
+.syf-img-fallback {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  display: none;
+}
+
+/* Year filter dropdown */
+.search-year-filter-drop {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--bg-grey);
+  min-width: 148px;
+  z-index: 400;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+}
+
+.search-year-filter.open .search-year-filter-drop {
+  display: block;
+}
+
+.syf-drop-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 14px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  transition: background 0.1s, color 0.1s;
+}
+
+.syf-drop-item:hover       { background: var(--bg-grey); color: var(--mid); }
+.syf-drop-item.active      { color: var(--mid); font-weight: 600; }
+.syf-drop-item img         { width: 22px; height: 22px; border-radius: 5px; object-fit: cover; flex-shrink: 0; }
+
+.syf-check {
+  margin-left: auto;
+  padding-left: 8px;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+}
+
+.syf-drop-item.active .syf-check {
+  opacity: 1;
+}
+
+.syf-check svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke: #5a9e7a;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* ============================================================
+   BREADCRUMB BAR
+   ============================================================ */
+
+.breadcrumb-bar {
+  width: 100%;
+  height: var(--bc-h);
+  background: var(--bg-grey);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 8px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  color: var(--icon-grey);
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 150;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+    overflow: visible;        /* allow dropdown to escape */
+
+}
+
+.breadcrumb-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+}
+
+.breadcrumb-bar a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb-bar a:hover { color: var(--dark); }
+
+.breadcrumb-bar .bc-plain   { color: var(--muted); }
+.breadcrumb-bar .bc-current {
+  font-family: "Roboto", sans-serif;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   BREADCRUMB — YEAR SWITCHER DROPDOWN
+   ============================================================ */
+
+.bc-year-wrap {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 200;
+}
+
+
+.bc-year-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-family: "Roboto Condensed", sans-serif;
+  color: var(--muted);
+  line-height: 1;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
+}
+
+.bc-year-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--mid);
+}
+
+.bc-year-btn svg {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  transition: transform 0.18s;
+}
+
+.bc-year-btn svg path {
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bc-year-wrap.open .bc-year-btn svg {
+  transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.bc-year-drop {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--bg-grey);
+  min-width: 130px;
+  z-index: 300;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.bc-year-wrap.open .bc-year-drop {
+  display: block;
+}
+
+.bc-year-drop-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  transition: background 0.1s, color 0.1s;
+}
+
+.bc-year-drop-item:hover  { background: var(--bg-grey); color: var(--mid); }
+.bc-year-drop-item.active { color: var(--mid); font-weight: 600; }
+.bc-year-drop-item img    { width: 20px; height: 20px; border-radius: 4px; object-fit: cover; flex-shrink: 0; }
+
+
+/* ============================================================
+   NAV DRAWER
+   ============================================================ */
+
+.nav-drawer {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  width: 100%;
+  background: var(--bg-light);
+  z-index: 190;
+  transform: translateY(-110%);
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  border-top: 2px solid var(--bg-grey);
+  max-height: calc(100vh - var(--nav-h));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-drawer.open {
+  transform: translateY(0);
+}
+
+.nav-drawer-inner {
+  padding: 14px 20px 22px;
+}
+
+
+/* ============================================================
+   DRAWER — GEN (YEAR) ICON BUTTONS
+   ============================================================ */
+
+.gen-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 2px solid var(--bg-grey);
+}
+
+.gen-btn {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 44px;
+  max-height: 44px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: var(--icon-grey);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+/* Image is 80% / dim when not selected */
+.gen-btn img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.65;
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+}
+
+.gen-btn .gen-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: "Cruyff Sans Expanded", sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.gen-btn:hover img { opacity: 0.85; }
+
+/* Selected state: full size + green border */
+.gen-btn.selected img { width: 100%; height: 100%; opacity: 1; }
+.gen-btn.selected     { border-color: var(--icon-border); }
+
+
+/* ============================================================
+   DRAWER — BODY LAYOUT
+   ============================================================ */
+
+.drawer-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Section headings */
+.sec-head {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--dark);
+  letter-spacing: 0.8px;
+  height: var(--link-h);
+  line-height: var(--link-h);
+  width: var(--link-w);
+  padding: 0 8px;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Nav link lists */
+.drawer-links {
+  list-style: none;
+}
+
+.drawer-links li {
+  display: block;
+}
+
+.drawer-links a {
+  display: block;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--mid);
+  text-decoration: none;
+  height: var(--link-h);
+  line-height: var(--link-h);
+  width: var(--link-w);
+  padding: 0 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.12s, color 0.12s;
+}
+
+.drawer-links a:hover  { background: var(--bg-grey); color: var(--dark); }
+.drawer-links a.active { background: var(--bg-grey); color: var(--dark); font-weight: 700; }
+
+
+/* ============================================================
+   DRAWER — CONTENT COLUMNS (A, BC, D)
+   ============================================================ */
+
+/* Bottom-aligned so all columns line up at their base */
+.content-area {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  padding-right: 20px;
+  flex-shrink: 0;
+}
+
+.content-col-a {
+  display: flex;
+  flex-direction: column;
+}
+
+.col-bc {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Spacer between col-bc groups */
+.group-gap {
+  height: var(--link-h);
+  flex-shrink: 0;
+}
+
+.content-col-d {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Vertical separator between content cols and right panel */
+.drawer-sep {
+  width: 1px;
+  background: var(--bg-grey);
+  flex-shrink: 0;
+  margin: 0 16px;
+  align-self: stretch;
+}
+
+
+/* ============================================================
+   DRAWER — RIGHT PANEL (MISC / DATA / SOCIALS)
+   ============================================================ */
+
+.right-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+/* Social links */
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  height: var(--link-h);
+  line-height: var(--link-h);
+  width: var(--link-w);
+  padding: 0 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
+}
+
+.social-link:hover { background: var(--bg-grey); color: var(--dark); }
+
+.soc-icon {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.soc-icon svg             { width: 13px; height: 13px; fill: var(--mid); transition: fill 0.15s; }
+.soc-icon.insta svg       { fill: none; stroke: var(--mid); stroke-width: 1.8px; transition: stroke 0.15s; }
+.social-link:hover .soc-icon svg       { fill: var(--dark); }
+.social-link:hover .soc-icon.insta svg { fill: none; stroke: var(--dark); }
+.social-link:hover .insta-dot          { fill: var(--dark) !important; }
+
+
+/* ============================================================
+   OVERLAY (behind open nav drawer)
+   ============================================================ */
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 180;
+}
+
+.overlay.active {
+  display: block;
+}
+
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
+
+.main-content {
+  padding: 18px 20px 32px;
+}
+
+/* Page title — Cruyff Sans Expanded */
+.page-heading {
+  font-family: "Cruyff Sans Expanded", sans-serif;
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+/* Page description — Roboto Condensed */
+.page-desc {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 15px;
+  line-height: 18px;
+  color: var(--mid);
+  margin-bottom: 15px;
+}
+
+
+/* ============================================================
+   TEMPLATE TAB STRIP
+   ============================================================ */
+
+/* Outer wrapper — clips overflow and adds the fade on the right edge */
+.tmpl-strip-wrap {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+/* Fade-out on right edge to hint at scrollability */
+.tmpl-strip-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, #f0f0f0);
+  pointer-events: none;
+  border-radius: 0 999px 999px 0;
+}
+
+/* Scrollable row of tabs */
+.tmpl-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;        /* hide scrollbar Firefox */
+  -ms-overflow-style: none;     /* hide scrollbar IE/Edge */
+  padding-bottom: 2px;          /* small room so focus outlines aren't clipped */
+  padding-right: 40px;          /* room for the fade */
+}
+
+.tmpl-strip::-webkit-scrollbar {
+  display: none;                /* hide scrollbar Chrome/Safari */
+}
+
+/* Individual tab pill */
+.tmpl-tab {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  background: var(--bg-grey);
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tmpl-tab:hover {
+  background: #d4d4d4;
+  color: var(--mid);
+}
+
+/* Active / selected tab */
+.tmpl-tab.active {
+  background: var(--dark);
+  color: var(--white);
+}
+
+/* ============================================================
+   SEARCH DROPDOWN — SECTION HEADERS
+   ============================================================ */
+
+.search-section-hdr {
+  padding: 6px 14px 3px;
+  font-family: "Roboto", sans-serif;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  color: var(--icon-grey);
+  text-transform: uppercase;
+  border-top: 1px solid var(--bg-grey);
+  margin-top: 2px;
+}
+
+.search-section-hdr:first-child {
+  border-top: none;
+  margin-top: 0;
+}
+
+.search-loading {
+  padding: 8px 14px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  color: var(--icon-grey);
+  font-style: italic;
+}
+
+.search-no-results--small {
+  padding: 6px 14px 8px;
+  font-size: 12px;
+}
+
+
+/* ============================================================
+   SEARCH DROPDOWN — PLAYER RESULT ROW
+   ============================================================ */
+
+.search-result--player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px 5px 8px;
+  min-height: 54px;
+}
+
+.search-result--player:hover,
+.search-result--player.highlighted {
+  background: var(--bg-grey);
+}
+
+/* Card thumbnail container */
+.sr-card-thumb {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #d0d0d0;
+}
+
+/* Card background — zoomed into top portion, stats cropped out */
+.sr-card-bg {
+  position: absolute;
+  width: 160%;
+  height: 160%;
+  top: -18%;
+  left: -30%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.sr-card-overlay {
+  display: none;
+}
+
+/* ── Base face styles shared by both types ── */
+.sr-card-face {
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+  pointer-events: none;
+  object-fit: cover;
+  object-position: top center;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.2));
+}
+
+/* ── DYNAMIC  faces/p${id}_small.png ──────────────────────────*/
+.sr-card-face[data-face-type="dynamic"] {
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 62px;
+  height: 62px;
+}
+
+/* ── NORMAL  normalFacesSmall/${id}.png ───────────────────────*/
+.sr-card-face[data-face-type="normal"] {
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+}
+
+
+/* ============================================================
+   TEXT INFO
+   ============================================================ */
+
+.sr-player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sr-player-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sr-player-name em {
+  font-style: normal;
+  font-weight: 800;
+  color: var(--dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sr-player-meta {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   DROPDOWN WIDTH
+   ============================================================ */
+
+.search-dropdown {
+  width: 340px;
+}
+
+@media (max-width: 480px) {
+  .search-dropdown {
+    width: calc(100vw - 28px);
+    left: 0;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET  (769px – 1024px)
+   ============================================================ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .drawer-body {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .content-area {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  /* All columns top-aligned on tablet */
+  .content-col-a,
+  .col-bc,
+  .content-col-d {
+    justify-content: flex-start;
+  }
+
+  /* Show the blank spacer heading so CARDS sits below the heading row */
+  .col-bc-head {
+    display: block !important;
+  }
+
+  .drawer-sep {
+    display: none;
+  }
+
+  .right-panel {
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--bg-grey);
+  }
+
+  .sec-head,
+  .drawer-links a,
+  .social-link {
+    width: auto;
+    min-width: 130px;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE  (≤768px)
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .nav-drawer {
+    top: var(--nav-h);
+    bottom: 0; /* added */
+    max-height: none; /* remove calc() */
+    overflow-y: auto;
+  }
+
+  .nav-drawer-inner {
+    padding: 12px 14px 220px;
+  }
+
+  .drawer-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .content-area {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0;
+    width: 100%;
+    gap: 0;
+  }
+
+  .sec-head,
+  .drawer-links a,
+  .social-link {
+    width: auto;
+    min-width: 0;
+  }
+
+  .content-col-a,
+  .col-bc,
+  .content-col-d {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .content-col-a  { margin-bottom: 10px; }
+  .col-bc         { justify-content: flex-start; }
+  .group-gap      { height: 10px; }
+  .content-col-d  { margin-top: 10px; }
+
+  .content-col-d .sec-head.blank-head { display: none; }
+  .col-bc-head                        { display: none !important; }
+
+  .drawer-sep { display: none; }
+
+  .right-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--bg-grey);
+  }
+
+  .nav-logo { font-size: 30px !important; }
+
+  .breadcrumb-bar {
+    height: auto;
+    min-height: var(--bc-h);
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}
+
+/* Two-column link lists when horizontal room allows (480px+) */
+@media (min-width: 480px) and (max-width: 768px) {
+
+  .drawer-links {
+    columns: 2;
+    column-gap: 0;
+  }
+
+  .drawer-links li {
+    break-inside: avoid;
+  }
+
+  .drawer-links a {
+    width: auto;
+    min-width: 140px;
+  }
+
+  .right-panel .drawer-links             { columns: 2; }
+  .right-panel ul.drawer-links li        { break-inside: avoid; }
+}
+
+
+/* ============================================================
+   RESPONSIVE — SMALL MOBILE  (≤480px)
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  .page-heading {
+    font-size: 32px;
+  }
+}

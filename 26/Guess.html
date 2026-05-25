@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guess the Player — Madfut Data</title>
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="stylesheet" href="/style.css">
+<style>
+
+/* ── Root layout ─────────────────────────────────────────── */
+#gtp-root {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 560px;
+}
+
+/* ── Mode strip ──────────────────────────────────────────── */
+#mode-strip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gtp-mode-btn {
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 7px;
+  border: 1.5px solid var(--bg-grey);
+  background: var(--bg-light);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  letter-spacing: 0.2px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.gtp-mode-btn:hover { border-color: #bbb; color: var(--dark); }
+.gtp-mode-btn.active {
+  border-color: #caffde;
+  background: rgba(202,253,222,0.12);
+  color: var(--dark);
+  font-weight: 700;
+}
+
+/* ── Score bar ───────────────────────────────────────────── */
+#score-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.score-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+.score-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+}
+.score-value {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1;
+}
+#new-game-btn {
+  margin-left: auto;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 7px;
+  border: 1.5px solid var(--bg-grey);
+  background: var(--bg-light);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+#new-game-btn:hover {
+  border-color: #caffde;
+  color: var(--dark);
+  background: rgba(202,253,222,0.08);
+}
+
+/* ── Clue card ───────────────────────────────────────────── */
+#clue-card {
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.clue-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--bg-grey);
+}
+.clue-card-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--icon-grey);
+}
+.clue-counter {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* Career timeline rows */
+.career-list {
+  padding: 8px 0 4px;
+}
+
+.career-row {
+  display: grid;
+  grid-template-columns: 40px 36px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-bottom: 1px solid rgba(225,225,225,0.6);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.12s;
+}
+.career-row:last-child { border-bottom: none; }
+
+/* Reveal animation */
+.career-row.just-revealed {
+  animation: rowReveal 0.35s ease forwards;
+}
+@keyframes rowReveal {
+  from { background: rgba(202,253,222,0.25); }
+  to   { background: transparent; }
+}
+
+.career-years {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.career-badge {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+.career-badge-hidden {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px dashed #ccc;
+  background: var(--bg-grey);
+}
+.career-club {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.career-club-hidden {
+  display: block;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--bg-grey);
+  width: 120px;
+}
+.career-league {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.career-league-badge {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+/* Reveal-more button */
+#reveal-btn-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 10px 16px 14px;
+  border-top: 1px solid var(--bg-grey);
+}
+#reveal-btn {
+  height: 34px;
+  padding: 0 20px;
+  border-radius: 8px;
+  border: 1.5px solid var(--bg-grey);
+  background: var(--bg-light);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+#reveal-btn:hover {
+  border-color: #caffde;
+  color: var(--dark);
+  background: rgba(202,253,222,0.10);
+}
+#reveal-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--bg-grey);
+  background: var(--bg-light);
+  color: var(--muted);
+}
+
+/* ── Input area ──────────────────────────────────────────── */
+#input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gtp-search-wrap {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  padding: 0 14px;
+  gap: 10px;
+  transition: border-color 0.15s;
+}
+.gtp-search-wrap:focus-within {
+  border-color: #caffde;
+}
+
+#player-input {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 15px;
+  color: var(--dark);
+  flex: 1;
+}
+#player-input::placeholder { color: var(--muted); }
+#player-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+#submit-btn {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 7px;
+  border: 1.5px solid #caffde;
+  background: rgba(202,253,222,0.12);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #3a8a6a;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.12s, border-color 0.12s;
+}
+#submit-btn:hover { background: rgba(202,253,222,0.28); }
+#submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Autocomplete dropdown */
+#autocomplete-drop {
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
+  max-height: 220px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #caffde rgba(180,180,180,0.28);
+}
+#autocomplete-drop.open { display: block; }
+
+.ac-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  color: var(--mid);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(225,225,225,0.6);
+  transition: background 0.1s, color 0.1s;
+}
+.ac-item:last-child { border-bottom: none; }
+.ac-item:hover, .ac-item.highlighted { background: var(--bg-grey); color: var(--dark); }
+.ac-badge { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
+.ac-item em { font-style: normal; font-weight: 700; color: var(--dark); }
+
+/* Wrong guesses list */
+#wrong-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 0;
+}
+
+.wrong-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: 5px;
+  background: rgba(224,64,64,0.07);
+  border: 1px solid rgba(224,64,64,0.2);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  color: #c04040;
+  font-weight: 600;
+}
+.wrong-tag::before { content: '✕'; font-size: 10px; opacity: 0.8; }
+
+/* Hint pills */
+#hint-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 11px;
+  border-radius: 6px;
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.hint-pill.revealed {
+  border-color: #caffde;
+  background: rgba(202,253,222,0.12);
+  color: var(--dark);
+}
+.hint-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ccc;
+  flex-shrink: 0;
+}
+.hint-pill.revealed .hint-dot { background: #3a8a6a; }
+
+/* ── Result overlay ──────────────────────────────────────── */
+#result-panel {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 28px 20px 24px;
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  border-radius: 14px;
+  text-align: center;
+}
+#result-panel.show { display: flex; }
+
+.result-emoji {
+  font-size: 42px;
+  line-height: 1;
+}
+.result-heading {
+  font-family: "Cruyff Sans Expanded", sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--dark);
+  letter-spacing: 0.2px;
+}
+.result-sub {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.result-sub strong { color: var(--dark); font-weight: 700; }
+
+.result-player-badge {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid var(--bg-grey);
+}
+
+#next-btn {
+  height: 38px;
+  padding: 0 24px;
+  border-radius: 8px;
+  border: 1.5px solid #caffde;
+  background: rgba(202,253,222,0.14);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3a8a6a;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+#next-btn:hover { background: rgba(202,253,222,0.3); }
+
+/* ── Streak flame ────────────────────────────────────────── */
+.streak-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-scroll">
+    <a href="/index.html">DATA</a>
+    <span>›</span>
+    <span class="bc-plain">26</span>
+    <span>›</span>
+    <span class="bc-current">GUESS THE PLAYER</span>
+  </div>
+</nav>
+
+<main class="main-content">
+  <h1 class="page-heading">Guess the Player</h1>
+  <p class="page-desc">Can you identify the player from their club career? More clues revealed after each wrong guess.</p>
+
+  <div id="gtp-root">
+
+    <!-- Mode selector -->
+    <div id="mode-strip">
+      <button class="gtp-mode-btn active" data-mode="all">All Leagues</button>
+      <button class="gtp-mode-btn" data-mode="pl">Premier League</button>
+      <button class="gtp-mode-btn" data-mode="laliga">LaLiga</button>
+    </div>
+
+    <!-- Score -->
+    <div id="score-bar">
+      <div class="score-pill">
+        <span class="score-label">Score</span>
+        <span class="score-value" id="score-display">0</span>
+      </div>
+      <div class="score-pill">
+        <span class="score-label">Streak</span>
+        <span class="score-value" id="streak-display">0🔥</span>
+      </div>
+      <button id="new-game-btn">↺ New Player</button>
+    </div>
+
+    <!-- Clue card -->
+    <div id="clue-card">
+      <div class="clue-card-header">
+        <span class="clue-card-title">Club Career</span>
+        <span class="clue-counter" id="clue-counter"></span>
+      </div>
+      <div class="career-list" id="career-list"></div>
+      <div id="reveal-btn-wrap">
+        <button id="reveal-btn">Reveal next club ↓</button>
+      </div>
+    </div>
+
+    <!-- Hint pills (nationality, position, age — unlocked progressively) -->
+    <div id="hint-row"></div>
+
+    <!-- Input -->
+    <div id="input-area">
+      <div class="gtp-search-wrap">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="6" cy="6" r="5" stroke="#9f9f9f" stroke-width="1.5"/>
+          <line x1="9.8" y1="9.8" x2="13" y2="13" stroke="#9f9f9f" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input id="player-input" type="text" placeholder="Type a player name…" autocomplete="off" spellcheck="false">
+        <button id="submit-btn">Guess</button>
+      </div>
+      <div id="autocomplete-drop"></div>
+      <div id="wrong-list"></div>
+    </div>
+
+    <!-- Result panel -->
+    <div id="result-panel">
+      <div class="result-emoji" id="result-emoji"></div>
+      <img class="result-player-badge" id="result-badge" src="" alt="">
+      <div class="result-heading" id="result-heading"></div>
+      <div class="result-sub" id="result-sub"></div>
+      <button id="next-btn">Next Player →</button>
+    </div>
+
+  </div>
+</main>
+
+<script src="/Template26.js"></script>
+<script src="js/leagueConfig.js"></script>
+<script type="module" src="js/guess-player.js"></script>
+
+</body>
+</html>

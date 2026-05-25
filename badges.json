@@ -1,0 +1,338 @@
+[
+  {
+    "id": "specialBadgeDefault",
+    "name": "MADFUT 26",
+    "description": "Welcome to MADFUT 26! Click on a Special Badge to select it.",
+    "tier1": "",
+    "tier2": "",
+    "tier3": ""
+  },
+  {
+    "id": "specialBadgeDraft121",
+    "name": "121-RATED DRAFT",
+    "description": "Build a 121-rated Draft, including a completed bench.",
+    "tier1": "Build a 119+ Draft (rating + chemistry).",
+    "tier2": "Build a 120+ Draft (rating + chemistry).",
+    "tier3": "Build a 121+ Draft (rating + chemistry)."
+  },
+  {
+    "id": "specialBadgeCollection100",
+    "name": "100% COLLECTION",
+    "description": "Collect every single card in the game. The ultimate achievement.",
+    "tier1": "Collect 85% of all cards in the game.",
+    "tier2": "Collect 95% of all cards in the game.",
+    "tier3": "Collect 100% of all cards in the game."
+  },
+  {
+    "id": "specialBadgeCollectionGold",
+    "name": "GOLD COLLECTION",
+    "description": "Collect all Non-Rare Gold cards in the game.",
+    "tier1": "Collect 50% of all Non-Rare Gold cards.",
+    "tier2": "Collect 90% of all Non-Rare Gold cards.",
+    "tier3": "Collect 100% of all Non-Rare Gold cards."
+  },
+  {
+    "id": "specialBadgeDotd10InARow",
+    "name": "10 DOTDS IN A ROW",
+    "description": "Complete 10 Drafts Of The Day in a row. Start over if you miss one.",
+    "tier1": "Complete 2 Drafts Of The Day in a row.",
+    "tier2": "Complete 5 Drafts Of The Day in a row.",
+    "tier3": "Complete 10 Drafts Of The Day in a row."
+  },
+  {
+    "id": "specialBadgeSquadBuilder125",
+    "name": "125 SQUAD BUILDER",
+    "description": "Build a team in Squad Builder that has 33 Chemistry and 92+ Rating.",
+    "tier1": "Build a squad with 33 Chemistry and 88+ Rating.",
+    "tier2": "Build a squad with 33 Chemistry and 90+ Rating.",
+    "tier3": "Build a squad with 33 Chemistry and 92+ Rating."
+  },
+  {
+    "id": "specialBadgeDraftCupWinsInARow",
+    "name": "DRAFT WINS IN A ROW",
+    "description": "Win multiple Draft Cup matches in a row. No draws!",
+    "tier1": "Win 2 Draft Cup matches in a row.",
+    "tier2": "Win 3 Draft Cup matches in a row.",
+    "tier3": "Win 5 Draft Cup matches in a row."
+  },
+  {
+    "id": "specialBadgeFreePacks",
+    "name": "FREE PACKS",
+    "description": "Open 5K Free Packs. Take your time…",
+    "tier1": "Open 500 Free Packs.",
+    "tier2": "Open 2000 Free Packs.",
+    "tier3": "Open 5000 Free Packs."
+  },
+  {
+    "id": "specialBadgeCollectionIcons",
+    "name": "ICONS COLLECTION",
+    "description": "Collect all standard ICON cards in the game.",
+    "tier1": "Collect 10% of all standard ICON cards.",
+    "tier2": "Collect 50% of all standard ICON cards.",
+    "tier3": "Collect 100% of all standard ICON cards."
+  },
+  {
+    "id": "specialBadgeDraftCupChamp",
+    "name": "DRAFT CUP CHAMP",
+    "description": "Win 7 WEEKLY Draft Cups - ultimate Draft mode competitions.",
+    "tier1": "Win 2 weekly Draft Cups.",
+    "tier2": "Win 4 weekly Draft Cups.",
+    "tier3": "Win 7 weekly Draft Cups."
+  },
+  {
+    "id": "specialBadgeDraftCupInvincibles",
+    "name": "DRAFT: INVINCIBLES",
+    "description": "Win a WEEKLY Draft Cup without losing a single match.",
+    "tier1": "Win a Draft Cup with maximum 2 losses.",
+    "tier2": "Win a Draft Cup with maximum 1 loss.",
+    "tier3": "Win a Draft Cup without losing a single match."
+  },
+  {
+    "id": "specialBadgeCollectionRareGold",
+    "name": "RARE GOLD COLLECTION",
+    "description": "Collect all Rare Gold cards in the game.",
+    "tier1": "Collect 40% of all Rare Gold cards.",
+    "tier2": "Collect 90% of all Rare Gold cards.",
+    "tier3": "Collect 100% of all Rare Gold cards."
+  },
+  {
+    "id": "specialBadgeCollectionSilver",
+    "name": "SILVER COLLECTION",
+    "description": "Collect all Rare and Non-Rare Silver cards in the game.",
+    "tier1": "Collect 30% of all Rare and Non-Rare Silver cards.",
+    "tier2": "Collect 70% of all Rare and Non-Rare Silver cards.",
+    "tier3": "Collect 100% of all Rare and Non-Rare Silver cards."
+  },
+  {
+    "id": "specialBadgeCollectionBronze",
+    "name": "BRONZE COLLECTION",
+    "description": "Collect all Rare and Non-Rare Bronze cards in the game.",
+    "tier1": "Collect 30% of all Bronze cards in the game.",
+    "tier2": "Collect 60% of all Bronze cards in the game.",
+    "tier3": "Collect 100% of all Bronze cards in the game."
+  },
+  {
+    "id": "specialBadgeBulkSeller",
+    "name": "BULK SELLER",
+    "description": "Quick sell cards with rating 82 or higher.",
+    "tier1": "Quick sell 30 cards with rating 82 or higher.",
+    "tier2": "Quick sell 70 cards with rating 82 or higher.",
+    "tier3": "Quick sell 200 cards with rating 82 or higher."
+  },
+  {
+    "id": "specialBadgeDraft124",
+    "name": "124-RATED DRAFT",
+    "description": "Build a 124-rated Draft, including a completed bench.",
+    "tier1": "Build a 122+ Draft (rating + chemistry).",
+    "tier2": "Build a 123+ Draft (rating + chemistry).",
+    "tier3": "Build a 124+ Draft (rating + chemistry)."
+  },
+  {
+    "id": "specialBadgeDraftCupPenalty",
+    "name": "PENALTY SPECIALIST",
+    "description": "Win Draft Cup matches in penalty shoot-outs.",
+    "tier1": "Win 1 Draft Cup match in a penalty shoot-out.",
+    "tier2": "Win 2 Draft Cup matches in penalty shoot-outs.",
+    "tier3": "Win 5 Draft Cup matches in penalty shoot-outs."
+  },
+  {
+    "id": "specialBadgeDraftCupDefenderGoals",
+    "name": "DEFENDER GOALS",
+    "description": "Score goals with defenders in Draft Cup matches.",
+    "tier1": "Score 2 goals with defenders in Draft Cup matches.",
+    "tier2": "Score 5 goals with defenders in Draft Cup matches.",
+    "tier3": "Score 10 goals with defenders in Draft Cup matches."
+  },
+  {
+    "id": "specialBadgeDraftCupCleanSheets15",
+    "name": "15 CLEAN SHEETS",
+    "description": "Play 15 Draft Cup matches without conceding a single goal.",
+    "tier1": "Keep 2 clean sheets in any Draft Cup matches.",
+    "tier2": "Keep 7 clean sheets in any Draft Cup matches.",
+    "tier3": "Keep 15 clean sheets in any Draft Cup matches."
+  },
+  {
+    "id": "specialBadgeDraftOneClub",
+    "name": "ONE CLUB DRAFTS",
+    "description": "Build Drafts that have at least 5 players from the same club and 33 Chem.",
+    "tier1": "Build 3 Drafts with 5 players from the same club and 33 Chem.",
+    "tier2": "Build 10 Drafts with 5 players from the same club and 33 Chem.",
+    "tier3": "Build 20 Drafts with 5 players from the same club and 33 Chem."
+  },
+  {
+    "id": "specialBadgeSquadBuilder128",
+    "name": "128 SQUAD BUILDER",
+    "description": "Build a team in Squad Builder that has 33 Chemistry and 95+ Rating.",
+    "tier1": "Build a squad with 33 Chemistry and 93+ Rating.",
+    "tier2": "Build a squad with 33 Chemistry and 94+ Rating.",
+    "tier3": "Build a squad with 33 Chemistry and 95+ Rating."
+  },
+  {
+    "id": "specialBadgeSBCLive40",
+    "name": "40 LIVE SBCS",
+    "description": "Complete 40 DIFFERENT LIVE Squad Building Challenges.",
+    "tier1": "Complete 5 DIFFERENT LIVE SBCs.",
+    "tier2": "Complete 15 DIFFERENT LIVE SBCs.",
+    "tier3": "Complete 40 DIFFERENT LIVE SBCs."
+  },
+  {
+    "id": "specialBadgeLoginRewards",
+    "name": "LOGIN REWARDS",
+    "description": "Claim Daily Login Reward for 30 days in a row.",
+    "tier1": "Claim Daily Login Reward for 7 days in a row.",
+    "tier2": "Claim Daily Login Reward for 15 days in a row.",
+    "tier3": "Claim Daily Login Reward for 30 days in a row."
+  },
+  {
+    "id": "specialBadgeFatalMyClubWinsInARow",
+    "name": "MY CLUB: 9 IN A ROW",
+    "description": "Fatal My Club: win 9 matches in a row.",
+    "tier1": "Fatal My Club: win 3 matches in a row.",
+    "tier2": "Fatal My Club: win 5 matches in a row.",
+    "tier3": "Fatal My Club: win 9 matches in a row."
+  },
+  {
+    "id": "specialBadgeFatalMyClubInvincibles",
+    "name": "MY CLUB: INVINCIBLES",
+    "description": "Fatal My Club: win 5 separate Series without losing a single game.",
+    "tier1": "Fatal My Club: win 1 Series without losing a single game.",
+    "tier2": "Fatal My Club: win 3 Series without losing a single game.",
+    "tier3": "Fatal My Club: win 5 Series without losing a single game."
+  },
+  {
+    "id": "specialBadgeFatalMyClubSeasons4",
+    "name": "MY CLUB: 4 SEASONS",
+    "description": "Fatal My Club: complete 4 full seasons (win every Series that week).",
+    "tier1": "Fatal My Club: win every Series in one week.",
+    "tier2": "Fatal My Club: complete 2 full seasons (win every Series).",
+    "tier3": "Fatal My Club: complete 4 full seasons (win every Series)."
+  },
+  {
+    "id": "specialBadgeFatalDraftWinsInARow",
+    "name": "FATAL DRAFT: 7 IN A ROW",
+    "description": "Fatal Draft: win 7 matches in a row.",
+    "tier1": "Fatal Draft: win 2 matches in a row.",
+    "tier2": "Fatal Draft: win 4 matches in a row.",
+    "tier3": "Fatal Draft: win 7 matches in a row."
+  },
+  {
+    "id": "specialBadgeFatalDraftSeasons4",
+    "name": "FATAL DRAFT: 4 SEASONS",
+    "description": "Fatal Draft: win Div 1 four times.",
+    "tier1": "Fatal Draft: win 1st Division once.",
+    "tier2": "Fatal Draft: win 1st Division 2 times.",
+    "tier3": "Fatal Draft: win 1st Division 4 times."
+  },
+  {
+    "id": "specialBadgeDraftRanks100K",
+    "name": "DRAFT: 100K POINTS",
+    "description": "Earn 100K Draft Building Points.",
+    "tier1": "Earn 10K Draft building points.",
+    "tier2": "Earn 40K Draft building points.",
+    "tier3": "Earn 100K Draft building points."
+  },
+  {
+    "id": "specialBadgeDraftRanksGold",
+    "name": "DRAFT: GOLD I",
+    "description": "Earn Gold I (or higher) Rank in Draft 10 times.",
+    "tier1": "Earn Gold I (or higher) Rank in Draft 2 times.",
+    "tier2": "Earn Gold I (or higher) Rank in Draft 6 times.",
+    "tier3": "Earn Gold I (or higher) Rank in Draft 10 times."
+  },
+  {
+    "id": "specialBadgeDraftRanksElite",
+    "name": "DRAFT: ELITE I",
+    "description": "Earn Elite I (or higher) Rank in Draft 7 times.",
+    "tier1": "Earn Elite I (or higher) Rank in Draft 2 times.",
+    "tier2": "Earn Elite I (or higher) Rank in Draft 4 times.",
+    "tier3": "Earn Elite I (or higher) Rank in Draft 7 times."
+  },
+  {
+    "id": "specialBadgeDraftRanksLegend",
+    "name": "DRAFT: LEGEND",
+    "description": "Earn Legend Weekly Rank in Draft 3 times.",
+    "tier1": "Earn Legend Weekly Rank in Draft.",
+    "tier2": "Earn Legend Weekly Rank in Draft 2 times.",
+    "tier3": "Earn Legend Weekly Rank in Draft 3 times."
+  },
+  {
+    "id": "specialBadgeHigherLowerStreak",
+    "name": "H/L: STREAK",
+    "description": "Reach a Win Streak of 50 in the Higher/Lower LTM.",
+    "tier1": "Reach a Win Streak of 15 in Higher/Lower.",
+    "tier2": "Reach a Win Streak of 30 in Higher/Lower.",
+    "tier3": "Reach a Win Streak of 50 in Higher/Lower."
+  },
+  {
+    "id": "specialBadgeHigherLowerLTMCards",
+    "name": "H/L: LTM CARDS",
+    "description": "Upgrade all 3 LTM cards to their Maximum rating.",
+    "tier1": "Upgrade 1 LTM card to the Max rating.",
+    "tier2": "Upgrade 2 LTM cards to the Max rating.",
+    "tier3": "Upgrade 3 LTM cards to the Max rating."
+  },
+  {
+    "id": "specialBadgeHigherLowerLTMMarket",
+    "name": "H/L: MARKET",
+    "description": "Open every item in the LTM market during Higher/Lower LTM.",
+    "tier1": "Open every single item in LTM market in 1 week.",
+    "tier2": "Open every single item in LTM market in 2 weeks.",
+    "tier3": "Open every single item in LTM market in 3 weeks."
+  },
+  {
+    "id": "specialBadgeFatalSimWinsInARow",
+    "name": "FATAL SIM: 6 IN A ROW",
+    "description": "Fatal Sim: win 6 matches in a row.",
+    "tier1": "Fatal Sim: win 2 matches in a row.",
+    "tier2": "Fatal Sim: win 4 matches in a row.",
+    "tier3": "Fatal Sim: win 6 matches in a row."
+  },
+  {
+    "id": "specialBadgeFatalSimSeasons3",
+    "name": "FATAL SIM: 3 SEASONS",
+    "description": "Fatal Sim: complete 3 full seasons (win every Series that week).",
+    "tier1": "Fatal Sim: win every Series in one week.",
+    "tier2": "Fatal Sim: complete 2 full seasons (win every Series).",
+    "tier3": "Fatal Sim: complete 3 full seasons (win every Series)."
+  },
+  {
+    "id": "specialBadgeDraftPuzzlesChem100",
+    "name": "33-CHEM PUZZLES",
+    "description": "Build 50 Draft Puzzles that have 33 Chemistry.",
+    "tier1": "Build 7 33-chem Draft Puzzles.",
+    "tier2": "Build 20 33-chem Draft Puzzles.",
+    "tier3": "Build 50 33-chem Draft Puzzles."
+  },
+  {
+    "id": "specialBadgeDraftPuzzlesLTMCards",
+    "name": "DRAFT PUZZLES: CARDS",
+    "description": "Upgrade all LTM cards to their Maximum rating.",
+    "tier1": "Upgrade 1 LTM card to the Max rating.",
+    "tier2": "Upgrade 2 LTM cards to the Max rating.",
+    "tier3": "Upgrade 3 LTM cards to the Max rating."
+  },
+  {
+    "id": "specialBadgeDraftPuzzlesLTMMarket",
+    "name": "DRAFT PUZZLES: MARKET",
+    "description": "Open every item in the LTM market during Draft Puzzles LTM.",
+    "tier1": "Open every single item in LTM market in 1 week.",
+    "tier2": "Open every single item in LTM market in 2 weeks.",
+    "tier3": "Open every single item in LTM market in 3 weeks."
+  },
+  {
+    "id": "specialBadgeDraftHybrid",
+    "name": "HYBRID EXPERT",
+    "description": "Build multiple Drafts with 33 Chemistry and 5+ Leagues.",
+    "tier1": "Build 10 Drafts with 33 Chemistry and 5+ Leagues.",
+    "tier2": "Build 30 Drafts with 33 Chemistry and 5+ Leagues.",
+    "tier3": "Build 100 Drafts with 33 Chemistry and 5+ Leagues."
+  },
+  {
+    "id": "specialBadgeSpecialCards",
+    "name": "SPECIAL CARDS",
+    "description": "Collect 500 different Special Cards.",
+    "tier1": "Collect 50 different Special Cards.",
+    "tier2": "Collect 200 different Special Cards.",
+    "tier3": "Collect 500 different Special Cards."
+  }
+]

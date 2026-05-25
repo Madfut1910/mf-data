@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>26/27 Season Predictor - Madfut Data</title>
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="stylesheet" href="/style.css">
+<style>
+
+/* ── Layout ───────────────────────────────────────────────── */
+#predictor-root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* ── League card strip ───────────────────────────────────── */
+#league-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pred-league-card {
+  width: 120px;
+  border-radius: 16px;
+  background: var(--bg-light);
+  border: 2px solid var(--bg-grey);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  padding: 0 0 10px;
+  opacity: 0.4;
+  transition: border-color 0.18s, background 0.18s, opacity 0.2s;
+  flex-shrink: 0;
+}
+.pred-league-card:hover  { border-color: #bbb; background: #ececec; opacity: 0.75 !important; }
+.pred-league-card.active { border-color: #caffde; background: var(--bg-light); opacity: 1 !important; }
+
+.pred-league-badge {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+  padding: 10px 16px 6px;
+  display: block;
+}
+.pred-league-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--dark);
+  text-align: center;
+  letter-spacing: 0.3px;
+  padding: 0 6px;
+  line-height: 1.2;
+}
+
+/* ── Top controls: reset + tab bar in one line ───────────── */
+.pred-controls {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+/* Reset button */
+#reset-btn {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 7px;
+  border: 1.5px solid var(--bg-grey);
+  background: var(--bg-light);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+#reset-btn:hover {
+  border-color: #e04040;
+  color: #e04040;
+  background: rgba(224,64,64,0.06);
+}
+
+/* Tab bar */
+#tab-bar {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.pred-tab {
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 7px;
+  border: 1.5px solid var(--bg-grey);
+  background: var(--bg-light);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  letter-spacing: 0.2px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.pred-tab:hover { border-color: #bbb; color: var(--dark); }
+.pred-tab--active {
+  border-color: #caffde;
+  background: rgba(202,253,222,0.12);
+  color: var(--dark);
+  font-weight: 700;
+}
+
+/* ── Panes ───────────────────────────────────────────────── */
+.pred-pane {
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ── Table ───────────────────────────────────────────────── */
+.pred-table-header {
+  display: grid;
+  grid-template-columns: 32px 32px 1fr auto;
+  align-items: center;
+  padding: 0 8px 6px;
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: var(--icon-grey);
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--bg-grey);
+  margin-bottom: 4px;
+  user-select: none;
+}
+.pred-hdr-status {
+  text-align: right;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.pred-row {
+  display: grid;
+  grid-template-columns: 32px 32px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 8px;
+  border-radius: 8px;
+  margin-bottom: 2px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.12s;
+}
+.pred-row:hover { background: var(--bg-grey); }
+
+.pred-row--champions  { border-left-color: #120993; }
+.pred-row--europa     { border-left-color: #ff6c3b; }
+.pred-row--conference { border-left-color: #88ffa4; }
+.pred-row--promo      { border-left-color: #00971e; }
+.pred-row--playoff    { border-left-color: #f0c040; }
+.pred-row--relegation { border-left-color: #9e2828; }
+.pred-row--mid        { border-left-color: transparent; }
+
+.pred-pos {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+}
+.pred-badge { width: 28px; height: 28px; object-fit: contain; }
+.pred-empty-badge {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px dashed #ccc;
+}
+.pred-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pred-placeholder {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  color: var(--icon-grey);
+  font-style: italic;
+}
+.pred-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--icon-grey);
+  padding: 4px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: color 0.12s, background 0.12s;
+  flex-shrink: 0;
+}
+.pred-clear:hover { color: #e04040; background: rgba(224,64,64,0.08); }
+
+.pred-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 8px 0;
+  margin-top: 4px;
+  border-top: 1px solid var(--bg-grey);
+}
+.leg { font-family: "Roboto Condensed", sans-serif; font-size: 11px; }
+.leg.champions  { color: #120993; }
+.leg.europa     { color: #ff6c3b; }
+.leg.conference { color: #88ffa4; }
+.leg.promo      { color: #00971e; }
+.leg.playoff    { color: #f0c040; }
+.leg.relegation { color: #9e2828; }
+
+/* ── Unconfirmed panel ───────────────────────────────────── */
+.unk-subtitle {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 14px;
+  line-height: 1.5;
+  max-width: 480px;
+}
+
+.unk-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--bg-grey);
+  background: var(--bg-light);
+  margin-bottom: 8px;
+  max-width: 420px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.unk-card--placed {
+  opacity: 0.45;
+}
+
+.unk-badge { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
+
+.unk-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.unk-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.unk-note {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.unk-btn {
+  flex-shrink: 0;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1.5px solid #caffde;
+  background: rgba(202,253,222,0.10);
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #3a8a6a;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.unk-btn:hover { background: rgba(202,253,222,0.25); border-color: #3a8a6a; }
+
+.unk-placed-tag {
+  flex-shrink: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #4a9e7a;
+  background: rgba(202,253,222,0.18);
+  border-radius: 5px;
+  padding: 3px 8px;
+  letter-spacing: 0.3px;
+}
+
+/* ── Bracket pane ────────────────────────────────────────── */
+.brk-bracket { display: flex; }
+
+.brk-rounds {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.brk-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 220px;
+}
+.brk-col--final {
+  justify-content: center;
+  align-self: center;
+}
+
+.brk-col-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--bg-grey);
+  margin-bottom: 2px;
+}
+
+.brk-matchup {
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+}
+.brk-matchup--final {
+  border-color: var(--bg-grey);
+  background: var(--bg-light);
+}
+
+.brk-team {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 3px 4px;
+  border-radius: 6px;
+  transition: background 0.1s;
+}
+.brk-team--solo {
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 4px;
+}
+.brk-team--clickable { cursor: pointer; }
+.brk-team--clickable:hover {
+  background: rgba(202,253,222,0.15);
+  outline: 1px solid rgba(202,253,222,0.4);
+}
+.brk-team--winner {
+  background: rgba(202,253,222,0.18);
+  outline: 1.5px solid #caffde;
+}
+
+.brk-vs {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+  user-select: none;
+  line-height: 1;
+  margin: 1px 0;
+}
+
+.brk-seed {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.brk-badge { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
+.brk-empty-badge {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px dashed #ccc;
+  flex-shrink: 0;
+}
+
+.brk-team-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px;
+}
+.brk-tbd { color: var(--icon-grey); font-weight: 400; font-style: italic; }
+
+.brk-reset-result {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--icon-grey);
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: color 0.12s, background 0.12s;
+}
+.brk-reset-result:hover { color: #e04040; background: rgba(224,64,64,0.08); }
+
+/* ── Picker modal ─────────────────────────────────────────── */
+#picker-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 500;
+  align-items: flex-end;
+  justify-content: center;
+}
+#picker-modal.open { display: flex; }
+
+@media (min-width: 540px) {
+  #picker-modal { align-items: center; }
+  .picker-sheet { border-radius: 14px !important; max-height: 68vh !important; }
+}
+
+.picker-sheet {
+  background: var(--bg-light);
+  border-radius: 16px 16px 0 0;
+  width: 100%;
+  max-width: 460px;
+  max-height: 74vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.picker-top {
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid var(--bg-grey);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.picker-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--dark);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.picker-search-wrap {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  border-radius: 17px;
+  background: var(--bg-grey);
+  padding: 0 13px;
+  gap: 8px;
+}
+#picker-search {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  color: var(--dark);
+  flex: 1;
+}
+#picker-search::placeholder { color: var(--muted); }
+#picker-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: 8px 8px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #caffde rgba(180,180,180,0.28);
+}
+.picker-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  color: var(--mid);
+  text-align: left;
+  transition: background 0.1s, color 0.1s;
+}
+.picker-item:hover    { background: var(--bg-grey); color: var(--dark); }
+.picker-item.selected { background: var(--bg-grey); color: var(--dark); font-weight: 700; }
+.picker-badge { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
+.picker-empty {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  padding: 20px;
+}
+.picker-unconfirmed-tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: #b08a20;
+  background: rgba(240,192,64,0.12);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 5px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* ── Add these to the existing <style> block in predictor.html ── */
+
+/* Locked tab state */
+.pred-tab--locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  border-color: var(--bg-grey) !important;
+  color: var(--muted) !important;
+  background: var(--bg-light) !important;
+}
+
+/* Gate overlay shown in place of the table when locked */
+.pred-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 24px;
+  text-align: center;
+  max-width: 380px;
+  margin: 0 auto;
+}
+.pred-gate-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--dark);
+  letter-spacing: 0.2px;
+  margin: 0;
+}
+.pred-gate-sub {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.pred-gate-sub strong {
+  color: var(--dark);
+  font-weight: 700;
+}
+
+/* ── Rivalry / Deadlines panel ─────────────────────────────── */
+.rv-section {
+  margin-bottom: 22px;
+  max-width: 480px;
+}
+
+.rv-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--bg-grey);
+}
+
+.rv-duel {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.rv-vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0 6px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.rv-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1.5px solid var(--bg-grey);
+  background: var(--bg-light);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s, opacity 0.15s;
+  min-width: 0;
+  position: relative;
+}
+.rv-card:hover:not(.rv-card--chosen):not(.rv-card--rejected) {
+  border-color: #caffde;
+  background: rgba(202, 253, 222, 0.07);
+}
+.rv-card--chosen {
+  border-color: #caffde;
+  background: rgba(202, 253, 222, 0.14);
+}
+.rv-card--rejected {
+  opacity: 0.35;
+  border-color: var(--bg-grey);
+  background: var(--bg-light);
+  cursor: pointer;
+}
+
+.rv-badge {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.rv-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.rv-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rv-note {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  color: var(--muted);
+}
+.rv-tick {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3a8a6a;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 6px;
+}
+.rv-cross {
+  font-size: 11px;
+  font-weight: 700;
+  color: #999;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 6px;
+}
+
+
+
+
+
+
+
+/* ── World Cup CSS additions — paste into predictor.html <style> block ── */
+
+/* WC groups grid */
+.wc-groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  max-width: 860px;
+}
+
+.wc-group-section {
+  background: var(--bg-light);
+  border: 1.5px solid var(--bg-grey);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.wc-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px 6px;
+  border-bottom: 1.5px solid var(--bg-grey);
+  background: rgba(0,0,0,0.02);
+}
+.wc-group-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--dark);
+}
+.wc-group-count {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.wc-group-row {
+  display: grid;
+  grid-template-columns: 22px 28px 1fr auto;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 8px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.1s;
+}
+.wc-group-row:hover { background: var(--bg-grey); }
+.wc-group-row + .wc-group-row { border-top: 1px solid var(--bg-grey); }
+
+.wc-row--first  { border-left-color: #120993; }
+.wc-row--second { border-left-color: #f0c040; }
+.wc-row--third  { border-left-color: #88ffa4; }
+.wc-row--fourth { border-left-color: transparent; }
+
+.wc-pos {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+}
+.wc-badge { width: 27px; height: 27px; object-fit: contain; }
+.wc-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* WC legend colours */
+.wc-leg-first  { color: #120993; }
+.wc-leg-second { color: #b08a20; }
+.wc-leg-third  { color: #2a7a4a; }
+.wc-leg-fourth { color: var(--icon-grey); }
+
+/* WC thirds grid */
+.wc-thirds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-width: 560px;
+}
+
+/* WC knockout — single vertical column */
+.wc-ko-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 560px;
+}
+
+/* Each round: label + grid of matchup cards */
+.wc-ko-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* R32 and R16 cards side by side in a 2-col grid */
+.wc-ko-col:nth-child(-n+2) {
+  /* R32 (16 cards) and R16 (8 cards): display as 2-column grid */
+}
+.wc-ko-col:nth-child(1) .brk-matchup,
+.wc-ko-col:nth-child(2) .brk-matchup {
+  /* normal stacking, handled by parent flex-direction column */
+}
+
+/* For R32 and R16 which have many cards, show in a 2-column grid */
+.wc-ko-col--grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+/* The label inside a grid col needs to span full width */
+.wc-ko-col--grid .brk-col-label {
+  grid-column: 1 / -1;
+}
+
+/* 3rd place + Final sit side by side */
+.wc-ko-end-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.wc-ko-end-row .wc-ko-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* WC champion banner */
+.wc-champion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  margin-top: 20px;
+  max-width: 340px;
+  background: rgba(202,253,222,0.15);
+  border: 1.5px solid #caffde;
+  border-radius: 12px;
+}
+.wc-champion img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+.wc-champion-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+}
+.wc-champion-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--dark);
+}
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-scroll">
+    <a href="/index.html">DATA</a>
+    <span>›</span>
+    <span class="bc-plain">26/27</span>
+    <span>›</span>
+    <span class="bc-current">SEASON PREDICTOR</span>
+  </div>
+</nav>
+
+<main class="main-content">
+  <h1 class="page-heading">Season Predictor</h1>
+  <p class="page-desc">Pick your predicted final table for the 2026/27 season.</p>
+
+  <div id="predictor-root">
+
+    <!-- League card strip -->
+    <div id="league-tabs"></div>
+
+    <!-- Reset + tab bar on the same line -->
+    <div class="pred-controls">
+      <button id="reset-btn">↺ Reset</button>
+      <div id="tab-bar"></div>
+    </div>
+
+    <!-- Table pane -->
+    <div id="pane-table" class="pred-pane">
+      <div id="table-wrap"></div>
+    </div>
+
+    <!-- Unconfirmed pane -->
+    <div id="pane-unconfirmed" class="pred-pane" style="display:none;">
+      <div id="unknown-wrap"></div>
+    </div>
+
+    <!-- Play-offs pane -->
+    <div id="pane-playoffs" class="pred-pane" style="display:none;">
+      <div id="bracket-wrap"></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Picker modal -->
+<div id="picker-modal" role="dialog" aria-modal="true" aria-label="Pick a team">
+  <div class="picker-sheet">
+    <div class="picker-top">
+      <div class="picker-title">Pick a team</div>
+      <div class="picker-search-wrap">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <circle cx="5.5" cy="5.5" r="4.5" stroke="#9f9f9f" stroke-width="1.5"/>
+          <line x1="8.9" y1="8.9" x2="12" y2="12" stroke="#9f9f9f" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input id="picker-search" type="text" placeholder="Search clubs…" autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+    <div id="picker-list"></div>
+  </div>
+</div>
+
+<script src="/Template26.js"></script>
+<script src="js/leagueConfig.js"></script>
+<script type="module" src="js/predictor.js"></script>
+
+</body>
+</html>

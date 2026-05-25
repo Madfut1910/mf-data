@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evo Chains – Madfut Data</title>
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Your site-wide nav styles -->
+<link rel="stylesheet" href="/style.css">
+<style>
+/* ── Page-specific overrides & layout ───────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent: #22c55e;
+  --accent-dim: rgba(34,197,94,0.12);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --surface: #f6f6f6;
+  --border: #e1e1e1;
+  --dark: #262626;
+  --mid: #424242;
+  --muted: #787878;
+  --white: #ffffff;
+  --bg: #f0f0f0;
+}
+
+html { scrollbar-width: thin; scrollbar-color: #caffde #d0d0d0; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #d0d0d0; border-radius: 999px; }
+::-webkit-scrollbar-thumb { background: #caffde; border-radius: 999px; }
+
+body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; }
+
+/* ── Page layout ────────────────────────────────────────── */
+.page {
+  display: flex;
+  min-height: calc(100vh - 111px); /* nav (67px) + breadcrumb (44px) */
+}
+
+/* ── Sidebar ────────────────────────────────────────────── */
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 111px;
+  height: calc(100vh - 111px);
+  overflow-y: auto;
+}
+.sidebar-header {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-header h2 {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.search-wrap-evo { position: relative; }
+.search-input-evo {
+  width: 100%; padding: 8px 32px 8px 12px;
+  border-radius: var(--radius-sm); border: 1px solid var(--border);
+  background: var(--white); font-family: 'Roboto Condensed', sans-serif;
+  font-size: 13px; color: var(--dark); outline: none; transition: border-color 0.15s;
+}
+.search-input-evo:focus { border-color: var(--dark); }
+.search-clear-evo {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  font-size: 16px; color: var(--muted); line-height: 1; display: none;
+}
+.search-wrap-evo:has(.search-input-evo:not(:placeholder-shown)) .search-clear-evo { display: block; }
+
+.filter-section { border-bottom: 1px solid var(--border); }
+.filter-toggle {
+  width: 100%; background: none; border: none; cursor: pointer;
+  padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); transition: color 0.15s;
+}
+.filter-toggle:hover { color: var(--dark); }
+.filter-toggle-chevron { transition: transform 0.2s; font-size: 10px; }
+.filter-toggle.collapsed .filter-toggle-chevron { transform: rotate(-90deg); }
+.filter-body { padding: 0 16px 14px; }
+.filter-body.hidden { display: none; }
+
+.len-btns { display: flex; flex-wrap: wrap; gap: 5px; }
+.len-btn {
+  padding: 5px 11px; border-radius: 999px;
+  border: 1.5px solid var(--border); background: var(--white);
+  color: var(--muted); font-size: 11px; font-weight: 700; cursor: pointer;
+  font-family: 'Roboto Condensed', sans-serif; transition: all 0.15s;
+}
+.len-btn:hover { border-color: var(--dark); color: var(--dark); }
+.len-btn.active { background: var(--dark); border-color: var(--dark); color: #fff; }
+
+.evo-list { display: flex; flex-direction: column; gap: 2px; max-height: 260px; overflow-y: auto; }
+.evo-list-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 4px; border-radius: 6px; cursor: pointer;
+  font-family: 'Roboto Condensed', sans-serif; font-size: 12px;
+  color: var(--dark); user-select: none; transition: background 0.1s;
+}
+.evo-list-item:hover { background: rgba(0,0,0,0.04); }
+.evo-list-item.deselected { opacity: 0.35; }
+.evo-check {
+  width: 15px; height: 15px; border-radius: 3px;
+  border: 1.5px solid #bbb; background: var(--white);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: all 0.1s;
+}
+.evo-list-item:not(.deselected) .evo-check { background: var(--dark); border-color: var(--dark); }
+.evo-check-icon { display: none; width: 9px; height: 9px; }
+.evo-list-item:not(.deselected) .evo-check-icon { display: block; }
+.evo-ctrl-row { display: flex; gap: 6px; margin-bottom: 8px; }
+.evo-ctrl-btn {
+  flex: 1; padding: 4px 8px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--white);
+  color: var(--muted); font-size: 10px; font-weight: 700; cursor: pointer;
+  font-family: 'Roboto Condensed', sans-serif; transition: all 0.12s;
+}
+.evo-ctrl-btn:hover { border-color: var(--dark); color: var(--dark); }
+
+/* ── Main content ───────────────────────────────────────── */
+.main {
+  flex: 1; padding: 20px; min-width: 0;
+}
+.main-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px; flex-wrap: wrap;
+}
+.page-title { font-size: 24px; font-weight: 700; color: var(--dark); }
+.result-count { font-family: 'Roboto Condensed', sans-serif; font-size: 13px; color: var(--muted); margin-left: auto; }
+
+/* ── Grid ───────────────────────────────────────────────── */
+.evo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+/* ── Evo card ───────────────────────────────────────────── */
+.evo-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.evo-card:hover { border-color: #aaa; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.evo-card-top { padding: 14px 14px 10px; }
+.evo-card-name { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 8px; line-height: 1.3; }
+.evo-req-pills { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 8px; }
+.req-pill {
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+  font-family: 'Roboto Condensed', sans-serif; background: #f0f0f0; color: var(--muted); border: 1px solid var(--border);
+}
+.req-pill.nation  { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+.req-pill.league  { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.req-pill.color   { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+.req-pill.rating  { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+.req-pill.stat    { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.req-pill.position{ background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+.req-pill.attack  { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.req-pill.ctrl    { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.req-pill.def     { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+
+.stage-dots { display: flex; gap: 3px; align-items: center; }
+.stage-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
+.stage-dot.on { background: var(--accent); }
+
+.evo-card-footer {
+  padding: 8px 14px; background: #fafafa; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.evo-stages-label { font-family: 'Roboto Condensed', sans-serif; font-size: 11px; color: var(--muted); }
+.evo-total-upgrade { font-family: 'Roboto Condensed', sans-serif; font-size: 11px; font-weight: 700; color: var(--accent); }
+
+/* ── Loading / empty ────────────────────────────────────── */
+.state-box {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 60px 20px;
+  color: var(--muted); font-family: 'Roboto Condensed', sans-serif;
+  font-size: 15px; gap: 12px; grid-column: 1 / -1;
+}
+.spinner {
+  width: 34px; height: 34px; border: 3px solid var(--border);
+  border-top-color: var(--dark); border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Modal ──────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 500;
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--white); border-radius: 18px; border: 1px solid var(--border);
+  width: 100%; max-width: 540px; max-height: 88vh;
+  display: flex; flex-direction: column;
+  transform: scale(0.96) translateY(8px); transition: transform 0.22s; overflow: hidden;
+}
+.modal-overlay.open .modal { transform: scale(1) translateY(0); }
+.modal-head {
+  padding: 18px 20px 14px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+  position: sticky; top: 0; background: var(--white);
+}
+.modal-icon {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--accent-dim);
+  color: var(--accent); display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.modal-title { font-size: 17px; font-weight: 700; color: var(--dark); flex: 1; }
+.modal-close {
+  width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border);
+  background: none; cursor: pointer; font-size: 18px; color: var(--muted);
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.modal-close:hover { background: var(--border); color: var(--dark); }
+.modal-body { overflow-y: auto; padding: 16px 20px 20px; }
+.modal-section { margin-bottom: 18px; }
+.modal-section:last-child { margin-bottom: 0; }
+.modal-section-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px;
+}
+.req-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.stage-list { display: flex; flex-direction: column; gap: 8px; }
+.stage-item { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.stage-item-head {
+  display: flex; align-items: center; gap: 8px; padding: 9px 12px;
+  background: #f8f8f8; border-bottom: 1px solid var(--border);
+}
+.stage-num {
+  width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff;
+  font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.stage-item-title { font-size: 13px; font-weight: 700; color: var(--dark); }
+.stage-pts { margin-left: auto; font-family: 'Roboto Condensed', sans-serif; font-size: 11px; color: var(--muted); background: var(--border); padding: 2px 7px; border-radius: 999px; }
+.stage-item-body { padding: 10px 12px; }
+.upgrade-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+.u-chip { font-family: 'Roboto Condensed', sans-serif; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+.u-ovr { background: #dbeafe; color: #1e40af; }
+.u-atk { background: #fee2e2; color: #991b1b; }
+.u-ctl { background: #fef3c7; color: #92400e; }
+.u-def { background: #ede9fe; color: #5b21b6; }
+.reward-list { display: flex; flex-direction: column; gap: 5px; }
+.reward-row { display: flex; align-items: center; gap: 8px; }
+.reward-badge { font-family: 'Roboto Condensed', sans-serif; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; flex-shrink: 0; }
+.rb-coins   { background: #fef3c7; color: #92400e; }
+.rb-token   { background: #ede9fe; color: #5b21b6; }
+.rb-special { background: #fce7f3; color: #9d174d; }
+.rb-pack    { background: #dcfce7; color: #166534; }
+.rb-generic { background: #f0f0f0; color: var(--muted); }
+.reward-text { font-family: 'Roboto Condensed', sans-serif; font-size: 12px; color: var(--mid); }
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 14px; }
+  .evo-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .page-title { font-size: 18px; }
+  .mobile-filter-btn {
+    display: flex !important; align-items: center; gap: 6px;
+    padding: 7px 12px; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--white); font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; cursor: pointer; color: var(--dark);
+  }
+  .modal { max-width: 100%; margin: 0; }
+}
+@media (min-width: 769px) { .mobile-filter-btn { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- ── Real nav (injected by Template26.js) ── -->
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-scroll">
+    <a href="/index.html">DATA</a>
+    <span>›</span>
+    <a href="/26/Evolution.html" class="bc-current">EVO CHAINS</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>Filters</h2>
+      <div class="search-wrap-evo">
+        <input class="search-input-evo" id="searchInputEvo" type="text" placeholder="Search evolutions…" autocomplete="off">
+        <button class="search-clear-evo" id="searchClearEvo">×</button>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <button class="filter-toggle" id="lenToggle">
+        Chain Length
+        <span class="filter-toggle-chevron">▼</span>
+      </button>
+      <div class="filter-body" id="lenBody">
+        <div class="len-btns" id="lenBtns">
+          <button class="len-btn active" data-len="all">Any</button>
+          <button class="len-btn" data-len="1">1 Stage</button>
+          <button class="len-btn" data-len="2">2 Stages</button>
+          <button class="len-btn" data-len="3">3 Stages</button>
+          <button class="len-btn" data-len="4">4+ Stages</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <button class="filter-toggle" id="evoToggle">
+        Evolutions
+        <span class="filter-toggle-chevron">▼</span>
+      </button>
+      <div class="filter-body" id="evoBody">
+        <div class="evo-ctrl-row">
+          <button class="evo-ctrl-btn" id="selectAll">Select all</button>
+          <button class="evo-ctrl-btn" id="deselectAll">Deselect all</button>
+        </div>
+        <div class="evo-list" id="evoListEl"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="main-header">
+      <div class="page-title">Evo Chains</div>
+      <button class="mobile-filter-btn" id="mobileFilterBtn" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+        Filters
+      </button>
+      <div class="result-count" id="resultCount"></div>
+    </div>
+    <div class="evo-grid" id="evoGrid">
+      <div class="state-box">
+        <div class="spinner"></div>
+        <span>Loading evolutions…</span>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-head">
+      <div class="modal-icon">⚡</div>
+      <div class="modal-title" id="modalTitle">Evo Name</div>
+      <button class="modal-close" id="modalClose">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Site-wide nav script -->
+<script src="/Template26.js"></script>
+
+<script>
+const NATION_NAMES = {'14':'England','54':'France','45':'Spain','47':'Germany','42':'Brazil','5':'Argentina','18':'Portugal','21':'Italy','76':'Netherlands','3':'USA','71':'Mexico','50':'Colombia','36':'Belgium','62':'Japan','11':'Croatia','60':'Morocco','24':'Denmark','67':'Sweden','28':'Uruguay','12':'Switzerland','38':'Senegal','29':'Tunisia','30':'Ghana','31':'Nigeria','99':'Algeria','13':'Poland','73':'Russia','17':'Serbia','56':'Turkey','25':'Austria','64':'Norway','55':'Finland','43':'Scotland','39':'Wales','46':'Ireland','15':'Greece','16':'Romania','57':'Hungary','66':'Slovakia','41':'Australia','91':'South Korea','26':'Ukraine','27':'Saudi Arabia','33':'Egypt','34':'Cameroon','37':'Ivory Coast','9':'Chile','7':'Peru','6':'Venezuela','48':'Switzerland','22':'Paraguay','96':'Costa Rica'};
+const LEAGUE_NAMES = {'13':'Premier League','16':'La Liga','19':'Bundesliga','31':'Serie A','53':'Ligue 1','61':'Liga Portugal','65':'Eredivisie','68':'Belgian Pro League','14':'EFL Championship','308':'MLS','39':'Saudi Pro League','88':'Süper Lig','78':'Championship','2':'Champions League','3':'Europa League'};
+const COLOR_NAMES = {'gold':'Gold','rare_gold':'Rare Gold','silver':'Silver','rare_silver':'Rare Silver','bronze':'Bronze','rare_bronze':'Rare Bronze','all_gold':'Any Gold','all_silver':'Any Silver','all_bronze':'Any Bronze','all_special':'Special Card','evo':'EVO'};
+
+let allEvos = [];
+let deselected = new Set();
+let lenFilter = 'all';
+let searchQ = '';
+
+function fmtReq(r) {
+  const [t, v] = r.split(',');
+  if (t === 'nation')   return { label: NATION_NAMES[v] || ('Nation '+v), cls: 'nation' };
+  if (t === 'league')   return { label: LEAGUE_NAMES[v] || ('League '+v), cls: 'league' };
+  if (t === 'color')    return { label: COLOR_NAMES[v] || v.replace(/_/g,' '), cls: 'color' };
+  if (t === 'rating')   return { label: 'Rating '+v, cls: 'rating' };
+  if (t === 'position') return { label: v, cls: 'position' };
+  if (t === 'attack')   return { label: 'ATK '+v, cls: 'attack' };
+  if (t === 'control')  return { label: 'CTL '+v, cls: 'ctrl' };
+  if (t === 'defense')  return { label: 'DEF '+v, cls: 'def' };
+  if (['PAC','SHO','PAS','DRI','DEF','PHY'].includes(t)) return { label: t+' '+v, cls: 'stat' };
+  return { label: r, cls: '' };
+}
+
+function parseUpgrade(s) {
+  const p = s.split(',').map(Number);
+  return { ovr: p[0]||0, atk: p[1]||0, ctl: p[2]||0, def: p[3]||0 };
+}
+
+function totalUpgrade(upgrades) {
+  return upgrades.reduce((acc, u) => {
+    const p = parseUpgrade(u);
+    acc.ovr += p.ovr; acc.atk += p.atk; acc.ctl += p.ctl; acc.def += p.def;
+    return acc;
+  }, { ovr:0, atk:0, ctl:0, def:0 });
+}
+
+function fmtReward(type, amount) {
+  const t = (type||'').toLowerCase();
+  if (t.includes('coin'))    return { cls:'rb-coins',   label:'Coins',   text: Number(amount).toLocaleString()+' coins' };
+  if (t.includes('token'))   return { cls:'rb-token',   label:'Token',   text: type };
+  if (t.includes('special')) return { cls:'rb-special', label:'Special', text: type };
+  if (t.includes('pack') || t.startsWith('pp_') || t.includes('random')) return { cls:'rb-pack', label:'Pack', text: type };
+  return { cls:'rb-generic', label:'Reward', text: `${amount}× ${type}` };
+}
+
+function filtered() {
+  return allEvos.filter(e => {
+    if (deselected.has(e.name)) return false;
+    if (lenFilter !== 'all') {
+      const len = parseInt(lenFilter);
+      if (len === 4 ? e.upgrades.length < 4 : e.upgrades.length !== len) return false;
+    }
+    if (searchQ && !e.name.toLowerCase().includes(searchQ)) return false;
+    return true;
+  });
+}
+
+function renderGrid() {
+  const grid = document.getElementById('evoGrid');
+  const list = filtered();
+  document.getElementById('resultCount').textContent = list.length + ' evolution' + (list.length !== 1 ? 's' : '');
+  if (!list.length) {
+    grid.innerHTML = '<div class="state-box"><span>No evolutions match your filters.</span></div>';
+    return;
+  }
+  const checkSvg = `<svg class="evo-check-icon" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  grid.innerHTML = list.map((e, i) => {
+    const tot = totalUpgrade(e.upgrades);
+    const reqPills = e.requirements.slice(0, 4).map(r => {
+      const f = fmtReq(r);
+      return `<span class="req-pill ${f.cls}">${f.label}</span>`;
+    }).join('') + (e.requirements.length > 4 ? `<span class="req-pill">+${e.requirements.length-4} more</span>` : '');
+    const dots = e.upgrades.map(() => `<span class="stage-dot on"></span>`).join('');
+    const totalStr = [
+      tot.ovr ? `+${tot.ovr} OVR` : '',
+      tot.atk ? `+${tot.atk} ATK` : '',
+      tot.ctl ? `+${tot.ctl} CTL` : '',
+      tot.def ? `+${tot.def} DEF` : '',
+    ].filter(Boolean).join(' · ');
+    return `<div class="evo-card" data-idx="${i}" onclick="openModal(${i})">
+      <div class="evo-card-top">
+        <div class="evo-card-name">${e.name}</div>
+        <div class="evo-req-pills">${reqPills}</div>
+        <div class="stage-dots">${dots}</div>
+      </div>
+      <div class="evo-card-footer">
+        <span class="evo-stages-label">${e.upgrades.length} stage${e.upgrades.length !== 1 ? 's' : ''}</span>
+        <span class="evo-total-upgrade">${totalStr || '—'}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderEvoList() {
+  const el = document.getElementById('evoListEl');
+  const checkSvg = `<svg class="evo-check-icon" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  el.innerHTML = allEvos.map(e => `
+    <div class="evo-list-item${deselected.has(e.name) ? ' deselected' : ''}" data-evo="${e.name.replace(/"/g,'&quot;')}" onclick="toggleEvo(this)">
+      <div class="evo-check">${checkSvg}</div>
+      <span>${e.name}</span>
+    </div>`).join('');
+}
+
+function toggleEvo(el) {
+  const name = el.dataset.evo;
+  if (deselected.has(name)) deselected.delete(name);
+  else deselected.add(name);
+  el.classList.toggle('deselected');
+  renderGrid();
+}
+
+function openModal(idx) {
+  const list = filtered();
+  const e = list[idx];
+  if (!e) return;
+  document.getElementById('modalTitle').textContent = e.name;
+  const reqHtml = e.requirements.length ? `
+    <div class="modal-section">
+      <div class="modal-section-title">Requirements to apply</div>
+      <div class="req-row">${e.requirements.map(r => {
+        const f = fmtReq(r);
+        return `<span class="req-pill ${f.cls}">${f.label}</span>`;
+      }).join('')}</div>
+    </div>` : '';
+  const stagesHtml = `
+    <div class="modal-section">
+      <div class="modal-section-title">Upgrade stages</div>
+      <div class="stage-list">${e.upgrades.map((u, i) => {
+        const up = parseUpgrade(u);
+        const pts = e.points && e.points[i] != null ? e.points[i] : null;
+        const upgChips = [
+          up.ovr ? `<span class="u-chip u-ovr">+${up.ovr} OVR</span>` : '',
+          up.atk ? `<span class="u-chip u-atk">+${up.atk} ATK</span>` : '',
+          up.ctl ? `<span class="u-chip u-ctl">+${up.ctl} CTL</span>` : '',
+          up.def ? `<span class="u-chip u-def">+${up.def} DEF</span>` : '',
+        ].filter(Boolean).join('');
+        const isLast = i === e.upgrades.length - 1;
+        const rewardHtml = (isLast && e.rewards && e.rewards.length) ? `
+          <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Completion rewards</div>
+            <div class="reward-list">${e.rewards.map(r => {
+              const f = fmtReward(r.type, r.amount);
+              return `<div class="reward-row"><span class="reward-badge ${f.cls}">${f.label}</span><span class="reward-text">${f.text}</span></div>`;
+            }).join('')}</div>
+          </div>` : '';
+        return `<div class="stage-item">
+          <div class="stage-item-head">
+            <div class="stage-num">${i+1}</div>
+            <div class="stage-item-title">Stage ${i+1}</div>
+            ${pts !== null ? `<div class="stage-pts">${pts} pts</div>` : ''}
+          </div>
+          <div class="stage-item-body">
+            <div class="upgrade-chips">${upgChips || '<span style="font-size:12px;color:var(--muted)">No stat upgrades</span>'}</div>
+            ${rewardHtml}
+          </div>
+        </div>`;
+      }).join('')}</div>
+    </div>`;
+  document.getElementById('modalBody').innerHTML = reqHtml + stagesHtml;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+// ── Toggle sections ───────────────────────────────────────
+document.getElementById('lenToggle').addEventListener('click', function() {
+  this.classList.toggle('collapsed');
+  document.getElementById('lenBody').classList.toggle('hidden');
+});
+document.getElementById('evoToggle').addEventListener('click', function() {
+  this.classList.toggle('collapsed');
+  document.getElementById('evoBody').classList.toggle('hidden');
+});
+
+// ── Length filter ─────────────────────────────────────────
+document.getElementById('lenBtns').addEventListener('click', e => {
+  const btn = e.target.closest('.len-btn');
+  if (!btn) return;
+  lenFilter = btn.dataset.len;
+  document.querySelectorAll('.len-btn').forEach(b => b.classList.toggle('active', b === btn));
+  renderGrid();
+});
+
+// ── Search ────────────────────────────────────────────────
+document.getElementById('searchInputEvo').addEventListener('input', e => {
+  searchQ = e.target.value.toLowerCase();
+  renderGrid();
+});
+document.getElementById('searchClearEvo').addEventListener('click', () => {
+  document.getElementById('searchInputEvo').value = '';
+  searchQ = '';
+  renderGrid();
+});
+
+// ── Select/deselect all ───────────────────────────────────
+document.getElementById('selectAll').addEventListener('click', () => {
+  deselected.clear();
+  document.querySelectorAll('.evo-list-item').forEach(el => el.classList.remove('deselected'));
+  renderGrid();
+});
+document.getElementById('deselectAll').addEventListener('click', () => {
+  allEvos.forEach(e => deselected.add(e.name));
+  document.querySelectorAll('.evo-list-item').forEach(el => el.classList.add('deselected'));
+  renderGrid();
+});
+
+// ── Modal close ───────────────────────────────────────────
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── Fetch — deduplicated by name ──────────────────────────
+async function load() {
+  const base = 'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/evosStandard';
+  try {
+    let pageToken = '';
+    // Use a Map keyed by evo name to prevent duplicates across pages
+    const evoMap = new Map();
+
+    do {
+      const url = base + '?pageSize=300' + (pageToken ? '&pageToken=' + pageToken : '');
+      const r = await fetch(url);
+      if (!r.ok) break;
+      const d = await r.json();
+      pageToken = d.nextPageToken || '';
+
+      (d.documents || []).forEach(doc => {
+        if (!doc?.fields) return;
+        (doc.fields?.evos?.arrayValue?.values || []).forEach(item => {
+          const f = item?.mapValue?.fields;
+          if (!f?.name?.stringValue) return;
+          const name = f.name.stringValue;
+          // Skip if we've already seen this evo name
+          if (evoMap.has(name)) return;
+
+          const pts = (f.points?.arrayValue?.values||[]).map(v => parseInt(v.integerValue||0));
+          const rewards = (f.rewards?.arrayValue?.values||[]).map(rv => {
+            const rf = rv?.mapValue?.fields;
+            if (!rf) return null;
+            return { type: rf.type?.stringValue||'', amount: parseInt(rf.amount?.integerValue||0) };
+          }).filter(Boolean);
+
+          evoMap.set(name, {
+            name,
+            requirements: (f.standardRequirements?.arrayValue?.values||[]).map(v=>v.stringValue).filter(Boolean),
+            upgrades: (f.standardUpgrades?.arrayValue?.values||[]).map(v=>v.stringValue).filter(Boolean),
+            points: pts,
+            rewards,
+          });
+        });
+      });
+    } while (pageToken);
+
+    allEvos = Array.from(evoMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+    renderEvoList();
+    renderGrid();
+  } catch(err) {
+    document.getElementById('evoGrid').innerHTML = `<div class="state-box"><span>Failed to load: ${err.message}</span></div>`;
+  }
+}
+
+load();
+</script>
+</body>
+</html>

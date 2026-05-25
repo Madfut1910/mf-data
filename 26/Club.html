@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MF26 Browse</title>
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="stylesheet" href="/style.css">
+<style>
+/* ── Page layout ── */
+:root {
+  --nav-h: 67px;
+  --bc-h: 44px;
+  --bg-light: #f6f6f6;
+  --bg-grey: #e1e1e1;
+  --dark: #262626;
+  --mid: #424242;
+  --muted: #787878;
+  --icon-grey: #9f9f9f;
+  --white: #eceaea;
+}
+
+@font-face { font-family: cruyffMedium; src: url(Fonts/CruyffSansCondensed+DINArabic+SSTThai-Medium.otf); }
+@font-face { font-family: cruyffBold; src: url(Fonts/CruyffSansCondensed+DINArabic+SSTThai-Bold.otf); }
+@font-face { font-family: cruyffSansMedium; src: url(Fonts/CruyffSans-Medium.26bd8110.otf); }
+@font-face { font-family: robotoBold; src: url(Fonts/Roboto-Bold.ttf); }
+@font-face { font-family: robotoSemiBold; src: url(Fonts/Roboto-SemiBold.ttf); }
+@font-face { font-family: Cruyff\ Sans\ Expanded; src: url(Fonts/CruyffSansExpanded-Heavy.e64b4629.otf); }
+@font-face { font-family: Roboto\ Condensed; src: url(Fonts/Roboto_Condensed-Medium.ttf); }
+@font-face { font-family: Roboto; src: url(Fonts/Roboto-Regular.ttf); }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: #f0f0f0;
+  overflow-x: hidden;
+}
+
+.breadcrumb-bar {
+  width: 100%; height: var(--bc-h);
+  background: var(--bg-grey);
+  display: flex; align-items: center;
+  padding: 0 20px; gap: 8px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px; color: var(--icon-grey);
+  position: sticky; top: 0; z-index: 150;
+}
+.breadcrumb-bar a { color: var(--muted); text-decoration: none; transition: color .2s; }
+.breadcrumb-bar a:hover { color: var(--dark); }
+.breadcrumb-bar .bc-current { font-family: "Roboto", sans-serif; color: var(--dark); font-weight: 700; }
+
+.main-content { padding: 18px 20px 60px; }
+.page-heading { font-family: "Cruyff Sans Expanded", sans-serif; font-size: 50px; font-weight: 900; color: var(--dark); margin-bottom: 8px; }
+.page-desc { font-family: "Roboto Condensed", sans-serif; font-size: 15px; color: var(--mid); margin-bottom: 20px; }
+
+/* ── Tab strip ── */
+.tab-strip-wrap { position: relative; margin-bottom: 20px; }
+.tab-strip-wrap::after { content:''; position:absolute; top:0; right:0; width:40px; height:100%; background:linear-gradient(to right,transparent,#f0f0f0); pointer-events:none; }
+.tab-strip { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px; padding-right:40px; }
+.tab-strip::-webkit-scrollbar { display:none; }
+.tab-pill {
+  display:inline-flex; align-items:center; flex-shrink:0;
+  height:32px; padding:0 14px; border-radius:999px;
+  font-family:"Roboto Condensed",sans-serif; font-size:13px;
+  color:var(--muted); text-decoration:none; background:var(--bg-grey);
+  border:none; cursor:pointer; white-space:nowrap;
+  transition:background .15s, color .15s;
+}
+.tab-pill:hover { background:#d4d4d4; color:var(--mid); }
+.tab-pill.active { background:var(--dark); color:var(--white); }
+
+/* ── Controls bar ── */
+.controls-bar {
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin-bottom:16px; padding:12px 16px;
+  background:var(--bg-light); border-radius:10px;
+  border:1px solid var(--bg-grey);
+}
+.controls-bar .label {
+  font-family:"Roboto Condensed",sans-serif; font-size:12px;
+  font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.6px;
+  flex-shrink:0;
+}
+.search-field {
+  flex:1; min-width:160px;
+  background:var(--bg-grey); border:none; border-radius:20px;
+  padding:7px 14px; font-family:"Roboto Condensed",sans-serif;
+  font-size:13px; color:var(--dark); outline:none;
+}
+.search-field::placeholder { color:var(--muted); }
+
+.filter-search-wrap { position:relative; }
+.filter-search-wrap input {
+  background:var(--bg-grey); border:none; border-radius:20px;
+  padding:7px 30px 7px 12px; font-family:"Roboto Condensed",sans-serif;
+  font-size:12px; color:var(--dark); outline:none; width:180px;
+}
+.filter-search-wrap input::placeholder { color:var(--muted); }
+.filter-search-wrap .clr { position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--muted); cursor:pointer; font-size:16px; line-height:1; }
+
+.sort-select {
+  background:var(--bg-grey); border:none; border-radius:8px;
+  padding:7px 12px; font-family:"Roboto Condensed",sans-serif;
+  font-size:12px; color:var(--dark); cursor:pointer; outline:none;
+}
+
+/* ── Results count ── */
+.results-count { font-family:"Roboto Condensed",sans-serif; font-size:12px; color:var(--muted); margin-bottom:12px; }
+
+/* ── Group rows ── */
+.groups-container { display:flex; flex-direction:column; gap:12px; }
+
+.group-row {
+  background:var(--bg-light); border-radius:12px;
+  border:1px solid var(--bg-grey); overflow:hidden;
+  transition:box-shadow .2s;
+}
+.group-row:hover { box-shadow:0 2px 12px rgba(0,0,0,.06); }
+
+.group-header {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 16px; cursor:pointer; user-select:none;
+  border-bottom:1px solid transparent; transition:border-color .2s;
+}
+.group-row.open .group-header { border-bottom-color:var(--bg-grey); }
+
+.group-badge-img { width:32px; height:32px; object-fit:contain; flex-shrink:0; border-radius:4px; }
+.group-color-swatch { width:32px; height:32px; border-radius:6px; border:1px solid rgba(0,0,0,.08); flex-shrink:0; background:#ccc; overflow:hidden; }
+.group-color-swatch img { width:100%; height:100%; object-fit:contain; }
+
+.group-name { font-family:"Roboto Condensed",sans-serif; font-size:15px; font-weight:700; color:var(--dark); flex:1; }
+.group-meta { display:flex; align-items:center; gap:8px; }
+.group-count { font-family:"Roboto Condensed",sans-serif; font-size:12px; color:var(--muted); }
+.group-chevron { font-size:12px; color:var(--muted); transition:transform .2s; flex-shrink:0; }
+.group-row.open .group-chevron { transform:rotate(180deg); }
+
+/* ── Preview thumbnails (always visible, 3 cards) ── */
+.group-preview {
+  display:flex; gap:6px; align-items:center; flex-shrink:0;
+}
+
+.group-body { display:none; padding:12px 16px 14px; }
+.group-row.open .group-body { display:block; }
+
+/* ── Card thumbnails ── */
+/* FIX 1: card-thumb needs explicit dimensions for absolute children to work */
+.card-thumbs {
+  display:flex; gap:6px; flex-wrap:wrap;
+}
+.card-thumb-link { text-decoration:none; display:block; }
+
+.card-thumb {
+  position: relative;
+  width: 60px;
+  /* aspect ratio of a FIFA-style card ~1.4:1 tall */
+  aspect-ratio: 3 / 4.2;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform .2s;
+  cursor: pointer;
+}
+.card-thumb:hover { transform: scale(1.07); z-index: 2; }
+
+/* The card background fills the full thumb */
+.card-thumb .card-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Rating — top-left */
+.card-thumb .ct-rating {
+  position: absolute;
+  top: 4px; left: 5px;
+  font-family: cruyffMedium, sans-serif;
+  font-size: 10px; font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.7);
+  line-height: 1;
+  z-index: 2;
+}
+
+/* Position — below rating */
+.card-thumb .ct-pos {
+  position: absolute;
+  top: 16px; left: 5px;
+  font-family: cruyffMedium, sans-serif;
+  font-size: 7px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  z-index: 2;
+}
+
+/* Face image — centred in upper 70% */
+.card-thumb .ct-face {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 78%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+.card-thumb .ct-face img {
+  width: 70%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Name — bottom strip */
+.card-thumb .ct-name {
+  position: absolute;
+  bottom: 5px; left: 0; right: 0;
+  text-align: center;
+  font-family: cruyffSansMedium, sans-serif;
+  font-size: 6.5px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 3px;
+  z-index: 2;
+}
+
+/* Preview thumbs (in header) are slightly smaller */
+.group-preview .card-thumb {
+  width: 44px;
+}
+
+/* show-more button */
+.show-more-btn {
+  margin-top:10px; background:none; border:1px dashed #bbb;
+  border-radius:8px; padding:7px 14px;
+  font-family:"Roboto Condensed",sans-serif; font-size:12px;
+  color:var(--mid); cursor:pointer; transition:all .2s;
+}
+.show-more-btn:hover { border-color:var(--dark); color:var(--dark); background:var(--bg-grey); }
+
+/* ── Loading / empty ── */
+.state-msg { font-family:"Roboto Condensed",sans-serif; font-size:14px; color:var(--muted); padding:30px 0; text-align:center; }
+
+/* ── Cross-filter dropdowns ── */
+.cross-filter-wrap { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.cross-filter-select-wrap { position:relative; }
+.cross-filter-input {
+  background:var(--bg-grey); border:none; border-radius:20px;
+  padding:7px 12px; font-family:"Roboto Condensed",sans-serif;
+  font-size:12px; color:var(--dark); outline:none; min-width:150px;
+  cursor:pointer;
+}
+.cross-filter-input::placeholder { color:var(--muted); }
+.cross-filter-dropdown {
+  display:none; position:absolute; top:calc(100% + 4px); left:0;
+  background:#fff; border:1px solid var(--bg-grey); border-radius:10px;
+  min-width:220px; max-height:220px; overflow-y:auto; z-index:300;
+  box-shadow:0 4px 16px rgba(0,0,0,.08);
+}
+.cross-filter-select-wrap.open .cross-filter-dropdown { display:block; }
+.cfd-item {
+  display:flex; align-items:center; gap:8px; padding:7px 12px;
+  font-family:"Roboto Condensed",sans-serif; font-size:12px;
+  color:var(--mid); cursor:pointer; border-bottom:1px solid #f0f0f0;
+  transition:background .1s;
+}
+.cfd-item:last-child { border-bottom:none; }
+.cfd-item:hover { background:var(--bg-grey); color:var(--dark); }
+.cfd-item.selected { background:var(--bg-grey); font-weight:700; color:var(--dark); }
+.cfd-item img { width:20px; height:20px; object-fit:contain; border-radius:3px; flex-shrink:0; }
+.cfd-no-results { padding:10px 12px; font-size:12px; color:var(--muted); }
+
+/* ── Active chips ── */
+.cross-filter-chips { display:flex; gap:5px; flex-wrap:wrap; }
+.cf-chip {
+  display:inline-flex; align-items:center; gap:4px; padding:3px 8px;
+  background:var(--dark); border-radius:20px;
+  font-family:"Roboto Condensed",sans-serif; font-size:11px; color:#fff;
+}
+.cf-chip button { background:none; border:none; color:rgba(255,255,255,.7); cursor:pointer; font-size:14px; line-height:1; padding:0; }
+.cf-chip button:hover { color:#fff; }
+
+/* dropdown search inside dropdown */
+.cfd-search {
+  position: sticky; top: 0;
+  padding: 8px 10px 6px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 1;
+}
+.cfd-search input {
+  width: 100%;
+  background: var(--bg-grey); border: none; border-radius: 12px;
+  padding: 5px 10px;
+  font-family: "Roboto Condensed", sans-serif; font-size: 12px;
+  color: var(--dark); outline: none;
+}
+.cfd-list { max-height: 170px; overflow-y: auto; }
+
+@media (max-width:768px) {
+  .page-heading { font-size:32px; }
+  .controls-bar { flex-direction:column; align-items:flex-start; }
+  .card-thumb { width:48px; }
+  .group-preview .card-thumb { width:36px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <a href="index.html">DATA</a>
+  <span>›</span>
+  <a href="/26/Database.html">DATABASE</a>
+  <span>›</span>
+  <a href="/26/Cards.html">CARDS</a>
+  <span>›</span>
+  <span class="bc-current">BROWSE</span>
+</nav>
+
+<main class="main-content" id="main-content">
+  <h1 class="page-heading">BROWSE</h1>
+  <p class="page-desc">Explore all cards grouped by club, league, nation or colour.</p>
+
+  <!-- Group-by tabs -->
+  <div class="tab-strip-wrap">
+    <div class="tab-strip" role="tablist">
+      <button class="tab-pill active" data-group="clubs">Clubs</button>
+      <button class="tab-pill" data-group="leagues">Leagues</button>
+      <button class="tab-pill" data-group="nations">Nations</button>
+      <button class="tab-pill" data-group="colours">Colours</button>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-bar">
+    <div class="filter-search-wrap">
+      <input id="groupSearch" class="cross-filter-input" type="text" placeholder="Search groups…" autocomplete="off">
+      <button class="clr" id="groupSearchClear">×</button>
+    </div>
+
+    <span class="label" style="margin-left:4px">Filter by:</span>
+
+    <div class="cross-filter-wrap">
+      <!-- All 4 cross-filters always visible — they all STACK -->
+      <div class="cross-filter-select-wrap" id="cfNationWrap">
+        <input class="cross-filter-input" id="cfNationInput" type="text" placeholder="Nation…" autocomplete="off" readonly>
+        <div class="cross-filter-dropdown" id="cfNationDropdown">
+          <div class="cfd-search"><input type="text" placeholder="Search nations…" id="cfNationSearch"></div>
+          <div class="cfd-list" id="cfNationList"></div>
+        </div>
+      </div>
+
+      <div class="cross-filter-select-wrap" id="cfClubWrap">
+        <input class="cross-filter-input" id="cfClubInput" type="text" placeholder="Club…" autocomplete="off" readonly>
+        <div class="cross-filter-dropdown" id="cfClubDropdown">
+          <div class="cfd-search"><input type="text" placeholder="Search clubs…" id="cfClubSearch"></div>
+          <div class="cfd-list" id="cfClubList"></div>
+        </div>
+      </div>
+
+      <div class="cross-filter-select-wrap" id="cfLeagueWrap">
+        <input class="cross-filter-input" id="cfLeagueInput" type="text" placeholder="League…" autocomplete="off" readonly>
+        <div class="cross-filter-dropdown" id="cfLeagueDropdown">
+          <div class="cfd-search"><input type="text" placeholder="Search leagues…" id="cfLeagueSearch"></div>
+          <div class="cfd-list" id="cfLeagueList"></div>
+        </div>
+      </div>
+
+      <div class="cross-filter-select-wrap" id="cfColourWrap">
+        <input class="cross-filter-input" id="cfColourInput" type="text" placeholder="Card colour…" autocomplete="off" readonly>
+        <div class="cross-filter-dropdown" id="cfColourDropdown">
+          <div class="cfd-search"><input type="text" placeholder="Search colours…" id="cfColourSearch"></div>
+          <div class="cfd-list" id="cfColourList"></div>
+        </div>
+      </div>
+    </div>
+
+    <select class="sort-select" id="sortSelect">
+      <option value="count-desc">Most cards</option>
+      <option value="count-asc">Fewest cards</option>
+      <option value="name-asc">Name A–Z</option>
+      <option value="name-desc">Name Z–A</option>
+      <option value="rating-desc">Highest rating</option>
+    </select>
+  </div>
+
+  <!-- Active filter chips -->
+  <div class="cross-filter-chips" id="activeCFChips" style="margin-bottom:12px"></div>
+
+  <div class="results-count" id="resultsCount"></div>
+  <div id="groupsContainer" class="groups-container">
+    <div class="state-msg" id="loadingMsg">Loading cards…</div>
+  </div>
+</main>
+
+<script>
+// ── FIX 3: Inline mappings loaded directly — no fragile regex parsing ──
+// These are populated from js/Mappings.js at runtime via a clean fetch+eval approach,
+// falling back to the bundled data below if that fails.
+
+// Bundled fallback data (subset — full file loaded dynamically)
+let clubIdToName = {};
+let leagueIdToName = {};
+let nationIdToName = {};
+
+// ── State ──
+let allPlayers = [];
+let colorMap = {};
+let currentGroupBy = 'clubs';
+let groupSearch = '';
+
+// FIX 4: Cross-filter selections — ALL four types always active & stacking
+const cfSelected = { nation: new Map(), club: new Map(), league: new Map(), colour: new Map() };
+
+const databases = {
+  updates:    'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/updates/',
+  sbcGroups:  'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/sbcGroups/',
+  objectives: 'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/objectives/',
+  evosElite:  'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/evosElite/',
+  draftCups:  'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/draftCups/',
+  ltm:        '26assets/Txt/ltm.json',
+  livePlayers:'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/livePlayers/',
+  realmExport:'json/realmExport.json'
+};
+const singleDbs = ['realmExport'];
+
+// ── Fetch helpers ──
+async function fetchPlayerDataWithTime(url, dbName) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return [];
+    const data = await res.json();
+    let players = data.fields?.players?.arrayValue?.values || [];
+    return players.map(p => ({
+      ...p,
+      createTime: data.createTime || '1970-01-01T00:00:00Z',
+      database: dbName
+    }));
+  } catch { return []; }
+}
+
+async function fetchInBatches(urls, dbName, batchSize = 25) {
+  const results = [];
+  for (let i = 0; i < urls.length; i += batchSize) {
+    const batch = urls.slice(i, i + batchSize);
+    const batchResults = await Promise.all(batch.map(u => fetchPlayerDataWithTime(u, dbName)));
+    batchResults.forEach(r => results.push(...r));
+  }
+  return results;
+}
+
+// FIX 3: Robust Mappings loader — parses the ES module properly
+async function loadMappings() {
+  try {
+    const res = await fetch('js/Mappings.js');
+    if (!res.ok) return;
+    const text = await res.text();
+
+    // Convert ES module to plain object literals we can JSON.parse
+    const parseExport = (name) => {
+      // Match: export const NAME = { ... };  (handles multiline)
+      const re = new RegExp(`export\\s+const\\s+${name}\\s*=\\s*(\\{[\\s\\S]*?\\});`, 'm');
+      const m = text.match(re);
+      if (!m) return {};
+      try {
+        // Keys in JS object literals may be unquoted or quoted — normalise to JSON
+        let src = m[1];
+        // Quote bare keys: word chars that aren't already quoted
+        src = src.replace(/([{,]\s*)([A-Za-z_$][A-Za-z0-9_$]*)\s*:/g, '$1"$2":');
+        // Remove trailing commas before } or ]
+        src = src.replace(/,(\s*[}\]])/g, '$1');
+        return JSON.parse(src);
+      } catch(e) {
+        console.warn(`Failed to parse ${name}:`, e);
+        return {};
+      }
+    };
+
+    clubIdToName   = parseExport('clubIdToName');
+    leagueIdToName = parseExport('leagueIdToName');
+    nationIdToName = parseExport('nationIdToName');
+    console.log(`Mappings loaded: ${Object.keys(clubIdToName).length} clubs, ${Object.keys(leagueIdToName).length} leagues, ${Object.keys(nationIdToName).length} nations`);
+  } catch (e) {
+    console.warn('Could not load Mappings.js, IDs will show as numbers', e);
+  }
+}
+
+async function loadColorMap() {
+  try {
+    const [localRes, fsRes] = await Promise.all([
+      fetch('json/color.json'),
+      fetch('https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/images')
+    ]);
+    const sources = [];
+    if (localRes.ok) { const d = await localRes.json(); if (d?.documents) sources.push(...d.documents); }
+    if (fsRes.ok)    { const d = await fsRes.json();    if (d?.documents)  sources.push(...d.documents); }
+    sources.forEach(doc => {
+      let imgs = [];
+      if (doc.fields?.images?.arrayValue?.values) imgs = doc.fields.images.arrayValue.values;
+      else if (doc.mapValue?.fields) imgs = [doc];
+      imgs.forEach(item => {
+        const f = item.mapValue?.fields || {};
+        const id = (f.id?.stringValue || f.name?.stringValue || '').trim().toLowerCase();
+        if (!id) return;
+        colorMap[id] = {
+          name: f.name?.stringValue || id,
+          url_big: f.url_big?.stringValue || null,
+          url_small: f.url_small?.stringValue || null,
+          url_micro: f.url_micro?.stringValue || null
+        };
+      });
+    });
+  } catch {}
+}
+
+async function loadAllPlayers() {
+  const allResults = [];
+  for (const [dbName, baseURL] of Object.entries(databases)) {
+    let players = [];
+    if (singleDbs.includes(dbName)) {
+      players = await fetchPlayerDataWithTime(baseURL, dbName);
+    } else {
+      const urls = [];
+      for (let i = 150; i >= 1; i--) urls.push(`${baseURL}${i}`);
+      players = await fetchInBatches(urls, dbName, 25);
+    }
+    allResults.push(...players);
+  }
+  allResults.sort((a,b) => new Date(b.createTime) - new Date(a.createTime));
+
+  const dbPriority = ['objectives','sbcGroups','draftCups','ltm','realmExport','evosElite','updates','livePlayers'];
+  const getPrio = db => { const i = dbPriority.indexOf(db); return i === -1 ? 999 : i; };
+  const idMap = new Map();
+  allResults.forEach(p => {
+    const id = p?.mapValue?.fields?.id?.stringValue;
+    if (!id) return;
+    const ex = idMap.get(id);
+    if (!ex) { idMap.set(id, p); return; }
+    const winDb = getPrio(ex.database) <= getPrio(p.database) ? ex.database : p.database;
+    const winner = new Date(p.createTime) > new Date(ex.createTime)
+      ? { ...p, database: winDb }
+      : { ...ex, database: winDb };
+    idMap.set(id, winner);
+  });
+  allPlayers = Array.from(idMap.values());
+}
+
+// ── Grouping logic ──
+function groupPlayers(players, by) {
+  const groups = new Map();
+  players.forEach(p => {
+    const f = p?.mapValue?.fields || {};
+    let key, label;
+    if (by === 'clubs') {
+      key   = String(f.clubId?.integerValue || '0');
+      label = clubIdToName[key] || `Club ${key}`;
+    } else if (by === 'leagues') {
+      key   = String(f.leagueId?.integerValue || '0');
+      label = leagueIdToName[key] || `League ${key}`;
+    } else if (by === 'nations') {
+      key   = String(f.nationId?.integerValue || '0');
+      label = nationIdToName[key] || `Nation ${key}`;
+    } else {
+      key   = (f.color?.stringValue || 'default').trim().toLowerCase();
+      label = colorMap[key]?.name || key.charAt(0).toUpperCase() + key.slice(1);
+    }
+    if (!groups.has(key)) groups.set(key, { key, label, players: [], topRating: 0 });
+    const g = groups.get(key);
+    g.players.push(p);
+    const r = parseInt(f.rating?.integerValue || 0);
+    if (r > g.topRating) g.topRating = r;
+  });
+  return groups;
+}
+
+// FIX 4: playerPassesAllFilters — checks ALL four filter types regardless of groupBy
+// This makes filters truly stack: e.g. groupBy=clubs + nation=Brazil + league=Premier League
+// will show only clubs containing Brazilian Premier League players.
+function playerPassesAllFilters(p) {
+  const f = p?.mapValue?.fields || {};
+  const pNation  = String(f.nationId?.integerValue  || '');
+  const pClub    = String(f.clubId?.integerValue    || '');
+  const pLeague  = String(f.leagueId?.integerValue  || '');
+  const pColour  = (f.color?.stringValue || 'default').trim().toLowerCase();
+
+  if (cfSelected.nation.size  > 0 && !cfSelected.nation.has(pNation))   return false;
+  if (cfSelected.club.size    > 0 && !cfSelected.club.has(pClub))        return false;
+  if (cfSelected.league.size  > 0 && !cfSelected.league.has(pLeague))   return false;
+  if (cfSelected.colour.size  > 0 && !cfSelected.colour.has(pColour))   return false;
+  return true;
+}
+
+// ── Render ──
+// FIX 2: Show only 3 preview cards per group (in header), expand in body
+const CARDS_PREVIEW  = 3;
+const CARDS_INITIAL  = 30;
+const groupOpenStates = new Map();
+const thumbLimits = new Map();
+
+function sortGroups(groupsArr) {
+  const sortVal = document.getElementById('sortSelect')?.value || 'count-desc';
+  groupsArr.sort((a,b) => {
+    if (sortVal === 'count-desc')  return b.players.length - a.players.length;
+    if (sortVal === 'count-asc')   return a.players.length - b.players.length;
+    if (sortVal === 'name-asc')    return a.label.localeCompare(b.label);
+    if (sortVal === 'name-desc')   return b.label.localeCompare(a.label);
+    if (sortVal === 'rating-desc') return b.topRating - a.topRating;
+    return 0;
+  });
+}
+
+function renderGroups() {
+  const container = document.getElementById('groupsContainer');
+  const rc = document.getElementById('resultsCount');
+
+  // Build all groups from all players
+  const allGroups = groupPlayers(allPlayers, currentGroupBy);
+  let groupsArr = Array.from(allGroups.values());
+
+  // FIX 4: Filter groups — keep group if at least one player passes ALL active filters
+  const hasAnyFilter = ['nation','club','league','colour'].some(t => cfSelected[t].size > 0);
+  if (hasAnyFilter) {
+    groupsArr = groupsArr.filter(g => g.players.some(playerPassesAllFilters));
+    // Also filter the players within each group to only matching ones (for display)
+    groupsArr = groupsArr.map(g => ({
+      ...g,
+      players: g.players.filter(playerPassesAllFilters)
+    }));
+    // Recompute topRating after filtering
+    groupsArr.forEach(g => {
+      g.topRating = g.players.reduce((max, p) => {
+        const r = parseInt(p?.mapValue?.fields?.rating?.integerValue || 0);
+        return r > max ? r : max;
+      }, 0);
+    });
+  }
+
+  // Group search
+  if (groupSearch.trim()) {
+    const q = groupSearch.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    groupsArr = groupsArr.filter(g =>
+      g.label.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(q)
+    );
+  }
+
+  sortGroups(groupsArr);
+  rc.textContent = `${groupsArr.length} group${groupsArr.length !== 1 ? 's' : ''}`;
+
+  if (groupsArr.length === 0) {
+    container.innerHTML = '<div class="state-msg">No groups match your filters.</div>';
+    return;
+  }
+
+  container.innerHTML = '';
+
+  groupsArr.forEach(g => {
+    const isOpen = groupOpenStates.get(g.key) || false;
+    const row = document.createElement('div');
+    row.className = 'group-row' + (isOpen ? ' open' : '');
+    row.dataset.key = g.key;
+
+    // Sort players by rating desc for display
+    const sortedPlayers = g.players.slice().sort((a,b) => {
+      const ra = parseInt(a?.mapValue?.fields?.rating?.integerValue || 0);
+      const rb = parseInt(b?.mapValue?.fields?.rating?.integerValue || 0);
+      return rb - ra;
+    });
+
+    // FIX 2: Build 3 preview thumbs for the header
+    const previewPlayers = sortedPlayers.slice(0, CARDS_PREVIEW);
+    const previewHtml = previewPlayers.map(p => buildThumbHTML(p, true)).join('');
+
+    const badgeImg = buildGroupBadge(g.key, currentGroupBy);
+
+    row.innerHTML = `
+      <div class="group-header">
+        ${badgeImg}
+        <span class="group-name">${escHtml(g.label)}</span>
+        <div class="group-meta">
+          <span class="group-count">${g.players.length} card${g.players.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="group-preview">${previewHtml}</div>
+        <span class="group-chevron">▼</span>
+      </div>
+      <div class="group-body">
+        <div class="card-thumbs" id="thumbs-${escAttr(g.key)}"></div>
+        <button class="show-more-btn" id="more-${escAttr(g.key)}" style="display:none"></button>
+      </div>
+    `;
+
+    row.querySelector('.group-header').addEventListener('click', () => {
+      const wasOpen = row.classList.contains('open');
+      row.classList.toggle('open', !wasOpen);
+      groupOpenStates.set(g.key, !wasOpen);
+      if (!wasOpen) renderCardThumbs(g.key, sortedPlayers, row);
+    });
+
+    container.appendChild(row);
+    if (isOpen) renderCardThumbs(g.key, sortedPlayers, row);
+  });
+}
+
+function renderCardThumbs(key, sortedPlayers, row) {
+  const thumbsEl = row.querySelector(`#thumbs-${escAttr(key)}`);
+  const moreBtn  = row.querySelector(`#more-${escAttr(key)}`);
+  if (!thumbsEl) return;
+
+  const limit = thumbLimits.get(key) || CARDS_INITIAL;
+  const toShow = sortedPlayers.slice(0, limit);
+  const remaining = sortedPlayers.length - limit;
+
+  thumbsEl.innerHTML = toShow.map(p => buildThumbHTML(p, false)).join('');
+
+  if (remaining > 0) {
+    moreBtn.style.display = '';
+    moreBtn.textContent = `Show ${Math.min(remaining, 50)} more…`;
+    moreBtn.onclick = () => {
+      thumbLimits.set(key, limit + 50);
+      renderCardThumbs(key, sortedPlayers, row);
+    };
+  } else {
+    moreBtn.style.display = 'none';
+  }
+}
+
+function buildGroupBadge(key, by) {
+  if (by === 'clubs')   return `<img class="group-badge-img" src="https://mf-data.b-cdn.net/26/Badges/Clubs/Large/club_large_${key}.png" alt="" onerror="this.style.visibility='hidden'">`;
+  if (by === 'leagues') return `<img class="group-badge-img" src="https://mf-data.b-cdn.net/26/Badges/Leagues/Large/league_large_${key}.png" alt="" onerror="this.style.visibility='hidden'">`;
+  if (by === 'nations') return `<img class="group-badge-img" src="https://mf-data.b-cdn.net/26/Badges/Nations/Large/nation_large_${key}.png" alt="" onerror="this.style.visibility='hidden'">`;
+  const cm = colorMap[key];
+  const url = cm?.url_micro || cm?.url_small || cm?.url_big || '';
+  return `<div class="group-color-swatch">${url ? `<img src="${url}" alt="${key}" onerror="this.style.display='none'">` : ''}</div>`;
+}
+
+// FIX 1: buildThumbHTML — card-thumb now relies on CSS aspect-ratio + position:absolute children
+function buildThumbHTML(p, isPreview = false) {
+  const f = p?.mapValue?.fields || {};
+  const id      = (f.id?.stringValue || '').replace('id','');
+  const color   = (f.color?.stringValue || 'default').trim().toLowerCase();
+  const rating  = f.rating?.integerValue || '?';
+  const position = f.position?.stringValue || '';
+  const name    = f.name?.stringValue || '';
+  const dbName  = p.database || '';
+
+  const cm = colorMap[color];
+  const cardBg = cm?.url_big || `https://mf-data.b-cdn.net/26/Colors/${color || 'default'}_big.png`;
+  const topColor = cm?.top_text_color || '#fff';
+
+  return `
+  <a class="card-thumb-link" href="Card-Detail.html?id=${escAttr(id)}&color=${escAttr(color)}&db=${escAttr(dbName)}" target="_blank" rel="noopener">
+    <div class="card-thumb" title="${escHtml(name)} (${rating})">
+      <img class="card-bg" src="${cardBg}" alt="${escHtml(color)} card"
+        onerror="this.src='Main Assets/boo.png'">
+      <div class="ct-rating" style="color:${topColor}">${rating}</div>
+      <div class="ct-pos" style="color:${topColor}">${escHtml(position)}</div>
+      <div class="ct-face">
+        <img src="https://trivela.b-cdn.net/26/normalFacesSmall/${id}.png" alt=""
+          onerror="if(!this._f2){this._f2=1;this.src='https://trivela.b-cdn.net/26/faces/p${id}.png';}else{this.onerror=null;this.src='Main Assets/boo.png';}">
+      </div>
+      <div class="ct-name">${escHtml(name)}</div>
+    </div>
+  </a>`;
+}
+
+// ── Cross-filter dropdown data ──
+let cfDropdownData = { nation: [], club: [], league: [], colour: [] };
+let cfInnerSearch  = { nation: '', club: '', league: '', colour: '' };
+
+function buildCFDropdownData() {
+  const nations  = new Map();
+  const clubs    = new Map();
+  const leagues  = new Map();
+  const colours  = new Map();
+
+  allPlayers.forEach(p => {
+    const f = p?.mapValue?.fields || {};
+    const nid = String(f.nationId?.integerValue  || '');
+    const cid = String(f.clubId?.integerValue    || '');
+    const lid = String(f.leagueId?.integerValue  || '');
+    const col = (f.color?.stringValue || 'default').trim().toLowerCase();
+    if (nid) nations.set(nid,  nationIdToName[nid]  || `Nation ${nid}`);
+    if (cid) clubs.set(cid,    clubIdToName[cid]    || `Club ${cid}`);
+    if (lid) leagues.set(lid,  leagueIdToName[lid]  || `League ${lid}`);
+    if (col) colours.set(col,  colorMap[col]?.name  || col.charAt(0).toUpperCase() + col.slice(1));
+  });
+
+  cfDropdownData.nation  = Array.from(nations.entries()).sort((a,b)  => a[1].localeCompare(b[1]));
+  cfDropdownData.club    = Array.from(clubs.entries()).sort((a,b)    => a[1].localeCompare(b[1]));
+  cfDropdownData.league  = Array.from(leagues.entries()).sort((a,b)  => a[1].localeCompare(b[1]));
+  cfDropdownData.colour  = Array.from(colours.entries()).sort((a,b)  => a[1].localeCompare(b[1]));
+}
+
+function renderCFList(type, listEl, searchTerm) {
+  const data = cfDropdownData[type] || [];
+  const term = searchTerm.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const filtered = term
+    ? data.filter(([,n]) => n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term))
+    : data;
+  const sel = cfSelected[type];
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = '<div class="cfd-no-results">No results</div>';
+    return;
+  }
+
+  listEl.innerHTML = filtered.slice(0, 150).map(([id, name]) => {
+    const isSelected = sel.has(id);
+    const img = buildCFImg(type, id);
+    return `<div class="cfd-item${isSelected ? ' selected' : ''}" data-id="${escAttr(id)}" data-name="${escAttr(name)}">
+      ${img}<span>${escHtml(name)}</span>
+    </div>`;
+  }).join('');
+
+  listEl.querySelectorAll('.cfd-item').forEach(item => {
+    item.addEventListener('click', e => {
+      e.stopPropagation();
+      const id   = item.dataset.id;
+      const name = item.dataset.name;
+      if (sel.has(id)) sel.delete(id);
+      else sel.set(id, name);
+      renderActiveCFChips();
+      renderGroups();
+      updateCFInputLabels();
+      renderCFList(type, listEl, cfInnerSearch[type]);
+    });
+  });
+}
+
+function buildCFImg(type, id) {
+  if (type === 'nation')  return `<img src="https://mf-data.b-cdn.net/26/Badges/Nations/Small/nation_small_${id}.png" alt="" onerror="this.style.display='none'">`;
+  if (type === 'club')    return `<img src="https://mf-data.b-cdn.net/26/Badges/Clubs/Small/club_small_${id}.png" alt="" onerror="this.style.display='none'">`;
+  if (type === 'league')  return `<img src="https://mf-data.b-cdn.net/26/Badges/Leagues/Small/league_small_${id}.png" alt="" onerror="this.style.display='none'">`;
+  if (type === 'colour') {
+    const url = colorMap[id]?.url_micro || colorMap[id]?.url_small || '';
+    return url ? `<img src="${url}" alt="" onerror="this.style.display='none'">` : '';
+  }
+  return '';
+}
+
+function updateCFInputLabels() {
+  const labelMap = {
+    nation: document.getElementById('cfNationInput'),
+    club:   document.getElementById('cfClubInput'),
+    league: document.getElementById('cfLeagueInput'),
+    colour: document.getElementById('cfColourInput'),
+  };
+  const placeholders = { nation: 'Nation…', club: 'Club…', league: 'League…', colour: 'Card colour…' };
+  Object.entries(labelMap).forEach(([type, inp]) => {
+    if (!inp) return;
+    const count = cfSelected[type].size;
+    inp.placeholder = count > 0 ? `${count} selected` : placeholders[type];
+  });
+}
+
+// Enable/disable the AND/OR toggle based on selection count
+function updateAndOrToggle(type) {
+  const toggleEl = document.getElementById(`cf${cap(type)}Mode`);
+  if (!toggleEl) return;
+  const count = cfSelected[type].size;
+  if (count >= 2) {
+    toggleEl.classList.remove('disabled');
+  } else {
+    // Reset to OR when fewer than 2 selected
+    toggleEl.classList.add('disabled');
+    if (cfMode[type] !== 'or') {
+      cfMode[type] = 'or';
+      toggleEl.querySelectorAll('.andor-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === 'or');
+      });
+    }
+  }
+}
+ 
+function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+ 
+function buildCFImg(type, id) {
+  if (type === 'nation')  return `<img src="https://mf-data.b-cdn.net/26/Badges/Nations/Small/nation_small_${id}.png" alt="" onerror="this.style.display='none'">`;
+  if (type === 'club')    return `<img src="https://mf-data.b-cdn.net/26/Badges/Clubs/Small/club_small_${id}.png" alt="" onerror="this.style.display='none'">`;
+  if (type === 'league')  return `<img src="https://mf-data.b-cdn.net/26/Badges/Leagues/Small/league_small_${id}.png" alt="" onerror="this.style.display='none'">`;
+  if (type === 'colour') {
+    const url = colorMap[id]?.url_micro || colorMap[id]?.url_small || '';
+    return url ? `<img src="${url}" alt="" onerror="this.style.display='none'">` : '';
+  }
+  return '';
+}
+ 
+function updateCFInputLabels() {
+  const map = {
+    nation: { el: document.getElementById('cfNationInput'), ph: 'Nation…' },
+    club:   { el: document.getElementById('cfClubInput'),   ph: 'Club…'   },
+    league: { el: document.getElementById('cfLeagueInput'), ph: 'League…' },
+    colour: { el: document.getElementById('cfColourInput'), ph: 'Card colour…' },
+  };
+  Object.entries(map).forEach(([type, { el, ph }]) => {
+    if (!el) return;
+    const count = cfSelected[type].size;
+    const mode  = cfMode[type].toUpperCase();
+    el.placeholder = count > 0
+      ? `${count} selected (${mode})`
+      : ph;
+  });
+}
+ 
+function renderActiveCFChips() {
+  const wrap = document.getElementById('activeCFChips');
+  if (!wrap) return;
+  const chips = [];
+  ['nation','club','league','colour'].forEach(type => {
+    cfSelected[type].forEach((name, id) => chips.push({ type, id, name }));
+  });
+ 
+  wrap.innerHTML = chips.map(({ type, id, name }) => {
+    const modeLabel = cfSelected[type].size >= 2 ? cfMode[type].toUpperCase() : '';
+    const modeChip  = modeLabel ? `<span class="cf-chip-mode">${modeLabel}</span>` : '';
+    return `<div class="cf-chip" data-remove-type="${escAttr(type)}" data-remove-id="${escAttr(id)}">
+      ${buildCFImg(type, id)} <span>${escHtml(name)}</span>${modeChip}
+      <button aria-label="Remove">×</button>
+    </div>`;
+  }).join('');
+ 
+  wrap.querySelectorAll('.cf-chip').forEach(chip => {
+    chip.querySelector('button').addEventListener('click', () => {
+      const type = chip.dataset.removeType;
+      cfSelected[type].delete(chip.dataset.removeId);
+      updateAndOrToggle(type);
+      renderActiveCFChips();
+      updateCFInputLabels();
+      renderGroups();
+    });
+  });
+}
+
+// ── Escape helpers ────────────────────────────────────────────────────────────
+function escHtml(s)  { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escAttr(s)  { return String(s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+ 
+// ── Wire events ───────────────────────────────────────────────────────────────
+function wireEvents() {
+  // Tabs
+  document.querySelectorAll('.tab-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentGroupBy = btn.dataset.group;
+      groupOpenStates.clear();
+      thumbLimits.clear();
+      renderGroups();
+    });
+  });
+ 
+  // Group search
+  const gs = document.getElementById('groupSearch');
+  gs.addEventListener('input', e => { groupSearch = e.target.value; renderGroups(); });
+  document.getElementById('groupSearchClear').addEventListener('click', () => {
+    gs.value = ''; groupSearch = ''; renderGroups();
+  });
+ 
+  // Sort
+  document.getElementById('sortSelect').addEventListener('change', renderGroups);
+ 
+  // Cross-filter dropdowns
+  const cfDefs = [
+    { type: 'nation',  inputId: 'cfNationInput',  wrapId: 'cfNationWrap',  searchId: 'cfNationSearch',  listId: 'cfNationList',  modeId: 'cfNationMode'  },
+    { type: 'club',    inputId: 'cfClubInput',    wrapId: 'cfClubWrap',    searchId: 'cfClubSearch',    listId: 'cfClubList',    modeId: 'cfClubMode'    },
+    { type: 'league',  inputId: 'cfLeagueInput',  wrapId: 'cfLeagueWrap',  searchId: 'cfLeagueSearch',  listId: 'cfLeagueList',  modeId: 'cfLeagueMode'  },
+    { type: 'colour',  inputId: 'cfColourInput',  wrapId: 'cfColourWrap',  searchId: 'cfColourSearch',  listId: 'cfColourList',  modeId: 'cfColourMode'  },
+  ];
+ 
+  cfDefs.forEach(({ type, inputId, wrapId, searchId, listId, modeId }) => {
+    const inp    = document.getElementById(inputId);
+    const wrap   = document.getElementById(wrapId);
+    const search = document.getElementById(searchId);
+    const list   = document.getElementById(listId);
+    const modeEl = document.getElementById(modeId);
+ 
+    // Open dropdown
+    inp.addEventListener('click', e => {
+      e.stopPropagation();
+      cfDefs.forEach(d => {
+        if (d.wrapId !== wrapId) document.getElementById(d.wrapId)?.classList.remove('open');
+      });
+      wrap.classList.toggle('open');
+      if (wrap.classList.contains('open')) {
+        cfInnerSearch[type] = '';
+        if (search) search.value = '';
+        renderCFList(type, list, '');
+        setTimeout(() => search?.focus(), 50);
+      }
+    });
+ 
+    // Inner search
+    if (search) {
+      search.addEventListener('input', e => {
+        cfInnerSearch[type] = e.target.value;
+        renderCFList(type, list, cfInnerSearch[type]);
+      });
+      search.addEventListener('click', e => e.stopPropagation());
+    }
+ 
+    // AND/OR toggle buttons
+    if (modeEl) {
+      modeEl.querySelectorAll('.andor-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const newMode = btn.dataset.mode;
+          cfMode[type]  = newMode;
+          modeEl.querySelectorAll('.andor-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.mode === newMode);
+          });
+          updateCFInputLabels();
+          renderActiveCFChips();
+          renderGroups();
+        });
+      });
+    }
+  });
+ 
+  // Close dropdowns on outside click
+  document.addEventListener('click', () => {
+    cfDefs.forEach(d => document.getElementById(d.wrapId)?.classList.remove('open'));
+  });
+}
+
+// ── Init ──
+async function init() {
+  document.getElementById('loadingMsg').textContent = 'Loading card designs…';
+  await Promise.all([loadMappings(), loadColorMap()]);
+  document.getElementById('loadingMsg').textContent = 'Fetching all cards…';
+  await loadAllPlayers();
+  document.getElementById('loadingMsg').remove();
+  buildCFDropdownData();
+  wireEvents();
+  renderGroups();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+
+<script src="/Template26.js"></script>
+</body>
+</html>

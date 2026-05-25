@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MF26 Cards</title>
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="css/Card.css">
+<link rel="stylesheet" href="css/Filter.css">
+</head>
+<body>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-scroll">
+    <a href="index.html">DATA</a>
+    <span>›</span>
+    <a href="/26/Database.html">DATABASE</a>
+    <span>›</span>
+    <a href="/26/Cards.html" class="bc-current">CARDS</a>
+  </div>
+</nav>
+
+<main class="main-content" id="main-content">
+  <h1 class="page-heading">CARDS</h1>
+  <p class="page-desc">View and filter from all the cards in Madfut 26!</p>
+
+  <div class="tmpl-strip-wrap">
+    <div class="tmpl-strip" id="tmplStrip" role="tablist">
+      <a href="Cards.html"          class="tmpl-tab active"  role="tab" aria-selected="true">All Cards</a>
+      <a href="Live-Cards.html"     class="tmpl-tab"         role="tab" aria-selected="false">Live Players</a>
+      <a href="EvoChains.html" class="tmpl-tab"         role="tab" aria-selected="false">Evo Chains</a>
+      <a href="LTM-Cards.html"      class="tmpl-tab"         role="tab" aria-selected="false">LTM Cards</a>
+    </div>
+  </div>
+
+  <!-- Sticky bar: results count + sort select + filter toggle -->
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+    <div class="results-count" id="resultsCount"></div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+<button type="button" id="toggleFilterBtn" title="Show filters">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="card-container">
+    <h4 id="loading-text" style="color:#aaa;font-family:'Roboto Condensed',sans-serif">Loading…</h4>
+  </div>
+
+  <div class="pagination" id="pagination" style="display:none;gap:5px;flex-wrap:wrap;justify-content:center;margin-top:20px">
+    <button type="button" id="pageFirst"  style="padding:8px 12px">&lt;&lt;</button>
+    <button type="button" id="pagePrev"   style="padding:8px 12px">&lt;</button>
+    <input  type="number" id="pageInput"  min="1" value="1"
+      style="width:60px;text-align:center;border-radius:4px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.06);color:#f0f0f0;padding:8px">
+    <span class="page-info" id="pageInfo" style="padding:8px;font-family:'Roboto Condensed',sans-serif;color:#aaa">of 1</span>
+    <button type="button" id="pageNext"   style="padding:8px 12px">&gt;</button>
+    <button type="button" id="pageLast"   style="padding:8px 12px">&gt;&gt;</button>
+  </div>
+</main>
+
+<!-- ═══════════════════════════════════════════
+     DESKTOP SIDEBAR
+     Structure: active-tags-bar | page-nav | scrollable body
+     All page content is injected by Filter.js
+     ═══════════════════════════════════════════ -->
+<div class="filter-sidebar" id="filterSidebar">
+  <!-- Active filter tags — injected by Filter.js -->
+  <div class="active-tags-bar" id="activeTagsBar">
+    <span class="no-filters-hint">No filters active</span>
+  </div>
+  <!-- Page navigation tabs — injected by Filter.js -->
+  <div class="filter-page-nav" id="desktopPageNav"></div>
+  <!-- Scrollable page content — injected by Filter.js -->
+  <div class="filter-sidebar-body" id="sidebarBodyEl"></div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+/* Card image download (global, called from card HTML) */
+function downloadCardImage(cardElement, fileName) {
+  const ds = window._downloadState || {};
+
+  const downloadBtn = cardElement.querySelector('.download-btn');
+  const faceBtn     = cardElement.querySelector('.download-face-btn');
+
+  if (downloadBtn) downloadBtn.style.display = 'none';
+  if (faceBtn)     faceBtn.style.display     = 'none';
+
+  // Elements to temporarily hide based on downloadState
+  const toHide = [];
+  const hide = (sel) => {
+    cardElement.querySelectorAll(sel).forEach(el => {
+      toHide.push({ el, prev: el.style.display });
+      el.style.display = 'none';
+    });
+  };
+
+  // Always hide UI chrome
+  hide('.totwNumber');
+  hide('.specialChem');
+
+  // Respect download toggles
+  if (!ds.showFCM)       hide('.fatal-meta-badge');
+  if (!ds.showFatal)     hide('.fatals');
+  if (!ds.showAltPos)    hide('.alt-positions');
+  if (!ds.showBreakdown) hide('.fcm-breakdown');
+
+  const rect = cardElement.getBoundingClientRect();
+  html2canvas(cardElement, { backgroundColor: null, useCORS: true, scale: 3, width: rect.width, height: rect.height })
+    .then(canvas => {
+      // Restore everything
+      if (downloadBtn) downloadBtn.style.display = '';
+      if (faceBtn)     faceBtn.style.display     = '';
+      toHide.forEach(({ el, prev }) => { el.style.display = prev; });
+
+      canvas.toBlob(blob => {
+        const a   = document.createElement('a');
+        a.href     = URL.createObjectURL(blob);
+        a.download = fileName;
+        a.click();
+      }, 'image/png');
+    });
+}
+window.downloadCardImage = downloadCardImage;
+</script>
+
+<script src="/Template26.js"></script>
+<script type="module" src="js/Card.js"></script>
+<script type="module" src="js/EvoCards.js"></script>
+<script type="module" src="js/Filter.js"></script>
+
+
+<script>
+function debugCards() {
+  const container = document.getElementById('card-container');
+  const html = container?.innerHTML || '';
+  
+  console.log('card-container child count:', container?.children.length);
+  console.log('Has card-and-breakdown:', html.includes('card-and-breakdown'));
+  console.log('Has card-three-dots:', html.includes('card-three-dots'));
+  console.log('Has card-menu-wrap:', html.includes('card-menu-wrap'));
+  console.log('innerHTML preview:', html.substring(0, 1000));
+  console.log('toggleCardMenu:', typeof window.toggleCardMenu);
+  console.log('openDevMenu:', typeof window.openDevMenu);
+
+  const dots = document.querySelectorAll('.card-three-dots');
+  console.log('Dots buttons in DOM:', dots.length);
+}
+
+document.getElementById('card-container').addEventListener('DOMNodeInserted', () => {
+  const container = document.getElementById('card-container');
+  if (container.querySelectorAll('.card').length > 0) {
+    console.log('Cards detected in DOM, running debug...');
+    debugCards();
+  }
+}, { once: true });
+
+setTimeout(debugCards, 12000);
+</script>
+</body>
+</html>

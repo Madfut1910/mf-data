@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card Detail – Madfut Data</title>
+<link rel="icon" type="image/x-icon" href="https://mf-data.b-cdn.net/web/Data Mini Logo (1).png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="css/Card.css">
+<style>
+
+/* ============================================================
+   CARD DETAIL PAGE
+   ============================================================ */
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-top: 28px;
+}
+
+.detail-card-col {
+  position: sticky;
+  top: calc(var(--nav-h, 67px) + var(--bc-h, 44px) + 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.detail-card-wrap {
+  position: relative;
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.detail-card-wrap .card { width: 300px; }
+
+.detail-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.detail-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.detail-btn-primary { background: var(--dark, #262626); color: #eceaea; }
+.detail-btn-primary:hover { background: #111; }
+.detail-btn-secondary { background: var(--bg-grey, #e1e1e1); color: var(--dark, #262626); }
+.detail-btn-secondary:hover { background: #d4d4d4; }
+
+.detail-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* ── Tab panels ── */
+.detail-tab-panel { display: none; flex-direction: column; gap: 24px; }
+.detail-tab-panel.active { display: flex; }
+
+/* ── Card Design download cells ── */
+.card-design-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.card-design-cell {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--bg-grey, #e1e1e1);
+  border-right: 1px solid var(--bg-grey, #e1e1e1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-design-cell .cd-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted, #787878);
+}
+
+.card-design-cell img.cd-preview {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.cd-dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--dark, #262626);
+  color: #eceaea;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.cd-dl-btn:hover { background: #111; }
+.cd-dl-btn svg { width: 11px; height: 11px; flex-shrink: 0; }
+
+.detail-section {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid var(--bg-grey, #e1e1e1);
+  overflow: hidden;
+}
+
+.detail-section-head {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--bg-grey, #e1e1e1);
+  background: var(--bg-grey, #e1e1e1);
+}
+
+.detail-section-head h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted, #787878);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.detail-cell {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--bg-grey, #e1e1e1);
+  border-right: 1px solid var(--bg-grey, #e1e1e1);
+}
+
+.detail-cell-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted, #787878);
+  margin-bottom: 4px;
+}
+
+.detail-cell-value {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark, #262626);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.fatal-detail-wrap {
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.fatal-big-img { width: 80px; height: auto; object-fit: contain; flex-shrink: 0; }
+
+.fatal-vals-col { display: flex; flex-direction: column; gap: 6px; }
+
+.fatal-val-row { display: flex; align-items: center; gap: 10px; }
+
+.fatal-val-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted, #787878);
+  width: 52px;
+}
+
+.fatal-val-num {
+  font-family: "Roboto", sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--dark, #262626);
+  line-height: 1;
+}
+
+.fatal-meta-detail {
+  margin-left: auto;
+  background: linear-gradient(135deg, #e8000d, #ff6a00);
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 80px;
+}
+
+.fatal-meta-detail-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  font-family: "Roboto", sans-serif;
+}
+
+.fatal-meta-detail-val {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  font-family: "Roboto", sans-serif;
+  line-height: 1;
+}
+
+/* ── Badges grid ── */
+.badges-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.badge-detail-cell {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--bg-grey, #e1e1e1);
+  border-right: 1px solid var(--bg-grey, #e1e1e1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.badge-detail-cell img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.badge-detail-cell .badge-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted, #787878);
+}
+
+.badge-detail-cell .badge-val {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark, #262626);
+}
+
+/* ── Evolutions ── */
+.evo-list { display: flex; flex-direction: column; gap: 0; }
+.evo-item:last-child { border-bottom: none; }
+.evo-item.expanded .evo-item-header { background: #fafafa; }
+.evo-name-col { flex: 1; min-width: 0; }
+.evo-name {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--dark, #262626);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.evo-req-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.evo-req-tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: 999px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase;
+  background: var(--bg-grey, #e1e1e1); color: var(--muted, #787878);
+}
+.evo-req-tag.met   { background: #caffde; color: #1a4a30; }
+.evo-req-tag.unmet { background: #ffe0e0; color: #7a1a1a; }
+.evo-stage:hover { border-color: #262626; }
+.evo-stage.applied { border-color: #22c55e; background: #f0fdf4; cursor: default; }
+.evo-stage-num { font-family: "Roboto", sans-serif; font-size: 10px; font-weight: 700; color: var(--muted, #787878); text-transform: uppercase; letter-spacing: 0.5px; }
+.evo-stage-pts { font-family: "Roboto", sans-serif; font-size: 18px; font-weight: 900; color: var(--dark, #262626); line-height: 1; }
+.evo-stage-pts-label { font-family: "Roboto Condensed", sans-serif; font-size: 9px; color: var(--muted, #787878); text-transform: uppercase; letter-spacing: 0.3px; }
+.evo-stage-upgrades { display: flex; flex-direction: column; gap: 2px; width: 100%; margin-top: 2px; }
+.evo-stage-upg-line { font-family: "Roboto Condensed", sans-serif; font-size: 10px; font-weight: 600; color: #22c55e; text-align: center; white-space: nowrap; }
+.evo-stage-upg-line.type-overall { color: #3b82f6; }
+.evo-stage-upg-line.type-attack  { color: #e8000d; }
+.evo-stage-upg-line.type-control { color: #f59e0b; }
+.evo-stage-upg-line.type-defense { color: #6366f1; }
+
+.evo-reset-all-btn {
+  display: inline-flex; align-items: center; gap: 2px;
+  padding: 2px 6px; border-radius: 999px; font-size: 9px; font-weight: 600;
+  font-family: "Roboto Condensed", sans-serif;
+  background: var(--bg-grey, #e1e1e1); color: var(--muted, #787878);
+  border: 1px solid #ccc; cursor: pointer; transition: background 0.15s;
+}
+.evo-reset-all-btn:hover { background: #ffdede; color: #a32d2d; border-color: #f09595; }
+.evo-reset-all-btn svg { width: 11px; height: 11px; }
+
+.evo-flat-list { display: flex; flex-direction: column; }
+.evo-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--bg-grey, #e1e1e1);
+  cursor: pointer; transition: background 0.12s; user-select: none;
+}
+.evo-row:last-child { border-bottom: none; }
+.evo-row:hover { background: #fafafa; }
+.evo-row.applied { background: #f0fdf4; }
+.evo-row.applied:hover { background: #e6faf0; }
+.evo-row.unmet { opacity: 0.5; cursor: not-allowed; }
+.evo-row.unmet:hover { background: transparent; }
+
+.evo-order-badge {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; font-family: "Roboto", sans-serif;
+  background: var(--bg-grey, #e1e1e1); color: var(--muted, #787878);
+  border: 1px solid #ccc; transition: background 0.15s, color 0.15s;
+}
+.evo-row.applied .evo-order-badge { background: #22c55e; color: #fff; border-color: #16a34a; }
+
+.evo-row-info { flex: 1; min-width: 0; }
+.evo-row-name {
+  font-size: 13px; font-weight: 700; color: var(--dark, #262626);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: "Roboto", sans-serif;
+}
+.evo-row-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+
+.evo-upg-pills { display: flex; flex-direction: column; gap: 2px; align-items: flex-end; flex-shrink: 0; }
+.evo-upg-pill {
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+  font-family: "Roboto Condensed", sans-serif; white-space: nowrap;
+}
+.upg-overall { background: #dbeafe; color: #1e40af; }
+.upg-attack  { background: #fee2e2; color: #991b1b; }
+.upg-control { background: #fef3c7; color: #92400e; }
+.upg-defense { background: #ede9fe; color: #4c1d95; }
+
+.evo-no-evos {
+  padding: 28px 18px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px; color: var(--muted, #787878); text-align: center;
+}
+.evo-loading {
+  padding: 28px 18px;
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 13px; color: var(--muted, #787878);
+}
+
+.detail-loading {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 300px; gap: 14px; color: var(--muted, #787878);
+  font-family: "Roboto Condensed", sans-serif; font-size: 15px;
+}
+
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--bg-grey, #e1e1e1);
+  border-top-color: var(--dark, #262626);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── FIX 5: Card in detail page is not clickable ── */
+#detail-card-render .card-link {
+  cursor: default !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 900px) {
+  .detail-layout { grid-template-columns: 1fr; }
+  .detail-card-col { position: static; padding-top: 10px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-scroll">
+    <a href="/index.html">DATA</a>
+    <span>›</span>
+    <a href="/26/Database.html">DATABASE</a>
+    <span>›</span>
+    <a href="/26/Cards.html">CARDS</a>
+    <span>›</span>
+    <a href="#" class="bc-current" id="bc-player-name"> </a>
+  </div>
+</nav>
+
+<main class="main-content" id="main-content">
+
+  <div id="detail-loading" class="detail-loading">
+    <div class="spinner"></div>
+    <span>Loading card…</span>
+  </div>
+
+  <div id="detail-content" style="display:none">
+    <h1 class="page-heading" id="detail-heading">—</h1>
+    <p class="page-desc">Madfut 26 Card Details</p>
+
+    <div class="detail-layout">
+
+      <!-- Left: card visual -->
+      <div class="detail-card-col">
+        <div class="detail-card-wrap" id="detail-card-render"></div>
+        <div class="detail-actions">
+          <button class="detail-btn detail-btn-primary" id="btn-download-card">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"/></svg>
+            Download Card
+          </button>
+          <a class="detail-btn detail-btn-secondary" href="/26/Cards.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            All Cards
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: info -->
+      <div class="detail-info-col">
+
+        <!-- Tab strip -->
+        <div class="tmpl-strip-wrap" style="margin-bottom:0">
+          <div class="tmpl-strip" id="detailTabStrip" role="tablist">
+            <button class="tmpl-tab active" role="tab" aria-selected="true"  data-tab="information">Information</button>
+            <button class="tmpl-tab"        role="tab" aria-selected="false" data-tab="evolutions">Evolutions</button>
+          </div>
+        </div>
+
+        <!-- Tab panel: Information -->
+        <div class="detail-tab-panel active" id="tab-information">
+
+          <div class="detail-section">
+            <div class="detail-section-head"><h2>Identity</h2></div>
+            <div class="detail-grid" id="grid-identity"></div>
+          </div>
+
+          <div class="detail-section">
+            <div class="detail-section-head"><h2>Fatal Combat Mode (FCM)</h2></div>
+            <div class="fatal-detail-wrap" id="fatal-wrap"></div>
+          </div>
+
+          <div class="detail-section">
+            <div class="detail-section-head"><h2>Badges</h2></div>
+            <div class="badges-detail-grid" id="badges-row"></div>
+          </div>
+
+          <!-- FIX 4: CDN toggle removed — just a plain section head -->
+          <div class="detail-section">
+            <div class="detail-section-head">
+              <h2>Card Design</h2>
+            </div>
+            <div class="card-design-grid" id="card-design-grid"></div>
+          </div>
+
+          <div class="detail-section">
+            <div class="detail-section-head"><h2>Misc</h2></div>
+            <div class="detail-grid" id="grid-extra"></div>
+          </div>
+
+        </div>
+
+        <!-- Tab panel: Evolutions -->
+        <div class="detail-tab-panel" id="tab-evolutions">
+          <div class="detail-section">
+            <div class="detail-section-head" style="display:flex;align-items:center;justify-content:space-between;">
+              <h2>Available Evolutions</h2>
+              <button class="evo-reset-all-btn" id="evo-reset-all-btn" style="display:none">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                Reset all
+              </button>
+            </div>
+            <div id="evo-list-container">
+              <div class="evo-loading">
+                <div class="spinner" style="width:20px;height:20px;border-width:2px;"></div>
+                Loading evolutions…
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="detail-error" style="display:none" class="detail-loading">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#787878" stroke-width="1.5">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <circle cx="12" cy="16" r="0.5" fill="#787878"/>
+    </svg>
+    <span id="detail-error-msg">Card not found.</span>
+    <a class="detail-btn detail-btn-secondary" href="/26/Cards.html">← Back to Cards</a>
+  </div>
+
+</main>
+
+<div id="toast-container"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="/Template26.js"></script>
+
+<script type="module">
+// ═══════════════════════════════════════════════════════════════
+//  CardDetail26
+// ═══════════════════════════════════════════════════════════════
+
+const params   = new URLSearchParams(location.search);
+const targetId = params.get('id');
+const targetDb = params.get('db');
+
+const databases = {
+  updates:     'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/updates/',
+  sbcGroups:   'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/sbcGroups/',
+  objectives:  'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/objectives/',
+  evosElite:   'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/evosElite/',
+  draftCups:   'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/draftCups/',
+  ltm:         '26assets/Txt/ltm.json',
+  livePlayers: 'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/livePlayers/',
+  realmExport: 'json/realmExport.json'
+};
+
+import { clubIdToName, leagueIdToName, nationIdToName } from '/26/js/Mappings.js';
+window._mappings = { clubIdToName, leagueIdToName, nationIdToName };
+const singleDocumentDatabases = ['realmExport'];
+
+let colorMap = {};
+
+// ── Card designs ─────────────────────────────────────────────
+async function fetchRemoteCardDesigns() {
+  colorMap = {};
+  try {
+    const [localRes, fsRes] = await Promise.all([
+      fetch('json/color.json'),
+      fetch('https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/images')
+    ]);
+    const localData = localRes.ok ? await localRes.json() : null;
+    const fsData    = fsRes.ok   ? await fsRes.json()    : null;
+    const sources   = [];
+    if (localData?.documents) sources.push(...localData.documents);
+    if (fsData?.documents)    sources.push(...fsData.documents);
+
+    sources.forEach(doc => {
+      let arr = [];
+      if (doc.fields?.images?.arrayValue?.values) arr = doc.fields.images.arrayValue.values;
+      else if (doc.mapValue?.fields) arr = [doc];
+      arr.forEach(item => {
+        const fields = item.mapValue?.fields || {};
+        const id = (fields.id?.stringValue || fields.name?.stringValue || '').trim().toLowerCase();
+        if (!id) return;
+        colorMap[id] = {
+          id,
+          name:                fields.name?.stringValue                || id,
+          url_big:             fields.url_big?.stringValue             || null,
+          url_small:           fields.url_small?.stringValue           || null,
+          url_micro:           fields.url_micro?.stringValue           || null,
+          top_text_color:      fields.top_text_color?.stringValue      || '#000000',
+          middle_text_color:   fields.middle_text_color?.stringValue   || '#000000',
+          bottom_text_color:   fields.bottom_text_color?.stringValue   || '#000000',
+          alt_pos_background:  fields.alt_pos_background?.stringValue  || '#333333',
+          alt_pos_text:        fields.alt_pos_text?.stringValue        || '#FFFFFF',
+          alt_pos_outline:     fields.alt_pos_outline?.stringValue     || '#000000'
+        };
+      });
+    });
+  } catch (err) {
+    console.error('fetchRemoteCardDesigns error:', err);
+  }
+}
+
+// FIX 4: CDN toggle removed — always Madfut CDN
+function getCardDesignUrls(colorKey) {
+  const matchedCard = colorMap[colorKey];
+  return {
+    big:   matchedCard?.url_big   || `https://mf-data.b-cdn.net/26/Colors/${colorKey}_big.png`,
+    small: matchedCard?.url_small || `https://mf-data.b-cdn.net/26/Colors/${colorKey}_small.png`,
+    micro: matchedCard?.url_micro || `https://mf-data.b-cdn.net/26/Colors/${colorKey}_micro.png`,
+  };
+}
+
+// ── Player fetch ────────────────────────────────────────────
+async function fetchPlayerDataWithTime(url, dbName) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Not found');
+    const data = await res.json();
+    let players = data.fields?.players?.arrayValue?.values || [];
+
+    if (data.fields?.evos?.arrayValue?.values) {
+      const evos       = data.fields.evos.arrayValue.values;
+      const sortedEvos = evos.slice().sort((a, b) =>
+        (parseInt(b?.mapValue?.fields?.id?.integerValue ?? 0)) - (parseInt(a?.mapValue?.fields?.id?.integerValue ?? 0))
+      );
+      const highestEvo = sortedEvos[0];
+      if (highestEvo) {
+        const nested = highestEvo?.mapValue?.fields?.players?.arrayValue?.values || [];
+        players = nested.slice(1).map((p, i) => {
+          const fields     = p?.mapValue?.fields || {};
+          const existingId = fields?.id?.stringValue;
+          const safeId     = (existingId && existingId !== 'id001' && existingId !== 'id002' && existingId !== 'id003')
+            ? existingId : `evoElite_${data.name}_${i}`;
+          return { ...p, mapValue: { ...p.mapValue, fields: { ...fields, id: { stringValue: safeId } } } };
+        });
+      }
+    }
+
+    return players.map(player => ({
+      ...player,
+      createTime: data.createTime || '1970-01-01T00:00:00Z',
+      updateTime: data.updateTime || '1970-01-01T00:00:00Z',
+      database:   dbName
+    }));
+  } catch { return []; }
+}
+
+async function fetchAllPlayersRaw() {
+  const promises = [];
+  Object.entries(databases).forEach(([dbName, baseURL]) => {
+    if (singleDocumentDatabases.includes(dbName)) {
+      promises.push(fetchPlayerDataWithTime(baseURL, dbName));
+    } else {
+      for (let i = 150; i >= 1; i--) promises.push(fetchPlayerDataWithTime(`${baseURL}${i}`, dbName));
+    }
+  });
+
+  const results = await Promise.all(promises);
+  let combined  = results.flat();
+  combined.sort((a, b) => new Date(b.createTime) - new Date(a.createTime));
+
+  const livePlayers  = combined.filter(p => p.database === 'livePlayers');
+  const otherPlayers = combined.filter(p => p.database !== 'livePlayers');
+
+  const origTimeMap = {};
+  otherPlayers.forEach(p => {
+    const id = p?.mapValue?.fields?.id?.stringValue;
+    if (id) origTimeMap[id] = p.createTime;
+  });
+
+  const liveWithTime = livePlayers.map(p => {
+    const id = p?.mapValue?.fields?.id?.stringValue;
+    const t  = origTimeMap[id];
+    return t ? { ...p, createTime: t } : p;
+  });
+
+  const liveIds = new Set(livePlayers.map(p => p?.mapValue?.fields?.id?.stringValue));
+  const merged  = [...liveWithTime, ...otherPlayers.filter(p => !liveIds.has(p?.mapValue?.fields?.id?.stringValue))];
+
+  const dbPriority = ['objectives','sbcGroups','draftCups','ltm','realmExport','evosElite','updates','livePlayers'];
+  const getPri     = db => { const i = dbPriority.indexOf(db); return i === -1 ? 999 : i; };
+
+  const idMap = new Map();
+  merged.forEach(p => {
+    const id = p?.mapValue?.fields?.id?.stringValue;
+    if (!id) return;
+    const existing = idMap.get(id);
+    if (!existing) { idMap.set(id, p); return; }
+    const winDb = getPri(existing.database) <= getPri(p.database) ? existing.database : p.database;
+    if (new Date(p.createTime) > new Date(existing.createTime)) {
+      idMap.set(id, { ...p, database: winDb });
+    } else {
+      idMap.set(id, { ...existing, database: winDb });
+    }
+  });
+
+  return Array.from(idMap.values());
+}
+
+// ── Fatal helpers ─────────────────────────────────────────────
+function getFatalImageCode(attack, control, defense) {
+  const A = parseInt(attack)||0, C = parseInt(control)||0, D = parseInt(defense)||0;
+  const highest = Math.max(A,C,D), diff = highest-3;
+  return `${A<=highest&&A>=diff?1:0}${C<=highest&&C>=diff?1:0}${D<=highest&&D>=diff?1:0}`;
+}
+
+function calculateFatalMetaRating(attack, control, defense, rating, specialChem, position) {
+  const A = parseInt(attack)||0, C = parseInt(control)||0, D = parseInt(defense)||0;
+  const R = parseInt(rating)||1, pos = (position||'').toUpperCase().trim();
+  function getChemLevel(sc) {
+    if (!sc) return 0; const s = sc.toLowerCase();
+    if (s.includes('3')) return 3; if (s.includes('2')) return 2;
+    if (s.includes('1')) return 1; if (s==='cardboost') return 2; return 0;
+  }
+  if (pos === 'GK') {
+    const supportBonus = ((A+C)/2)*0.03, base = D+supportBonus;
+    const defExcess = D-R, chemLevel = getChemLevel(specialChem);
+    return parseFloat((base + chemLevel*0.8*Math.max(0,defExcess/10) + (defExcess>=0?defExcess*1.0:defExcess*0.4)).toFixed(2));
+  }
+  const highest = Math.max(A,C,D), diff = highest-3;
+  const attMain = A<=highest&&A>=diff, conMain = C<=highest&&C>=diff, defMain = D<=highest&&D>=diff;
+  const MB=1.5, SW=0.08;
+  const score  = (attMain?A*MB:A*SW)+(conMain?C*MB:C*SW)+(defMain?D*MB:D*SW);
+  const norm   = (attMain?MB:SW)+(conMain?MB:SW)+(defMain?MB:SW);
+  const nf     = score/norm;
+  let netScore = 0;
+  if (attMain) netScore+=(A-R); if (conMain) netScore+=(C-R); if (defMain) netScore+=(D-R);
+  const netBoost = netScore>=0?netScore:netScore*0.4;
+  const rawEx = nf-R;
+  const clampedEx = R>=88 ? rawEx : (rawEx>=0 ? rawEx : Math.max(rawEx,-((R/99)*5)));
+  let lb=0;
+  if (rawEx>0&&R<87) { lb=Math.min(rawEx*((87-R)/87)*2.8,14); }
+  return parseFloat((nf+(clampedEx*1.2)+lb+netBoost+getChemLevel(specialChem)*0.8*(nf/99)).toFixed(2));
+}
+
+// ── buildCardHTML ─────────────────────────────────────────────
+// FIX 5: Card is rendered as a non-clickable div on the detail page
+function buildCardHTML(p, options) {
+  const { showDownload = true } = options || {};
+  const f = p.mapValue.fields;
+
+  const name           = f.name?.stringValue          || 'Unknown';
+  const rating         = f.rating?.integerValue        || '0';
+  const position       = f.position?.stringValue       || 'NA';
+  const altPositions   = f.altPositions?.stringValue   || '';
+  const totwNumber     = Number(f.totwNumber?.integerValue ?? -1);
+  const pac            = f.PAC?.integerValue            || '0';
+  const sho            = f.SHO?.integerValue            || '0';
+  const pas            = f.PAS?.integerValue            || '0';
+  const dri            = f.DRI?.integerValue            || '0';
+  const def            = f.DEF?.integerValue            || '0';
+  const phy            = f.PHY?.integerValue            || '0';
+  const attack         = f.attack?.integerValue         || '0';
+  const control        = f.control?.integerValue        || '0';
+  const defense        = f.defense?.integerValue        || '0';
+  const specialChemRaw = f.specialChem?.stringValue     || '';
+  const fatalCode      = getFatalImageCode(attack, control, defense);
+  const fatalMeta      = calculateFatalMetaRating(attack, control, defense, rating, specialChemRaw, position) || 0;
+  const fatalImageURL  = `https://mf-data.b-cdn.net/26/Fatal/Stats/fatal_card_stats_${fatalCode}.png`;
+  const nationId       = f.nationId?.integerValue       || '0';
+  const leagueId       = f.leagueId?.integerValue       || '0';
+  const clubId         = f.clubId?.integerValue         || '0';
+  const color          = f.color?.stringValue           || 'default';
+  const id             = f.id?.stringValue?.replace('id', '') || '00000000';
+  const baseId         = f.baseId?.integerValue         || '00000000';
+
+  let specialChem = '';
+  if (specialChemRaw) {
+    const chemMap = {
+      league3:'+3 League Chem', league2:'+2 League Chem', league1:'+1 League Chem',
+      club3:'+3 Club Chem',     club2:'+2 Club Chem',     club1:'+1 Club Chem',
+      nation3:'+3 Nation Chem', nation2:'+2 Nation Chem', nation1:'+1 Nation Chem',
+      cardBoost:'Card Boost'
+    };
+    specialChem = chemMap[specialChemRaw] || specialChemRaw;
+  }
+
+  let statLabels = ['PAC','SHO','PAS','DRI','DEF','PHY'];
+  if (position.toUpperCase() === 'GK') statLabels = ['DIV','HAN','KIC','REF','SPD','POS'];
+
+  const colorKey        = (color || 'default').toString().trim().toLowerCase();
+  const matchedCard     = colorMap[colorKey];
+  const cardImageURL    = matchedCard?.url_big || `https://mf-data.b-cdn.net/26/Colors/${colorKey || 'default'}_big.png`;
+  const topTextColor    = matchedCard?.top_text_color    || '#000000';
+  const middleTextColor = matchedCard?.middle_text_color || '#FFFFFF';
+  const bottomTextColor = matchedCard?.bottom_text_color || '#FFFFFF';
+
+  const downloadBtnHTML = showDownload ? `
+    <button class="download-btn" style="display:flex;"
+      onclick="event.preventDefault();event.stopPropagation();downloadCardImage(this.closest('.card'),'${name.replace(/'/g,'').replace(/\s+/g,'_')}_${rating}_${color}.png')">
+      <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"/></svg>
+    </button>` : '';
+
+  return `
+    <div class="card-link" style="cursor:default;pointer-events:none;display:block;">
+      <div class="card-wrapper">
+        <div class="card">
+          ${downloadBtnHTML}
+          <img src="${cardImageURL}" alt="${color} card">
+          <div class="overall-position">
+            <div class="overall player-rating" style="color:${topTextColor};">${rating}</div>
+            <div class="position player-position" style="color:${topTextColor};">${position}</div>
+          </div>
+          ${altPositions ? `<div class="alt-positions">${altPositions.split(',').map(pos => {
+            const hex = matchedCard?.alt_pos_background || '#333333';
+            const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+            return `<div class="alt-pos" style="background-color:rgba(${r},${g},${b},0.8);color:${matchedCard?.alt_pos_text||'#fff'};border:1px solid ${matchedCard?.alt_pos_outline||'#000'};">${pos.trim()}</div>`;
+          }).join('')}</div>` : ''}
+          <div class="player-name" style="color:${middleTextColor};">${name}</div>
+          ${totwNumber !== -1 ? `<div class="totwNumber">TOTW ${totwNumber}</div>` : ''}
+          <div class="specialChem">${specialChem}</div>
+          <div class="stats">
+            ${statLabels.map((label, idx) => {
+              const values = [pac,sho,pas,dri,def,phy];
+              return `<div class="stat"><div class="stat-label" style="color:${bottomTextColor};">${label}</div><div class="stat-value" style="color:${bottomTextColor};">${values[idx]}</div></div>`;
+            }).join('')}
+          </div>
+          <div class="stats-separator"></div>
+          <div class="fatals">
+            <img class="fatal-bg" src="${fatalImageURL}" alt="Fatal BG">
+            <div class="fatal-value-container">
+              <div class="fatal-value">${attack}</div>
+              <div class="fatal-value">${control}</div>
+              <div class="fatal-value">${defense}</div>
+            </div>
+            <div class="fatal-meta-badge" title="Fatal Meta Rating">
+              <span class="fatal-meta-label">META</span>
+              <span class="fatal-meta-value">${fatalMeta.toFixed(2)}</span>
+            </div>
+          </div>
+          <div class="badges">
+            <img class="badge flag"   src="https://mf-data.b-cdn.net/26/Badges/Nations/Large/nation_large_${nationId}.png"  alt="Nation Flag">
+            <img class="badge league" src="https://mf-data.b-cdn.net/26/Badges/Leagues/Large/league_large_${leagueId}.png" alt="League badge">
+            <img class="badge club"   src="https://mf-data.b-cdn.net/26/Badges/Clubs/Large/club_large_${clubId}.png"        alt="Club Badge">
+          </div>
+          <img class="player-face"
+            src="https://trivela.b-cdn.net/26/normalFacesSmall/${id}.png"
+            alt="${name} Face"
+            onerror="
+              if (!this.dataset.step) {
+                this.dataset.step='p';this.classList.add('normal-face');
+                this.src='https://trivela.b-cdn.net/26/faces/p${id}.png';
+              } else if (this.dataset.step==='p') {
+                this.dataset.step='base';this.classList.remove('normal-face');this.classList.add('fallback-face');
+                this.src='https://trivela.b-cdn.net/26/normalFacesSmall/${baseId}.png';
+              } else {
+                this.onerror=null;this.classList.remove('normal-face');this.classList.add('fallback-face');
+                this.src='Main Assets/boo.png';
+              }
+            ">
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── Download ──────────────────────────────────────────────────
+function downloadCardImage(cardElement, fileName) {
+  const metaBadge = cardElement.querySelector('.fatal-meta-badge');
+  const totwEl    = cardElement.querySelector('.totwNumber');
+  const chemEl    = cardElement.querySelector('.specialChem');
+  const prevTotw  = totwEl?.style.display;
+  const prevChem  = chemEl?.style.display;
+  if (metaBadge) metaBadge.style.display = 'none';
+  if (totwEl)    totwEl.style.display    = 'none';
+  if (chemEl)    chemEl.style.display    = 'none';
+
+  const rect = cardElement.getBoundingClientRect();
+  html2canvas(cardElement, { backgroundColor:null, useCORS:true, scale:3, width:rect.width, height:rect.height })
+    .then(canvas => {
+      if (metaBadge) metaBadge.style.display = '';
+      if (totwEl)    totwEl.style.display    = prevTotw;
+      if (chemEl)    chemEl.style.display    = prevChem;
+      canvas.toBlob(blob => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        a.click();
+      }, 'image/png');
+    });
+}
+window.downloadCardImage = downloadCardImage;
+window.downloadFaceImage = function(){};
+
+// ═══════════════════════════════════════════════════════════════
+//  EVOLUTIONS SYSTEM
+// ═══════════════════════════════════════════════════════════════
+
+const evoState = {};
+let liveCard = null;
+
+async function fetchAllEvosStandard() {
+  const base = 'https://firestore.googleapis.com/v1/projects/trivela-madfut/databases/(default)/documents/evosStandard/';
+  const evos = [];
+
+  let docNames = [];
+  try {
+    const listRes = await fetch(base + '?pageSize=200');
+    if (listRes.ok) {
+      const listData = await listRes.json();
+      docNames = (listData.documents || []).map(d => d.name.split('/').pop());
+    }
+  } catch(e) {}
+
+  if (!docNames.length) {
+    docNames = Array.from({length: 100}, (_, i) => String(i + 1));
+  }
+
+  const fetches = docNames.map(n =>
+    fetch(`${base}${n}`).then(r => r.ok ? r.json() : null).catch(() => null)
+  );
+  const results = await Promise.all(fetches);
+
+  results.forEach(data => {
+    if (!data?.fields) return;
+    const evoArr = data.fields?.evos?.arrayValue?.values || [];
+    evoArr.forEach(item => {
+      const f = item?.mapValue?.fields;
+      if (!f) return;
+      const name = f.name?.stringValue;
+      if (!name) return;
+      evos.push({
+        name,
+        requirements: (f.standardRequirements?.arrayValue?.values || [])
+                        .map(v => v.stringValue).filter(Boolean),
+        upgrades:     (f.standardUpgrades?.arrayValue?.values || [])
+                        .map(v => v.stringValue).filter(Boolean),
+        points:       (f.points?.arrayValue?.values || [])
+                        .map(v => parseInt(v.integerValue) || 0),
+        color:         f.color?.stringValue || null,
+      });
+    });
+  });
+
+  return evos;
+}
+
+function meetsRequirement(req, card) {
+  const [type, val] = req.split(',');
+  const rangeCheck = (cardVal, range) => {
+    const [lo, hi] = range.split('-').map(Number);
+    return parseInt(cardVal) >= lo && parseInt(cardVal) <= hi;
+  };
+  switch (type) {
+    case 'nation':   return String(card.nationId) === val;
+    case 'league':   return String(card.leagueId) === val;
+    case 'club':     return String(card.clubId)   === val;
+    case 'color': {
+      const cardColor = (card.color || '').toLowerCase();
+      const reqColor  = val.toLowerCase();
+      const aliases = {
+        'all_silver': ['silver', 'rare_silver'],
+        'all_gold':   ['gold',   'rare_gold'],
+        'all_bronze': ['bronze', 'rare_bronze'],
+      };
+      if (aliases[reqColor]) return aliases[reqColor].includes(cardColor);
+      if (aliases[cardColor]) return aliases[cardColor].includes(reqColor) || cardColor === reqColor;
+      return cardColor === reqColor;
+    }
+    case 'position': return (card.position || '').toUpperCase() === val.toUpperCase();
+    case 'rating':   return rangeCheck(card.rating,  val);
+    case 'attack':   return rangeCheck(card.attack,  val);
+    case 'control':  return rangeCheck(card.control, val);
+    case 'defense':  return rangeCheck(card.defense, val);
+    case 'PAC':      return rangeCheck(card.PAC, val);
+    case 'SHO':      return rangeCheck(card.SHO, val);
+    case 'PAS':      return rangeCheck(card.PAS, val);
+    case 'DRI':      return rangeCheck(card.DRI, val);
+    case 'DEF':      return rangeCheck(card.DEF, val);
+    case 'PHY':      return rangeCheck(card.PHY, val);
+    default:         return true;
+  }
+}
+
+function parseUpgrade(upgradeStr) {
+  const parts = upgradeStr.split(',').map(Number);
+  return { overall: parts[0]||0, attack: parts[1]||0, control: parts[2]||0, defense: parts[3]||0 };
+}
+
+function upgradeLabel(upgradeStr) {
+  const u = parseUpgrade(upgradeStr);
+  const parts = [];
+  if (u.overall)  parts.push(`<span class="evo-stage-upg-line type-overall">+${u.overall} OVR &amp; Stats</span>`);
+  if (u.attack)   parts.push(`<span class="evo-stage-upg-line type-attack">+${u.attack} Attack</span>`);
+  if (u.control)  parts.push(`<span class="evo-stage-upg-line type-control">+${u.control} Control</span>`);
+  if (u.defense)  parts.push(`<span class="evo-stage-upg-line type-defense">+${u.defense} Defense</span>`);
+  return parts.join('');
+}
+
+function reqLabel(req, card) {
+  const [type, val] = req.split(',');
+  const met = meetsRequirement(req, card);
+  const cls = met ? 'met' : 'unmet';
+  const icon = met ? '✓' : '✗';
+
+  let displayVal = val;
+  if (type === 'nation' && window._mappings?.nationIdToName)
+    displayVal = window._mappings.nationIdToName[val] || val;
+  else if (type === 'league' && window._mappings?.leagueIdToName)
+    displayVal = window._mappings.leagueIdToName[val] || val;
+  else if (type === 'club' && window._mappings?.clubIdToName)
+    displayVal = window._mappings.clubIdToName[val] || val;
+
+  const labels = {
+    nation: displayVal, league: displayVal, club: displayVal,
+    color: `Color: ${val}`, position: `Pos: ${val}`,
+    rating: `Rating ${val}`, attack: `Attack ${val}`, control: `Control ${val}`, defense: `Defense ${val}`,
+    PAC: `PAC ${val}`, SHO: `SHO ${val}`, PAS: `PAS ${val}`,
+    DRI: `DRI ${val}`, DEF: `DEF ${val}`, PHY: `PHY ${val}`,
+  };
+  const text = labels[type] || req;
+  return `<span class="evo-req-tag ${cls}">${icon} ${text}</span>`;
+}
+
+function applyEvoToCard(card, evoName, evos) {
+  const evo = evos.find(e => e.name === evoName);
+  if (!evo) return card;
+  let c = { ...card };
+  const cap = v => String(Math.min(99, v));
+  evo.upgrades.forEach(upg => {
+    const u = parseUpgrade(upg);
+    c.rating  = cap(parseInt(c.rating)  + u.overall);
+    c.PAC     = cap(parseInt(c.PAC)     + u.overall);
+    c.SHO     = cap(parseInt(c.SHO)     + u.overall);
+    c.PAS     = cap(parseInt(c.PAS)     + u.overall);
+    c.DRI     = cap(parseInt(c.DRI)     + u.overall);
+    c.DEF     = cap(parseInt(c.DEF)     + u.overall);
+    c.PHY     = cap(parseInt(c.PHY)     + u.overall);
+    c.attack  = cap(parseInt(c.attack)  + u.attack);
+    c.control = cap(parseInt(c.control) + u.control);
+    c.defense = cap(parseInt(c.defense) + u.defense);
+  });
+  c.color = 'evo';
+  return c;
+}
+
+let evoApplyOrder = 1;
+
+function renderEvoList(evos, card, originalCard) {
+  const container = document.getElementById('evo-list-container');
+  const resetBtn  = document.getElementById('evo-reset-all-btn');
+
+  const seen = new Set();
+  const unique = evos.filter(evo => {
+    if (seen.has(evo.name)) return false;
+    seen.add(evo.name); return true;
+  });
+
+  const eligible = unique.filter(evo => {
+    if (evoState[evo.name]) return true;
+    return evo.requirements.every(req => meetsRequirement(req, card));
+  });
+
+  const anyApplied = Object.keys(evoState).length > 0;
+  resetBtn.style.display = anyApplied ? 'inline-flex' : 'none';
+
+  if (!eligible.length) {
+    container.innerHTML = `<div class="evo-no-evos">No evolutions found for this card.</div>`;
+    return;
+  }
+
+  container.innerHTML = `<div class="evo-flat-list">${eligible.map(evo => {
+    const allMet = evoState[evo.name]
+      ? true
+      : evo.requirements.every(r => meetsRequirement(r, card));
+    const isApplied = !!evoState[evo.name];
+    const order    = evoState[evo.name]?.order ?? null;
+
+    const totalUpg = evo.upgrades.reduce((acc, u) => {
+      const p = parseUpgrade(u);
+      acc.overall += p.overall; acc.attack += p.attack;
+      acc.control += p.control; acc.defense += p.defense;
+      return acc;
+    }, { overall:0, attack:0, control:0, defense:0 });
+
+    const upgPills = [
+      totalUpg.overall ? `<span class="evo-upg-pill upg-overall">+${totalUpg.overall} OVR</span>` : '',
+      totalUpg.attack  ? `<span class="evo-upg-pill upg-attack">+${totalUpg.attack} ATK</span>`  : '',
+      totalUpg.control ? `<span class="evo-upg-pill upg-control">+${totalUpg.control} CON</span>` : '',
+      totalUpg.defense ? `<span class="evo-upg-pill upg-defense">+${totalUpg.defense} DEF</span>` : '',
+    ].filter(Boolean).join('');
+
+    const reqTags = evo.requirements.length
+      ? evo.requirements.map(r => reqLabel(r, card)).join('')
+      : `<span class="evo-req-tag met">✓ No requirements</span>`;
+
+    const cls = isApplied ? 'applied' : (!allMet ? 'unmet' : '');
+
+    return `<div class="evo-row ${cls}" data-evo="${encodeURIComponent(evo.name)}" data-applied="${isApplied}" data-met="${allMet}">
+      <div class="evo-order-badge">${order !== null ? order : '·'}</div>
+      <div class="evo-row-info">
+        <div class="evo-row-name">${evo.name}${isApplied ? ' <span style="color:#16a34a;font-size:10px;font-weight:600;font-family:\'Roboto Condensed\',sans-serif;letter-spacing:.5px">APPLIED</span>' : ''}</div>
+        <div class="evo-row-tags">${reqTags}</div>
+      </div>
+      <div class="evo-upg-pills">${upgPills}</div>
+    </div>`;
+  }).join('')}</div>`;
+
+  container.querySelectorAll('.evo-row').forEach(row => {
+    const name    = decodeURIComponent(row.dataset.evo);
+    const applied = row.dataset.applied === 'true';
+    const met     = row.dataset.met === 'true';
+
+    if (applied) {
+      row.addEventListener('click', () => {
+        const removedOrder = evoState[name].order;
+        Object.keys(evoState).forEach(k => {
+          if (evoState[k].order >= removedOrder) delete evoState[k];
+        });
+        evoApplyOrder = removedOrder;
+        rebuildAfterEvo();
+      });
+    } else if (met) {
+      row.addEventListener('click', () => {
+        evoState[name] = { order: evoApplyOrder++ };
+        rebuildAfterEvo();
+      });
+    }
+  });
+}
+
+document.addEventListener('click', e => {
+  if (e.target.closest('#evo-reset-all-btn')) {
+    Object.keys(evoState).forEach(k => delete evoState[k]);
+    evoApplyOrder = 1;
+    rebuildAfterEvo();
+  }
+});
+
+function rebuildAfterEvo() {
+  let c = { ...window._originalCard };
+  const ordered = Object.entries(evoState).sort((a,b) => a[1].order - b[1].order);
+  ordered.forEach(([name]) => { c = applyEvoToCard(c, name, window._allEvos); });
+  if (!ordered.length) c.color = window._originalCard.color;
+  liveCard = c;
+
+  const fakePlayer = buildFakePlayer(c);
+  document.getElementById('detail-card-render').innerHTML =
+    buildCardHTML(fakePlayer, { showDownload: false });
+
+  renderEvoList(window._allEvos, liveCard, window._originalCard);
+}
+
+function buildFakePlayer(c) {
+  return {
+    database: c.database,
+    createTime: c.createTime,
+    updateTime: c.updateTime,
+    mapValue: {
+      fields: {
+        name:         { stringValue:  c.name },
+        rating:       { integerValue: c.rating },
+        position:     { stringValue:  c.position },
+        altPositions: { stringValue:  c.altPositions || '' },
+        totwNumber:   { integerValue: String(c.totwNumber ?? -1) },
+        PAC:          { integerValue: c.PAC },
+        SHO:          { integerValue: c.SHO },
+        PAS:          { integerValue: c.PAS },
+        DRI:          { integerValue: c.DRI },
+        DEF:          { integerValue: c.DEF },
+        PHY:          { integerValue: c.PHY },
+        attack:       { integerValue: c.attack },
+        control:      { integerValue: c.control },
+        defense:      { integerValue: c.defense },
+        specialChem:  { stringValue:  c.specialChem || '' },
+        nationId:     { integerValue: c.nationId },
+        leagueId:     { integerValue: c.leagueId },
+        clubId:       { integerValue: c.clubId },
+        color:        { stringValue:  c.color },
+        id:           { stringValue:  c.id },
+        baseId:       { integerValue: c.baseId },
+      }
+    }
+  };
+}
+
+function showError(msg) {
+  document.getElementById('detail-loading').style.display = 'none';
+  document.getElementById('detail-error').style.display   = 'flex';
+  document.getElementById('detail-error-msg').textContent = msg;
+}
+
+function cell(label, value) {
+  return `<div class="detail-cell">
+    <div class="detail-cell-label">${label}</div>
+    <div class="detail-cell-value">${value}</div>
+  </div>`;
+}
+
+// ── Card Design grid renderer ─────────────────────────────────
+function renderCardDesignGrid(colorKey, playerId, playerBaseId) {
+  const urls = getCardDesignUrls(colorKey);
+
+  // Dynamic face URLs — try player-specific first, then base fallback
+  const faceBigUrl   = `https://trivela.b-cdn.net/26/faces/p${playerId}.png`;
+  const faceSmallUrl = `https://trivela.b-cdn.net/26/faces/p${playerId}_small.png`;
+
+  function cdCell(label, imgUrl, dlUrl) {
+    const downloadHref = dlUrl || imgUrl;
+    return `<div class="card-design-cell">
+      <div class="cd-label">${label}</div>
+      <img class="cd-preview" src="${imgUrl}" alt="${label}" onerror="this.style.opacity='0.15'">
+      <a class="cd-dl-btn" href="${downloadHref}" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"/></svg>
+        Download
+      </a>
+    </div>`;
+  }
+
+  document.getElementById('card-design-grid').innerHTML =
+    cdCell('Card — Big',    urls.big) +
+    cdCell('Card — Small',  urls.small) +
+    cdCell('Card — Micro',  urls.micro) +
+    cdCell('Dynamic — Big',   faceBigUrl) +
+    cdCell('Dynamic — Small', faceSmallUrl);
+}
+
+// ── Misc field config ─────────────────────────────────────────
+const MISC_FIELD_ORDER = [
+  'man','packable','uniqueInPack','inPacks','tradeable',
+  'untradeable','tokens','rewards','date','season','version',
+];
+
+const MISC_LABELS = {
+  man:'Gender', packable:'Packable', uniqueInPack:'Unique In Pack',
+  inPacks:'In Packs', tradeable:'Tradeable', untradeable:'Untradeable',
+  tokens:'Tokens', rewards:'Rewards', date:'Date', season:'Season', version:'Version',
+};
+
+function formatMiscValue(key, rawVal) {
+  if (key === 'man') {
+    const boolVal = rawVal?.booleanValue ?? (rawVal?.stringValue === 'true') ?? null;
+    if (boolVal === true)  return 'Man';
+    if (boolVal === false) return 'Woman';
+    return String(rawVal?.booleanValue ?? rawVal?.stringValue ?? rawVal?.integerValue ?? '—');
+  }
+  if (key === 'packable') {
+    const intVal = parseInt(rawVal?.integerValue ?? rawVal?.stringValue ?? 'NaN');
+    if (!isNaN(intVal)) {
+      if (intVal === 0)                     return 'Yes';
+      if (intVal === -1 || intVal === -2)   return 'No (Reward)';
+      return String(intVal);
+    }
+    return '—';
+  }
+  const v = rawVal?.booleanValue ?? rawVal?.integerValue ?? rawVal?.stringValue ?? null;
+  if (v === null || v === '') return null;
+  return String(v);
+}
+
+// ── Main ─────────────────────────────────────────────────────
+async function loadDetail() {
+  if (!targetId) { showError('No card ID in the URL.'); return; }
+
+  await fetchRemoteCardDesigns();
+  const [allPlayers, allEvos] = await Promise.all([
+    fetchAllPlayersRaw(),
+    fetchAllEvosStandard(),
+  ]);
+  window._allEvos = allEvos;
+
+  let player = allPlayers.find(p => {
+    const pid = (p?.mapValue?.fields?.id?.stringValue || '').replace('id','');
+    return pid === targetId && (!targetDb || p.database === targetDb);
+  }) || allPlayers.find(p =>
+    (p?.mapValue?.fields?.id?.stringValue || '').replace('id','') === targetId
+  );
+
+  if (!player) { showError(`No card found with ID "${targetId}".`); return; }
+
+  const f = player.mapValue.fields;
+
+  const name           = f.name?.stringValue          || 'Unknown';
+  const rating         = f.rating?.integerValue        || '0';
+  const position       = f.position?.stringValue       || 'NA';
+  const totwNumber     = Number(f.totwNumber?.integerValue ?? -1);
+  const attack         = f.attack?.integerValue         || '0';
+  const control        = f.control?.integerValue        || '0';
+  const defense        = f.defense?.integerValue        || '0';
+  const specialChemRaw = f.specialChem?.stringValue     || '';
+  const nationId       = f.nationId?.integerValue       || '0';
+  const leagueId       = f.leagueId?.integerValue       || '0';
+  const clubId         = f.clubId?.integerValue         || '0';
+  const color          = f.color?.stringValue           || 'default';
+  const id             = f.id?.stringValue?.replace('id','') || targetId;
+  const baseId         = f.baseId?.integerValue         || '0';
+  // FIX 3: itemId read from its own dedicated Firestore field
+  const itemId         = f.itemId?.integerValue         || '—';
+  const fatalCode      = getFatalImageCode(attack, control, defense);
+  const fatalMeta      = calculateFatalMetaRating(attack, control, defense, rating, specialChemRaw, position);
+
+  const chemDisplayMap = {
+    league3:'League Chem +3', league2:'League Chem +2', league1:'League Chem +1',
+    club3:'Club Chem +3',     club2:'Club Chem +2',     club1:'Club Chem +1',
+    nation3:'Nation Chem +3', nation2:'Nation Chem +2', nation1:'Nation Chem +1',
+    cardBoost:'Card Boost'
+  };
+  const specialChem = specialChemRaw ? (chemDisplayMap[specialChemRaw] || specialChemRaw) : '—';
+
+  const dbDisplay = {
+    updates:'Updates', sbcGroups:'SBC Groups', objectives:'Objectives',
+    evosElite:'Evos Elite', draftCups:'Draft Cups', ltm:'LTM',
+    livePlayers:'Live Players', realmExport:'Base Game'
+  };
+
+  const originalCard = {
+    name, rating, position, altPositions: f.altPositions?.stringValue || '',
+    totwNumber, specialChem: specialChemRaw,
+    PAC: f.PAC?.integerValue || '0', SHO: f.SHO?.integerValue || '0',
+    PAS: f.PAS?.integerValue || '0', DRI: f.DRI?.integerValue || '0',
+    DEF: f.DEF?.integerValue || '0', PHY: f.PHY?.integerValue || '0',
+    attack, control, defense,
+    nationId, leagueId, clubId, color, id, baseId,
+    database: player.database, createTime: player.createTime, updateTime: player.updateTime,
+  };
+  window._originalCard = originalCard;
+  liveCard = { ...originalCard };
+
+  document.title = `${name} – Madfut Data`;
+  document.getElementById('bc-player-name').textContent = name.toUpperCase();
+  document.getElementById('detail-heading').textContent = name;
+
+  // ── Tab switching ──
+  document.getElementById('detailTabStrip').addEventListener('click', e => {
+    const btn = e.target.closest('[data-tab]');
+    if (!btn) return;
+    document.querySelectorAll('#detailTabStrip [data-tab]').forEach(b => {
+      b.classList.toggle('active', b === btn);
+      b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+    });
+    document.querySelectorAll('.detail-tab-panel').forEach(p => {
+      p.classList.toggle('active', p.id === `tab-${btn.dataset.tab}`);
+    });
+  });
+
+  // ── Card render (FIX 5: non-clickable div) ──
+  document.getElementById('detail-card-render').innerHTML =
+    buildCardHTML(player, { showDownload: false });
+
+  // ── Download button ──
+  document.getElementById('btn-download-card').addEventListener('click', () => {
+    const cardEl = document.querySelector('#detail-card-render .card');
+    if (cardEl) downloadCardImage(cardEl, `${name.replace(/\s+/g,'_')}_${rating}_${color}.png`);
+  });
+
+  // FIX 3: Identity grid — Item ID uses real f.itemId value
+  document.getElementById('grid-identity').innerHTML =
+    cell('Player ID',  id) +
+    cell('Base ID',    baseId) +
+    cell('Item ID',    itemId) +
+    cell('Card Type',  color) +
+    cell('Database',   dbDisplay[player.database] || player.database) +
+    cell('Added',      player.createTime ? new Date(player.createTime).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '—') +
+    cell('Updated',    player.updateTime ? new Date(player.updateTime).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '—') +
+    (totwNumber !== -1 ? cell('TOTW Number', totwNumber) : '') +
+    (specialChemRaw    ? cell('Special Chem', specialChem) : '');
+
+  // ── FCM section ──
+  document.getElementById('fatal-wrap').innerHTML = `
+    <img class="fatal-big-img" src="https://mf-data.b-cdn.net/26/Fatal/Stats/fatal_card_stats_${fatalCode}.png" alt="FCM type">
+    <div class="fatal-vals-col">
+      <div class="fatal-val-row"><div class="fatal-val-label">Attack</div><div class="fatal-val-num">${attack}</div></div>
+      <div class="fatal-val-row"><div class="fatal-val-label">Control</div><div class="fatal-val-num">${control}</div></div>
+      <div class="fatal-val-row"><div class="fatal-val-label">Defense</div><div class="fatal-val-num">${defense}</div></div>
+    </div>
+    <div class="fatal-meta-detail">
+      <div class="fatal-meta-detail-label">FCM Meta</div>
+      <div class="fatal-meta-detail-val">${fatalMeta.toFixed(2)}</div>
+    </div>
+  `;
+
+  // ── Badges grid — use mappings for names ──
+  const nationName = window._mappings?.nationIdToName?.[nationId] || `ID ${nationId}`;
+  const leagueName = window._mappings?.leagueIdToName?.[leagueId] || `ID ${leagueId}`;
+  const clubName   = window._mappings?.clubIdToName?.[clubId]     || `ID ${clubId}`;
+
+  document.getElementById('badges-row').innerHTML = `
+    <div class="badge-detail-cell">
+      <div class="badge-label">Nation</div>
+      <img src="https://mf-data.b-cdn.net/26/Badges/Nations/Large/nation_large_${nationId}.png" alt="Nation" onerror="this.style.opacity='0.15'">
+      <div class="badge-val">${nationName}</div>
+    </div>
+    <div class="badge-detail-cell">
+      <div class="badge-label">League</div>
+      <img src="https://mf-data.b-cdn.net/26/Badges/Leagues/Large/league_large_${leagueId}.png" alt="League" onerror="this.style.opacity='0.15'">
+      <div class="badge-val">${leagueName}</div>
+    </div>
+    <div class="badge-detail-cell">
+      <div class="badge-label">Club</div>
+      <img src="https://mf-data.b-cdn.net/26/Badges/Clubs/Large/club_large_${clubId}.png" alt="Club" onerror="this.style.opacity='0.15'">
+      <div class="badge-val">${clubName}</div>
+    </div>
+  `;
+
+  // ── Card Design grid ──
+  const colorKey = (color || 'default').toString().trim().toLowerCase();
+  window._cardDesignColorKey = colorKey;
+  window._cardDesignPlayerId  = id;
+  window._cardDesignBaseId    = baseId;
+  renderCardDesignGrid(colorKey, id, baseId);
+
+  // FIX 2: 'itemId' excluded from Misc — shown in Identity instead
+  const knownKeys = new Set([
+    'name','rating','position','altPositions','totwNumber',
+    'PAC','SHO','PAS','DRI','DEF','PHY',
+    'attack','control','defense','specialChem',
+    'nationId','leagueId','clubId','color','id','baseId',
+    'itemId',
+  ]);
+
+  const extraFields = {};
+  for (const [key, rawVal] of Object.entries(f)) {
+    if (knownKeys.has(key)) continue;
+    extraFields[key] = rawVal;
+  }
+
+  const remainingKeys = Object.keys(extraFields)
+    .filter(k => !MISC_FIELD_ORDER.includes(k))
+    .sort();
+  const orderedKeys = [...MISC_FIELD_ORDER, ...remainingKeys].filter(k => k in extraFields);
+
+  const extraCells = [];
+  for (const key of orderedKeys) {
+    const rawVal = extraFields[key];
+    const label  = MISC_LABELS[key] || key;
+    const value  = formatMiscValue(key, rawVal);
+    if (value === null) continue;
+    extraCells.push(cell(label, value));
+  }
+
+  document.getElementById('grid-extra').innerHTML = extraCells.length
+    ? extraCells.join('')
+    : `<div class="detail-cell" style="grid-column:1/-1"><div class="detail-cell-value" style="color:var(--muted)">No additional fields</div></div>`;
+
+  // ── Evolutions ──
+  renderEvoList(allEvos, liveCard, window._originalCard);
+
+  // ── Reveal ──
+  document.getElementById('detail-loading').style.display = 'none';
+  document.getElementById('detail-content').style.display = 'block';
+}
+
+loadDetail().catch(err => {
+  console.error(err);
+  showError('Failed to load card. ' + (err.message || ''));
+});
+</script>
+
+</body>
+</html>
